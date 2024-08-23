@@ -1,0 +1,733 @@
+2024-05-21 20:56:39,984 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-05-21 20:56:39,984 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-05-21 20:56:39,985 - kernelstub.Config    : INFO     Looking for configuration...
+2024-05-21 20:56:39,985 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-05-21 20:56:39,985 - kernelstub.Config    : DEBUG    Configuration found!
+2024-05-21 20:56:39,985 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': True, 'config_rev': 3}
+2024-05-21 20:56:39,985 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-05-21 20:56:39,985 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-05-21 20:56:39,985 - kernelstub           : WARNING  Live mode is enabled!
+Kernelstub is running in live environment mode. This usually means that you are running a live disk, and kernelstub should not run. We are thus exiting with 0.
+If you are not running a live disk, please run `sudo kernelstub` to disable live mode.
+2024-05-21 20:58:02,712 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-05-21 20:58:02,713 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-05-21 20:58:02,713 - kernelstub.Config    : INFO     Looking for configuration...
+2024-05-21 20:58:02,713 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-05-21 20:58:02,713 - kernelstub.Config    : DEBUG    Configuration found!
+2024-05-21 20:58:02,713 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': True, 'config_rev': 3}
+2024-05-21 20:58:02,713 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-05-21 20:58:02,714 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-05-21 20:58:02,714 - kernelstub           : WARNING  Live mode is enabled!
+Kernelstub is running in live environment mode. This usually means that you are running a live disk, and kernelstub should not run. We are thus exiting with 0.
+If you are not running a live disk, please run `sudo kernelstub` to disable live mode.
+2024-05-21 20:58:02,834 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-05-21 20:58:02,834 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-05-21 20:58:02,834 - kernelstub.Config    : INFO     Looking for configuration...
+2024-05-21 20:58:02,834 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-05-21 20:58:02,834 - kernelstub.Config    : DEBUG    Configuration found!
+2024-05-21 20:58:02,835 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': True, 'config_rev': 3}
+2024-05-21 20:58:02,835 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-05-21 20:58:02,835 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-05-21 20:58:02,835 - kernelstub           : WARNING  Live mode is enabled!
+Kernelstub is running in live environment mode. This usually means that you are running a live disk, and kernelstub should not run. We are thus exiting with 0.
+If you are not running a live disk, please run `sudo kernelstub` to disable live mode.
+2024-05-21 20:59:02,752 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-05-21 20:59:02,752 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-05-21 20:59:02,752 - kernelstub.Config    : INFO     Looking for configuration...
+2024-05-21 20:59:02,752 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-05-21 20:59:02,753 - kernelstub.Config    : DEBUG    Configuration found!
+2024-05-21 20:59:02,753 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': True, 'config_rev': 3}
+2024-05-21 20:59:02,753 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-05-21 20:59:02,753 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-05-21 20:59:02,753 - kernelstub           : WARNING  Live mode is enabled!
+Kernelstub is running in live environment mode. This usually means that you are running a live disk, and kernelstub should not run. We are thus exiting with 0.
+If you are not running a live disk, please run `sudo kernelstub` to disable live mode.
+2024-05-21 21:11:10,620 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-05-21 21:11:10,621 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-05-21 21:11:10,621 - kernelstub.Config    : INFO     Looking for configuration...
+2024-05-21 21:11:10,621 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-05-21 21:11:10,621 - kernelstub.Config    : DEBUG    Configuration found!
+2024-05-21 21:11:10,621 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': True, 'config_rev': 3}
+2024-05-21 21:11:10,622 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-05-21 21:11:10,622 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-05-21 21:11:10,622 - kernelstub           : WARNING  Live mode is enabled!
+Kernelstub is running in live environment mode. This usually means that you are running a live disk, and kernelstub should not run. We are thus exiting with 0.
+If you are not running a live disk, please run `sudo kernelstub` to disable live mode.
+2024-05-21 21:13:08,761 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-05-21 21:13:08,761 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-05-21 21:13:08,761 - kernelstub.Config    : INFO     Looking for configuration...
+2024-05-21 21:13:08,762 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-05-21 21:13:08,762 - kernelstub.Config    : DEBUG    Configuration found!
+2024-05-21 21:13:08,762 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': True, 'config_rev': 3}
+2024-05-21 21:13:08,762 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-05-21 21:13:08,762 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-05-21 21:13:08,762 - kernelstub           : WARNING  Live mode is enabled!
+Kernelstub is running in live environment mode. This usually means that you are running a live disk, and kernelstub should not run. We are thus exiting with 0.
+If you are not running a live disk, please run `sudo kernelstub` to disable live mode.
+2024-05-21 21:14:35,026 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-05-21 21:14:35,026 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-05-21 21:14:35,026 - kernelstub.Config    : INFO     Looking for configuration...
+2024-05-21 21:14:35,027 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-05-21 21:14:35,027 - kernelstub.Config    : DEBUG    Configuration found!
+2024-05-21 21:14:35,027 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': True, 'config_rev': 3}
+2024-05-21 21:14:35,027 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-05-21 21:14:35,027 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-05-21 21:14:35,027 - kernelstub           : WARNING  Live mode is enabled!
+Kernelstub is running in live environment mode. This usually means that you are running a live disk, and kernelstub should not run. We are thus exiting with 0.
+If you are not running a live disk, please run `sudo kernelstub` to disable live mode.
+2024-08-18 13:21:42,222 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path='/boot/efi', root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options='quiet loglevel=0 systemd.show_status=false splash', remove_options=None, log_file=None, setup_loader=True, off_loader=False, install_stub=False, manage_mode=True, force_update=True, verbosity=1, preserve_live=False)
+2024-08-18 13:21:42,223 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-08-18 13:21:42,223 - kernelstub.Config    : INFO     Looking for configuration...
+2024-08-18 13:21:42,223 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-08-18 13:21:42,223 - kernelstub.Config    : DEBUG    Configuration found!
+2024-08-18 13:21:42,224 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': True, 'config_rev': 3}
+2024-08-18 13:21:42,224 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-08-18 13:21:42,224 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-08-18 13:21:42,225 - kernelstub           : DEBUG    {
+  "default": {
+    "kernel_options": [
+      "quiet",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": false,
+    "manage_mode": false,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  },
+  "user": {
+    "kernel_options": [
+      "quiet",
+      "loglevel=0",
+      "systemd.show_status=false"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": true,
+    "manage_mode": true,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  }
+}
+2024-08-18 13:21:42,225 - kernelstub           : DEBUG    Checking configuration integrity...
+2024-08-18 13:21:42,225 - kernelstub.Config    : DEBUG    ['quiet', 'loglevel=0', 'systemd.show_status=false', 'splash']
+2024-08-18 13:21:42,226 - kernelstub           : DEBUG    Structing objects
+2024-08-18 13:21:42,226 - kernelstub.Drive     : DEBUG    loaded kernelstub.Drive
+2024-08-18 13:21:42,226 - kernelstub.Drive     : DEBUG    root path = /
+2024-08-18 13:21:42,226 - kernelstub.Drive     : DEBUG    esp_path = /boot/efi
+2024-08-18 13:21:42,226 - kernelstub.Drive     : DEBUG    Getting a list of drives
+2024-08-18 13:21:42,226 - kernelstub.Drive     : DEBUG    ['/dev/sda3 / ext4 rw,relatime 0 0\n', '/dev/sda1 /boot/efi vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', '/dev/sda2 /recovery vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', 'udev /dev devtmpfs rw,nosuid,relatime,size=3943236k,nr_inodes=985809,mode=755,inode64 0 0\n', 'devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0\n', 'proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /run tmpfs rw,nosuid,nodev,noexec,relatime,size=797488k,mode=755,inode64 0 0\n', 'sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'efivarfs /sys/firmware/efi/efivars efivarfs rw,nosuid,nodev,noexec,relatime 0 0\n', '/dev/sdb1 /cdrom iso9660 ro,noatime,nojoliet,check=s,map=n,blocksize=2048,iocharset=utf8 0 0\n']
+2024-08-18 13:21:42,226 - kernelstub.Drive     : DEBUG    Getting the block device file for /
+2024-08-18 13:21:42,227 - kernelstub.Drive     : DEBUG    / is on /dev/sda3
+2024-08-18 13:21:42,227 - kernelstub.Drive     : DEBUG    Getting the block device file for /boot/efi
+2024-08-18 13:21:42,227 - kernelstub.Drive     : DEBUG    /boot/efi is on /dev/sda1
+2024-08-18 13:21:42,227 - kernelstub.Drive     : DEBUG    ESP is a partition on /dev/sda
+2024-08-18 13:21:42,227 - kernelstub.Drive     : DEBUG    Looking for UUID for path /
+2024-08-18 13:21:42,230 - kernelstub.Drive     : DEBUG    Root is on /dev/sda
+2024-08-18 13:21:42,230 - kernelstub.Drive     : DEBUG    root_fs = /dev/sda3 
+2024-08-18 13:21:42,230 - kernelstub.Drive     : DEBUG    root_uuid is d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-18 13:21:42,231 - kernelstub.NVRAM     : DEBUG    loaded kernelstub.NVRAM
+2024-08-18 13:21:42,231 - kernelstub.NVRAM     : DEBUG    Updating NVRAM info
+2024-08-18 13:21:42,231 - kernelstub.NVRAM     : DEBUG    Getting NVRAM data
+2024-08-18 13:21:42,285 - kernelstub.NVRAM     : DEBUG    Finding NVRAM entry for Pop_OS 22.04
+2024-08-18 13:21:42,286 - kernelstub.Installer : DEBUG    loaded kernelstub.Installer
+2024-08-18 13:21:42,286 - kernelstub           : INFO     System information: 
+
+    OS:..................Pop!_OS 22.04
+    Root partition:....../dev/sda3
+    Root FS UUID:........d047bce4-63ac-4071-b369-ee7b521891b8
+    ESP Path:............/boot/efi
+    ESP Partition:......./dev/sda1
+    ESP Partition #:.....1
+    NVRAM entry #:.......-1
+    Boot Variable #:.....0000
+    Kernel Boot Options:.quiet loglevel=0 systemd.show_status=false splash
+    Kernel Image Path:.../boot/vmlinuz-6.8.0-76060800daily20240311-generic
+    Initrd Image Path:.../boot/initrd.img-6.8.0-76060800daily20240311-generic
+    Force-overwrite:.....True
+
+2024-08-18 13:21:42,287 - kernelstub           : DEBUG    Setting up boot...
+2024-08-18 13:21:42,287 - kernelstub           : DEBUG    kopts: root=UUID=d047bce4-63ac-4071-b369-ee7b521891b8 ro quiet loglevel=0 systemd.show_status=false splash
+2024-08-18 13:21:42,287 - kernelstub.Installer : INFO     Copying Kernel into ESP
+2024-08-18 13:21:42,288 - kernelstub.Installer : DEBUG    kernel being copied to /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-18 13:21:42,288 - kernelstub.Installer : DEBUG    Copying: /boot/vmlinuz-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-18 13:21:42,327 - kernelstub.Installer : INFO     Copying initrd.img into ESP
+2024-08-18 13:21:42,327 - kernelstub.Installer : DEBUG    Copying: /boot/initrd.img-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/initrd.img
+2024-08-18 13:21:42,884 - kernelstub.Installer : DEBUG    Copy complete
+2024-08-18 13:21:42,884 - kernelstub.Installer : INFO     Setting up loader.conf configuration
+2024-08-18 13:21:42,885 - kernelstub.Installer : INFO     Making entry file for Pop!_OS
+2024-08-18 13:21:42,885 - kernelstub.Installer : DEBUG    Entry created!
+2024-08-18 13:21:42,886 - kernelstub.Installer : INFO     Backing up old kernel
+2024-08-18 13:21:42,886 - kernelstub.Installer : INFO     No old kernel found, skipping
+2024-08-18 13:21:42,887 - kernelstub.Installer : DEBUG    Copying: /proc/cmdline => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-18 13:21:42,887 - kernelstub           : DEBUG    Saving configuration to file
+2024-08-18 13:21:42,887 - kernelstub.Config    : DEBUG    Saving configuration to /etc/kernelstub/configuration
+2024-08-18 13:21:42,888 - kernelstub.Config    : DEBUG    Configuration saved!
+2024-08-18 13:21:42,888 - kernelstub           : DEBUG    Setup complete!
+
+
+2024-08-18 13:23:14,597 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-08-18 13:23:14,598 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-08-18 13:23:14,598 - kernelstub.Config    : INFO     Looking for configuration...
+2024-08-18 13:23:14,598 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-08-18 13:23:14,599 - kernelstub.Config    : DEBUG    Configuration found!
+2024-08-18 13:23:14,599 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false', 'splash'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': False, 'config_rev': 3}
+2024-08-18 13:23:14,599 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-08-18 13:23:14,599 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-08-18 13:23:14,600 - kernelstub           : DEBUG    {
+  "default": {
+    "kernel_options": [
+      "quiet",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": false,
+    "manage_mode": false,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  },
+  "user": {
+    "kernel_options": [
+      "quiet",
+      "loglevel=0",
+      "systemd.show_status=false",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": true,
+    "manage_mode": true,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  }
+}
+2024-08-18 13:23:14,600 - kernelstub           : DEBUG    Checking configuration integrity...
+2024-08-18 13:23:14,600 - kernelstub           : DEBUG    Structing objects
+2024-08-18 13:23:14,601 - kernelstub.Drive     : DEBUG    loaded kernelstub.Drive
+2024-08-18 13:23:14,601 - kernelstub.Drive     : DEBUG    root path = /
+2024-08-18 13:23:14,601 - kernelstub.Drive     : DEBUG    esp_path = /boot/efi
+2024-08-18 13:23:14,601 - kernelstub.Drive     : DEBUG    Getting a list of drives
+2024-08-18 13:23:14,601 - kernelstub.Drive     : DEBUG    ['/dev/sda3 / ext4 rw,relatime 0 0\n', '/dev/sda1 /boot/efi vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', '/dev/sda2 /recovery vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', 'udev /dev devtmpfs rw,nosuid,relatime,size=3943236k,nr_inodes=985809,mode=755,inode64 0 0\n', 'devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0\n', 'proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /run tmpfs rw,nosuid,nodev,noexec,relatime,size=797488k,mode=755,inode64 0 0\n', 'sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'efivarfs /sys/firmware/efi/efivars efivarfs rw,nosuid,nodev,noexec,relatime 0 0\n']
+2024-08-18 13:23:14,602 - kernelstub.Drive     : DEBUG    Getting the block device file for /
+2024-08-18 13:23:14,602 - kernelstub.Drive     : DEBUG    / is on /dev/sda3
+2024-08-18 13:23:14,602 - kernelstub.Drive     : DEBUG    Getting the block device file for /boot/efi
+2024-08-18 13:23:14,602 - kernelstub.Drive     : DEBUG    /boot/efi is on /dev/sda1
+2024-08-18 13:23:14,602 - kernelstub.Drive     : DEBUG    ESP is a partition on /dev/sda
+2024-08-18 13:23:14,603 - kernelstub.Drive     : DEBUG    Looking for UUID for path /
+2024-08-18 13:23:14,606 - kernelstub.Drive     : DEBUG    Root is on /dev/sda
+2024-08-18 13:23:14,606 - kernelstub.Drive     : DEBUG    root_fs = /dev/sda3 
+2024-08-18 13:23:14,606 - kernelstub.Drive     : DEBUG    root_uuid is d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-18 13:23:14,607 - kernelstub.NVRAM     : DEBUG    loaded kernelstub.NVRAM
+2024-08-18 13:23:14,607 - kernelstub.NVRAM     : DEBUG    Updating NVRAM info
+2024-08-18 13:23:14,607 - kernelstub.NVRAM     : DEBUG    Getting NVRAM data
+2024-08-18 13:23:14,661 - kernelstub.NVRAM     : DEBUG    Finding NVRAM entry for Pop_OS 22.04
+2024-08-18 13:23:14,661 - kernelstub.Installer : DEBUG    loaded kernelstub.Installer
+2024-08-18 13:23:14,662 - kernelstub           : INFO     System information: 
+
+    OS:..................Pop!_OS 22.04
+    Root partition:....../dev/sda3
+    Root FS UUID:........d047bce4-63ac-4071-b369-ee7b521891b8
+    ESP Path:............/boot/efi
+    ESP Partition:......./dev/sda1
+    ESP Partition #:.....1
+    NVRAM entry #:.......-1
+    Boot Variable #:.....0000
+    Kernel Boot Options:.quiet loglevel=0 systemd.show_status=false splash
+    Kernel Image Path:.../boot/vmlinuz-6.8.0-76060800daily20240311-generic
+    Initrd Image Path:.../boot/initrd.img-6.8.0-76060800daily20240311-generic
+    Force-overwrite:.....False
+
+2024-08-18 13:23:14,662 - kernelstub           : DEBUG    Setting up boot...
+2024-08-18 13:23:14,663 - kernelstub           : DEBUG    kopts: root=UUID=d047bce4-63ac-4071-b369-ee7b521891b8 ro quiet loglevel=0 systemd.show_status=false splash
+2024-08-18 13:23:14,663 - kernelstub.Installer : INFO     Copying Kernel into ESP
+2024-08-18 13:23:14,664 - kernelstub.Installer : DEBUG    kernel being copied to /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-18 13:23:14,664 - kernelstub.Installer : DEBUG    Copying: /boot/vmlinuz-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-18 13:23:14,706 - kernelstub.Installer : INFO     Copying initrd.img into ESP
+2024-08-18 13:23:14,706 - kernelstub.Installer : DEBUG    Copying: /boot/initrd.img-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/initrd.img
+2024-08-18 13:23:14,945 - kernelstub.Installer : DEBUG    Copy complete
+2024-08-18 13:23:14,945 - kernelstub.Installer : INFO     Setting up loader.conf configuration
+2024-08-18 13:23:14,946 - kernelstub.Installer : INFO     Making entry file for Pop!_OS
+2024-08-18 13:23:14,946 - kernelstub.Installer : DEBUG    Entry created!
+2024-08-18 13:23:14,946 - kernelstub.Installer : INFO     Backing up old kernel
+2024-08-18 13:23:14,947 - kernelstub.Installer : INFO     No old kernel found, skipping
+2024-08-18 13:23:14,947 - kernelstub.Installer : DEBUG    Copying: /proc/cmdline => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-18 13:23:14,948 - kernelstub           : DEBUG    Saving configuration to file
+2024-08-18 13:23:14,948 - kernelstub.Config    : DEBUG    Saving configuration to /etc/kernelstub/configuration
+2024-08-18 13:23:14,949 - kernelstub.Config    : DEBUG    Configuration saved!
+2024-08-18 13:23:14,949 - kernelstub           : DEBUG    Setup complete!
+
+
+2024-08-18 20:58:22,192 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-08-18 20:58:22,193 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-08-18 20:58:22,193 - kernelstub.Config    : INFO     Looking for configuration...
+2024-08-18 20:58:22,193 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-08-18 20:58:22,194 - kernelstub.Config    : DEBUG    Configuration found!
+2024-08-18 20:58:22,194 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false', 'splash'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': False, 'config_rev': 3}
+2024-08-18 20:58:22,194 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-08-18 20:58:22,194 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-08-18 20:58:22,195 - kernelstub           : DEBUG    {
+  "default": {
+    "kernel_options": [
+      "quiet",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": false,
+    "manage_mode": false,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  },
+  "user": {
+    "kernel_options": [
+      "quiet",
+      "loglevel=0",
+      "systemd.show_status=false",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": true,
+    "manage_mode": true,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  }
+}
+2024-08-18 20:58:22,195 - kernelstub           : DEBUG    Checking configuration integrity...
+2024-08-18 20:58:22,195 - kernelstub           : DEBUG    Structing objects
+2024-08-18 20:58:22,196 - kernelstub.Drive     : DEBUG    loaded kernelstub.Drive
+2024-08-18 20:58:22,196 - kernelstub.Drive     : DEBUG    root path = /
+2024-08-18 20:58:22,196 - kernelstub.Drive     : DEBUG    esp_path = /boot/efi
+2024-08-18 20:58:22,196 - kernelstub.Drive     : DEBUG    Getting a list of drives
+2024-08-18 20:58:22,197 - kernelstub.Drive     : DEBUG    ['sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0\n', 'udev /dev devtmpfs rw,nosuid,relatime,size=3943968k,nr_inodes=985992,mode=755,inode64 0 0\n', 'devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0\n', 'tmpfs /run tmpfs rw,nosuid,nodev,noexec,relatime,size=797488k,mode=755,inode64 0 0\n', 'efivarfs /sys/firmware/efi/efivars efivarfs rw,nosuid,nodev,noexec,relatime 0 0\n', '/dev/sda3 / ext4 rw,noatime,errors=remount-ro 0 0\n', 'securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /dev/shm tmpfs rw,nosuid,nodev,inode64 0 0\n', 'tmpfs /run/lock tmpfs rw,nosuid,nodev,noexec,relatime,size=5120k,inode64 0 0\n', 'cgroup2 /sys/fs/cgroup cgroup2 rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot 0 0\n', 'pstore /sys/fs/pstore pstore rw,nosuid,nodev,noexec,relatime 0 0\n', 'bpf /sys/fs/bpf bpf rw,nosuid,nodev,noexec,relatime,mode=700 0 0\n', 'systemd-1 /proc/sys/fs/binfmt_misc autofs rw,relatime,fd=29,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=11312 0 0\n', 'hugetlbfs /dev/hugepages hugetlbfs rw,relatime,pagesize=2M 0 0\n', 'mqueue /dev/mqueue mqueue rw,nosuid,nodev,noexec,relatime 0 0\n', 'debugfs /sys/kernel/debug debugfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'tracefs /sys/kernel/tracing tracefs rw,nosuid,nodev,noexec,relatime 0 0\n', 'fusectl /sys/fs/fuse/connections fusectl rw,nosuid,nodev,noexec,relatime 0 0\n', 'configfs /sys/kernel/config configfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'ramfs /run/credentials/systemd-sysusers.service ramfs ro,nosuid,nodev,noexec,relatime,mode=700 0 0\n', '/dev/sda2 /recovery vfat rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', '/dev/sda1 /boot/efi vfat rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', 'binfmt_misc /proc/sys/fs/binfmt_misc binfmt_misc rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /run/user/1000 tmpfs rw,nosuid,nodev,relatime,size=797484k,nr_inodes=199371,mode=700,uid=1000,gid=1000,inode64 0 0\n', 'gvfsd-fuse /run/user/1000/gvfs fuse.gvfsd-fuse rw,nosuid,nodev,relatime,user_id=1000,group_id=1000 0 0\n', 'portal /run/user/1000/doc fuse.portal rw,nosuid,nodev,relatime,user_id=1000,group_id=1000 0 0\n']
+2024-08-18 20:58:22,197 - kernelstub.Drive     : DEBUG    Getting the block device file for /
+2024-08-18 20:58:22,198 - kernelstub.Drive     : DEBUG    / is on /dev/sda3
+2024-08-18 20:58:22,198 - kernelstub.Drive     : DEBUG    Getting the block device file for /boot/efi
+2024-08-18 20:58:22,198 - kernelstub.Drive     : DEBUG    /boot/efi is on /dev/sda1
+2024-08-18 20:58:22,198 - kernelstub.Drive     : DEBUG    ESP is a partition on /dev/sda
+2024-08-18 20:58:22,199 - kernelstub.Drive     : DEBUG    Looking for UUID for path /
+2024-08-18 20:58:22,203 - kernelstub.Drive     : DEBUG    Root is on /dev/sda
+2024-08-18 20:58:22,203 - kernelstub.Drive     : DEBUG    root_fs = /dev/sda3 
+2024-08-18 20:58:22,204 - kernelstub.Drive     : DEBUG    root_uuid is d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-18 20:58:22,204 - kernelstub.NVRAM     : DEBUG    loaded kernelstub.NVRAM
+2024-08-18 20:58:22,204 - kernelstub.NVRAM     : DEBUG    Updating NVRAM info
+2024-08-18 20:58:22,204 - kernelstub.NVRAM     : DEBUG    Getting NVRAM data
+2024-08-18 20:58:22,268 - kernelstub.NVRAM     : DEBUG    Finding NVRAM entry for Pop_OS 22.04
+2024-08-18 20:58:22,268 - kernelstub.Installer : DEBUG    loaded kernelstub.Installer
+2024-08-18 20:58:22,268 - kernelstub           : INFO     System information: 
+
+    OS:..................Pop!_OS 22.04
+    Root partition:....../dev/sda3
+    Root FS UUID:........d047bce4-63ac-4071-b369-ee7b521891b8
+    ESP Path:............/boot/efi
+    ESP Partition:......./dev/sda1
+    ESP Partition #:.....1
+    NVRAM entry #:.......-1
+    Boot Variable #:.....0000
+    Kernel Boot Options:.quiet loglevel=0 systemd.show_status=false splash
+    Kernel Image Path:.../boot/vmlinuz-6.8.0-76060800daily20240311-generic
+    Initrd Image Path:.../boot/initrd.img-6.8.0-76060800daily20240311-generic
+    Force-overwrite:.....False
+
+2024-08-18 20:58:22,269 - kernelstub           : DEBUG    Setting up boot...
+2024-08-18 20:58:22,269 - kernelstub           : DEBUG    kopts: root=UUID=d047bce4-63ac-4071-b369-ee7b521891b8 ro quiet loglevel=0 systemd.show_status=false splash
+2024-08-18 20:58:22,269 - kernelstub.Installer : INFO     Copying Kernel into ESP
+2024-08-18 20:58:22,270 - kernelstub.Installer : DEBUG    kernel being copied to /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-18 20:58:22,270 - kernelstub.Installer : DEBUG    Copying: /boot/vmlinuz-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-18 20:58:22,331 - kernelstub.Installer : INFO     Copying initrd.img into ESP
+2024-08-18 20:58:22,331 - kernelstub.Installer : DEBUG    Copying: /boot/initrd.img-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/initrd.img
+2024-08-18 20:58:22,538 - kernelstub.Installer : DEBUG    Copy complete
+2024-08-18 20:58:22,539 - kernelstub.Installer : INFO     Setting up loader.conf configuration
+2024-08-18 20:58:22,539 - kernelstub.Installer : INFO     Making entry file for Pop!_OS
+2024-08-18 20:58:22,540 - kernelstub.Installer : DEBUG    Entry created!
+2024-08-18 20:58:22,540 - kernelstub.Installer : INFO     Backing up old kernel
+2024-08-18 20:58:22,541 - kernelstub.Installer : INFO     No old kernel found, skipping
+2024-08-18 20:58:22,541 - kernelstub.Installer : DEBUG    Copying: /proc/cmdline => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-18 20:58:22,542 - kernelstub           : DEBUG    Saving configuration to file
+2024-08-18 20:58:22,543 - kernelstub.Config    : DEBUG    Saving configuration to /etc/kernelstub/configuration
+2024-08-18 20:58:22,544 - kernelstub.Config    : DEBUG    Configuration saved!
+2024-08-18 20:58:22,544 - kernelstub           : DEBUG    Setup complete!
+
+
+2024-08-18 21:00:04,625 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-08-18 21:00:04,625 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-08-18 21:00:04,626 - kernelstub.Config    : INFO     Looking for configuration...
+2024-08-18 21:00:04,626 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-08-18 21:00:04,626 - kernelstub.Config    : DEBUG    Configuration found!
+2024-08-18 21:00:04,627 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false', 'splash'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': False, 'config_rev': 3}
+2024-08-18 21:00:04,627 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-08-18 21:00:04,628 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-08-18 21:00:04,629 - kernelstub           : DEBUG    {
+  "default": {
+    "kernel_options": [
+      "quiet",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": false,
+    "manage_mode": false,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  },
+  "user": {
+    "kernel_options": [
+      "quiet",
+      "loglevel=0",
+      "systemd.show_status=false",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": true,
+    "manage_mode": true,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  }
+}
+2024-08-18 21:00:04,629 - kernelstub           : DEBUG    Checking configuration integrity...
+2024-08-18 21:00:04,629 - kernelstub           : DEBUG    Structing objects
+2024-08-18 21:00:04,630 - kernelstub.Drive     : DEBUG    loaded kernelstub.Drive
+2024-08-18 21:00:04,630 - kernelstub.Drive     : DEBUG    root path = /
+2024-08-18 21:00:04,630 - kernelstub.Drive     : DEBUG    esp_path = /boot/efi
+2024-08-18 21:00:04,631 - kernelstub.Drive     : DEBUG    Getting a list of drives
+2024-08-18 21:00:04,631 - kernelstub.Drive     : DEBUG    ['sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0\n', 'udev /dev devtmpfs rw,nosuid,relatime,size=3943968k,nr_inodes=985992,mode=755,inode64 0 0\n', 'devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0\n', 'tmpfs /run tmpfs rw,nosuid,nodev,noexec,relatime,size=797488k,mode=755,inode64 0 0\n', 'efivarfs /sys/firmware/efi/efivars efivarfs rw,nosuid,nodev,noexec,relatime 0 0\n', '/dev/sda3 / ext4 rw,noatime,errors=remount-ro 0 0\n', 'securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /dev/shm tmpfs rw,nosuid,nodev,inode64 0 0\n', 'tmpfs /run/lock tmpfs rw,nosuid,nodev,noexec,relatime,size=5120k,inode64 0 0\n', 'cgroup2 /sys/fs/cgroup cgroup2 rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot 0 0\n', 'pstore /sys/fs/pstore pstore rw,nosuid,nodev,noexec,relatime 0 0\n', 'bpf /sys/fs/bpf bpf rw,nosuid,nodev,noexec,relatime,mode=700 0 0\n', 'systemd-1 /proc/sys/fs/binfmt_misc autofs rw,relatime,fd=29,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=11312 0 0\n', 'hugetlbfs /dev/hugepages hugetlbfs rw,relatime,pagesize=2M 0 0\n', 'mqueue /dev/mqueue mqueue rw,nosuid,nodev,noexec,relatime 0 0\n', 'debugfs /sys/kernel/debug debugfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'tracefs /sys/kernel/tracing tracefs rw,nosuid,nodev,noexec,relatime 0 0\n', 'fusectl /sys/fs/fuse/connections fusectl rw,nosuid,nodev,noexec,relatime 0 0\n', 'configfs /sys/kernel/config configfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'ramfs /run/credentials/systemd-sysusers.service ramfs ro,nosuid,nodev,noexec,relatime,mode=700 0 0\n', '/dev/sda2 /recovery vfat rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', '/dev/sda1 /boot/efi vfat rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', 'binfmt_misc /proc/sys/fs/binfmt_misc binfmt_misc rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /run/user/1000 tmpfs rw,nosuid,nodev,relatime,size=797484k,nr_inodes=199371,mode=700,uid=1000,gid=1000,inode64 0 0\n', 'gvfsd-fuse /run/user/1000/gvfs fuse.gvfsd-fuse rw,nosuid,nodev,relatime,user_id=1000,group_id=1000 0 0\n', 'portal /run/user/1000/doc fuse.portal rw,nosuid,nodev,relatime,user_id=1000,group_id=1000 0 0\n']
+2024-08-18 21:00:04,632 - kernelstub.Drive     : DEBUG    Getting the block device file for /
+2024-08-18 21:00:04,632 - kernelstub.Drive     : DEBUG    / is on /dev/sda3
+2024-08-18 21:00:04,632 - kernelstub.Drive     : DEBUG    Getting the block device file for /boot/efi
+2024-08-18 21:00:04,633 - kernelstub.Drive     : DEBUG    /boot/efi is on /dev/sda1
+2024-08-18 21:00:04,633 - kernelstub.Drive     : DEBUG    ESP is a partition on /dev/sda
+2024-08-18 21:00:04,633 - kernelstub.Drive     : DEBUG    Looking for UUID for path /
+2024-08-18 21:00:04,638 - kernelstub.Drive     : DEBUG    Root is on /dev/sda
+2024-08-18 21:00:04,638 - kernelstub.Drive     : DEBUG    root_fs = /dev/sda3 
+2024-08-18 21:00:04,638 - kernelstub.Drive     : DEBUG    root_uuid is d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-18 21:00:04,639 - kernelstub.NVRAM     : DEBUG    loaded kernelstub.NVRAM
+2024-08-18 21:00:04,639 - kernelstub.NVRAM     : DEBUG    Updating NVRAM info
+2024-08-18 21:00:04,639 - kernelstub.NVRAM     : DEBUG    Getting NVRAM data
+2024-08-18 21:00:04,693 - kernelstub.NVRAM     : DEBUG    Finding NVRAM entry for Pop_OS 22.04
+2024-08-18 21:00:04,694 - kernelstub.Installer : DEBUG    loaded kernelstub.Installer
+2024-08-18 21:00:04,694 - kernelstub           : INFO     System information: 
+
+    OS:..................Pop!_OS 22.04
+    Root partition:....../dev/sda3
+    Root FS UUID:........d047bce4-63ac-4071-b369-ee7b521891b8
+    ESP Path:............/boot/efi
+    ESP Partition:......./dev/sda1
+    ESP Partition #:.....1
+    NVRAM entry #:.......-1
+    Boot Variable #:.....0000
+    Kernel Boot Options:.quiet loglevel=0 systemd.show_status=false splash
+    Kernel Image Path:.../boot/vmlinuz-6.9.3-76060903-generic
+    Initrd Image Path:.../boot/initrd.img-6.9.3-76060903-generic
+    Force-overwrite:.....False
+
+2024-08-18 21:00:04,694 - kernelstub           : DEBUG    Setting up boot...
+2024-08-18 21:00:04,694 - kernelstub           : DEBUG    kopts: root=UUID=d047bce4-63ac-4071-b369-ee7b521891b8 ro quiet loglevel=0 systemd.show_status=false splash
+2024-08-18 21:00:04,695 - kernelstub.Installer : INFO     Copying Kernel into ESP
+2024-08-18 21:00:04,695 - kernelstub.Installer : DEBUG    kernel being copied to /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-18 21:00:04,695 - kernelstub.Installer : DEBUG    Copying: /boot/vmlinuz-6.9.3-76060903-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-18 21:00:04,738 - kernelstub.Installer : INFO     Copying initrd.img into ESP
+2024-08-18 21:00:04,738 - kernelstub.Installer : DEBUG    Copying: /boot/initrd.img-6.9.3-76060903-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/initrd.img
+2024-08-18 21:00:04,944 - kernelstub.Installer : DEBUG    Copy complete
+2024-08-18 21:00:04,944 - kernelstub.Installer : INFO     Setting up loader.conf configuration
+2024-08-18 21:00:04,945 - kernelstub.Installer : INFO     Making entry file for Pop!_OS
+2024-08-18 21:00:04,945 - kernelstub.Installer : DEBUG    Entry created!
+2024-08-18 21:00:04,945 - kernelstub.Installer : INFO     Backing up old kernel
+2024-08-18 21:00:04,946 - kernelstub.Installer : DEBUG    Copying: /boot/vmlinuz-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz-previous.efi
+2024-08-18 21:00:04,994 - kernelstub.Installer : DEBUG    Copying: /boot/initrd.img-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/initrd.img-previous
+2024-08-18 21:00:05,182 - kernelstub.Installer : INFO     Making entry file for Pop!_OS
+2024-08-18 21:00:05,183 - kernelstub.Installer : DEBUG    Entry created!
+2024-08-18 21:00:05,183 - kernelstub.Installer : DEBUG    Copying: /proc/cmdline => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-18 21:00:05,184 - kernelstub           : DEBUG    Saving configuration to file
+2024-08-18 21:00:05,184 - kernelstub.Config    : DEBUG    Saving configuration to /etc/kernelstub/configuration
+2024-08-18 21:00:05,185 - kernelstub.Config    : DEBUG    Configuration saved!
+2024-08-18 21:00:05,185 - kernelstub           : DEBUG    Setup complete!
+
+
+2024-08-18 21:00:05,331 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-08-18 21:00:05,332 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-08-18 21:00:05,332 - kernelstub.Config    : INFO     Looking for configuration...
+2024-08-18 21:00:05,332 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-08-18 21:00:05,333 - kernelstub.Config    : DEBUG    Configuration found!
+2024-08-18 21:00:05,333 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false', 'splash'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': False, 'config_rev': 3}
+2024-08-18 21:00:05,333 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-08-18 21:00:05,333 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-08-18 21:00:05,334 - kernelstub           : DEBUG    {
+  "default": {
+    "kernel_options": [
+      "quiet",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": false,
+    "manage_mode": false,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  },
+  "user": {
+    "kernel_options": [
+      "quiet",
+      "loglevel=0",
+      "systemd.show_status=false",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": true,
+    "manage_mode": true,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  }
+}
+2024-08-18 21:00:05,334 - kernelstub           : DEBUG    Checking configuration integrity...
+2024-08-18 21:00:05,334 - kernelstub           : DEBUG    Structing objects
+2024-08-18 21:00:05,334 - kernelstub.Drive     : DEBUG    loaded kernelstub.Drive
+2024-08-18 21:00:05,334 - kernelstub.Drive     : DEBUG    root path = /
+2024-08-18 21:00:05,335 - kernelstub.Drive     : DEBUG    esp_path = /boot/efi
+2024-08-18 21:00:05,335 - kernelstub.Drive     : DEBUG    Getting a list of drives
+2024-08-18 21:00:05,335 - kernelstub.Drive     : DEBUG    ['sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0\n', 'udev /dev devtmpfs rw,nosuid,relatime,size=3943968k,nr_inodes=985992,mode=755,inode64 0 0\n', 'devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0\n', 'tmpfs /run tmpfs rw,nosuid,nodev,noexec,relatime,size=797488k,mode=755,inode64 0 0\n', 'efivarfs /sys/firmware/efi/efivars efivarfs rw,nosuid,nodev,noexec,relatime 0 0\n', '/dev/sda3 / ext4 rw,noatime,errors=remount-ro 0 0\n', 'securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /dev/shm tmpfs rw,nosuid,nodev,inode64 0 0\n', 'tmpfs /run/lock tmpfs rw,nosuid,nodev,noexec,relatime,size=5120k,inode64 0 0\n', 'cgroup2 /sys/fs/cgroup cgroup2 rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot 0 0\n', 'pstore /sys/fs/pstore pstore rw,nosuid,nodev,noexec,relatime 0 0\n', 'bpf /sys/fs/bpf bpf rw,nosuid,nodev,noexec,relatime,mode=700 0 0\n', 'systemd-1 /proc/sys/fs/binfmt_misc autofs rw,relatime,fd=29,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=11312 0 0\n', 'hugetlbfs /dev/hugepages hugetlbfs rw,relatime,pagesize=2M 0 0\n', 'mqueue /dev/mqueue mqueue rw,nosuid,nodev,noexec,relatime 0 0\n', 'debugfs /sys/kernel/debug debugfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'tracefs /sys/kernel/tracing tracefs rw,nosuid,nodev,noexec,relatime 0 0\n', 'fusectl /sys/fs/fuse/connections fusectl rw,nosuid,nodev,noexec,relatime 0 0\n', 'configfs /sys/kernel/config configfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'ramfs /run/credentials/systemd-sysusers.service ramfs ro,nosuid,nodev,noexec,relatime,mode=700 0 0\n', '/dev/sda2 /recovery vfat rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', '/dev/sda1 /boot/efi vfat rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', 'binfmt_misc /proc/sys/fs/binfmt_misc binfmt_misc rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /run/user/1000 tmpfs rw,nosuid,nodev,relatime,size=797484k,nr_inodes=199371,mode=700,uid=1000,gid=1000,inode64 0 0\n', 'gvfsd-fuse /run/user/1000/gvfs fuse.gvfsd-fuse rw,nosuid,nodev,relatime,user_id=1000,group_id=1000 0 0\n', 'portal /run/user/1000/doc fuse.portal rw,nosuid,nodev,relatime,user_id=1000,group_id=1000 0 0\n']
+2024-08-18 21:00:05,336 - kernelstub.Drive     : DEBUG    Getting the block device file for /
+2024-08-18 21:00:05,336 - kernelstub.Drive     : DEBUG    / is on /dev/sda3
+2024-08-18 21:00:05,336 - kernelstub.Drive     : DEBUG    Getting the block device file for /boot/efi
+2024-08-18 21:00:05,336 - kernelstub.Drive     : DEBUG    /boot/efi is on /dev/sda1
+2024-08-18 21:00:05,337 - kernelstub.Drive     : DEBUG    ESP is a partition on /dev/sda
+2024-08-18 21:00:05,337 - kernelstub.Drive     : DEBUG    Looking for UUID for path /
+2024-08-18 21:00:05,340 - kernelstub.Drive     : DEBUG    Root is on /dev/sda
+2024-08-18 21:00:05,340 - kernelstub.Drive     : DEBUG    root_fs = /dev/sda3 
+2024-08-18 21:00:05,341 - kernelstub.Drive     : DEBUG    root_uuid is d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-18 21:00:05,341 - kernelstub.NVRAM     : DEBUG    loaded kernelstub.NVRAM
+2024-08-18 21:00:05,341 - kernelstub.NVRAM     : DEBUG    Updating NVRAM info
+2024-08-18 21:00:05,342 - kernelstub.NVRAM     : DEBUG    Getting NVRAM data
+2024-08-18 21:00:05,395 - kernelstub.NVRAM     : DEBUG    Finding NVRAM entry for Pop_OS 22.04
+2024-08-18 21:00:05,395 - kernelstub.Installer : DEBUG    loaded kernelstub.Installer
+2024-08-18 21:00:05,395 - kernelstub           : INFO     System information: 
+
+    OS:..................Pop!_OS 22.04
+    Root partition:....../dev/sda3
+    Root FS UUID:........d047bce4-63ac-4071-b369-ee7b521891b8
+    ESP Path:............/boot/efi
+    ESP Partition:......./dev/sda1
+    ESP Partition #:.....1
+    NVRAM entry #:.......-1
+    Boot Variable #:.....0000
+    Kernel Boot Options:.quiet loglevel=0 systemd.show_status=false splash
+    Kernel Image Path:.../boot/vmlinuz-6.9.3-76060903-generic
+    Initrd Image Path:.../boot/initrd.img-6.9.3-76060903-generic
+    Force-overwrite:.....False
+
+2024-08-18 21:00:05,396 - kernelstub           : DEBUG    Setting up boot...
+2024-08-18 21:00:05,396 - kernelstub           : DEBUG    kopts: root=UUID=d047bce4-63ac-4071-b369-ee7b521891b8 ro quiet loglevel=0 systemd.show_status=false splash
+2024-08-18 21:00:05,396 - kernelstub.Installer : INFO     Copying Kernel into ESP
+2024-08-18 21:00:05,397 - kernelstub.Installer : DEBUG    kernel being copied to /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-18 21:00:05,397 - kernelstub.Installer : DEBUG    Copying: /boot/vmlinuz-6.9.3-76060903-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-18 21:00:05,445 - kernelstub.Installer : INFO     Copying initrd.img into ESP
+2024-08-18 21:00:05,445 - kernelstub.Installer : DEBUG    Copying: /boot/initrd.img-6.9.3-76060903-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/initrd.img
+2024-08-18 21:00:05,706 - kernelstub.Installer : DEBUG    Copy complete
+2024-08-18 21:00:05,707 - kernelstub.Installer : INFO     Setting up loader.conf configuration
+2024-08-18 21:00:05,707 - kernelstub.Installer : INFO     Making entry file for Pop!_OS
+2024-08-18 21:00:05,707 - kernelstub.Installer : DEBUG    Entry created!
+2024-08-18 21:00:05,708 - kernelstub.Installer : INFO     Backing up old kernel
+2024-08-18 21:00:05,708 - kernelstub.Installer : DEBUG    Copying: /boot/vmlinuz-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz-previous.efi
+2024-08-18 21:00:05,754 - kernelstub.Installer : DEBUG    Copying: /boot/initrd.img-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/initrd.img-previous
+2024-08-18 21:00:06,017 - kernelstub.Installer : INFO     Making entry file for Pop!_OS
+2024-08-18 21:00:06,018 - kernelstub.Installer : DEBUG    Entry created!
+2024-08-18 21:00:06,018 - kernelstub.Installer : DEBUG    Copying: /proc/cmdline => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-18 21:00:06,018 - kernelstub           : DEBUG    Saving configuration to file
+2024-08-18 21:00:06,019 - kernelstub.Config    : DEBUG    Saving configuration to /etc/kernelstub/configuration
+2024-08-18 21:00:06,019 - kernelstub.Config    : DEBUG    Configuration saved!
+2024-08-18 21:00:06,019 - kernelstub           : DEBUG    Setup complete!
+
+
+2024-08-19 14:07:37,941 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-08-19 14:07:37,941 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-08-19 14:07:37,942 - kernelstub.Config    : INFO     Looking for configuration...
+2024-08-19 14:07:37,942 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-08-19 14:07:37,943 - kernelstub.Config    : DEBUG    Configuration found!
+2024-08-19 14:07:37,943 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false', 'splash'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': False, 'config_rev': 3}
+2024-08-19 14:07:37,944 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-08-19 14:07:37,944 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-08-19 14:07:37,945 - kernelstub           : DEBUG    {
+  "default": {
+    "kernel_options": [
+      "quiet",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": false,
+    "manage_mode": false,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  },
+  "user": {
+    "kernel_options": [
+      "quiet",
+      "loglevel=0",
+      "systemd.show_status=false",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": true,
+    "manage_mode": true,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  }
+}
+2024-08-19 14:07:37,945 - kernelstub           : DEBUG    Checking configuration integrity...
+2024-08-19 14:07:37,946 - kernelstub           : DEBUG    Structing objects
+2024-08-19 14:07:37,946 - kernelstub.Drive     : DEBUG    loaded kernelstub.Drive
+2024-08-19 14:07:37,946 - kernelstub.Drive     : DEBUG    root path = /
+2024-08-19 14:07:37,947 - kernelstub.Drive     : DEBUG    esp_path = /boot/efi
+2024-08-19 14:07:37,947 - kernelstub.Drive     : DEBUG    Getting a list of drives
+2024-08-19 14:07:37,948 - kernelstub.Drive     : DEBUG    ['sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0\n', 'udev /dev devtmpfs rw,nosuid,relatime,size=3942376k,nr_inodes=985594,mode=755,inode64 0 0\n', 'devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0\n', 'tmpfs /run tmpfs rw,nosuid,nodev,noexec,relatime,size=797264k,mode=755,inode64 0 0\n', 'efivarfs /sys/firmware/efi/efivars efivarfs rw,nosuid,nodev,noexec,relatime 0 0\n', '/dev/sda3 / ext4 rw,noatime,errors=remount-ro 0 0\n', 'securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /dev/shm tmpfs rw,nosuid,nodev,inode64 0 0\n', 'tmpfs /run/lock tmpfs rw,nosuid,nodev,noexec,relatime,size=5120k,inode64 0 0\n', 'cgroup2 /sys/fs/cgroup cgroup2 rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot 0 0\n', 'pstore /sys/fs/pstore pstore rw,nosuid,nodev,noexec,relatime 0 0\n', 'bpf /sys/fs/bpf bpf rw,nosuid,nodev,noexec,relatime,mode=700 0 0\n', 'systemd-1 /proc/sys/fs/binfmt_misc autofs rw,relatime,fd=29,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=10543 0 0\n', 'hugetlbfs /dev/hugepages hugetlbfs rw,relatime,pagesize=2M 0 0\n', 'mqueue /dev/mqueue mqueue rw,nosuid,nodev,noexec,relatime 0 0\n', 'debugfs /sys/kernel/debug debugfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'tracefs /sys/kernel/tracing tracefs rw,nosuid,nodev,noexec,relatime 0 0\n', 'fusectl /sys/fs/fuse/connections fusectl rw,nosuid,nodev,noexec,relatime 0 0\n', 'configfs /sys/kernel/config configfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'ramfs /run/credentials/systemd-sysusers.service ramfs ro,nosuid,nodev,noexec,relatime,mode=700 0 0\n', '/dev/sda2 /recovery vfat rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', '/dev/sda1 /boot/efi vfat rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', 'binfmt_misc /proc/sys/fs/binfmt_misc binfmt_misc rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /run/user/1000 tmpfs rw,nosuid,nodev,relatime,size=797260k,nr_inodes=199315,mode=700,uid=1000,gid=1000,inode64 0 0\n', 'gvfsd-fuse /run/user/1000/gvfs fuse.gvfsd-fuse rw,nosuid,nodev,relatime,user_id=1000,group_id=1000 0 0\n', 'portal /run/user/1000/doc fuse.portal rw,nosuid,nodev,relatime,user_id=1000,group_id=1000 0 0\n']
+2024-08-19 14:07:37,948 - kernelstub.Drive     : DEBUG    Getting the block device file for /
+2024-08-19 14:07:37,948 - kernelstub.Drive     : DEBUG    / is on /dev/sda3
+2024-08-19 14:07:37,949 - kernelstub.Drive     : DEBUG    Getting the block device file for /boot/efi
+2024-08-19 14:07:37,949 - kernelstub.Drive     : DEBUG    /boot/efi is on /dev/sda1
+2024-08-19 14:07:37,949 - kernelstub.Drive     : DEBUG    ESP is a partition on /dev/sda
+2024-08-19 14:07:37,950 - kernelstub.Drive     : DEBUG    Looking for UUID for path /
+2024-08-19 14:07:37,954 - kernelstub.Drive     : DEBUG    Root is on /dev/sda
+2024-08-19 14:07:37,954 - kernelstub.Drive     : DEBUG    root_fs = /dev/sda3 
+2024-08-19 14:07:37,954 - kernelstub.Drive     : DEBUG    root_uuid is d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-19 14:07:37,955 - kernelstub.NVRAM     : DEBUG    loaded kernelstub.NVRAM
+2024-08-19 14:07:37,955 - kernelstub.NVRAM     : DEBUG    Updating NVRAM info
+2024-08-19 14:07:37,955 - kernelstub.NVRAM     : DEBUG    Getting NVRAM data
+2024-08-19 14:07:38,028 - kernelstub.NVRAM     : DEBUG    Finding NVRAM entry for Pop_OS 22.04
+2024-08-19 14:07:38,028 - kernelstub.Installer : DEBUG    loaded kernelstub.Installer
+2024-08-19 14:07:38,029 - kernelstub           : INFO     System information: 
+
+    OS:..................Pop!_OS 22.04
+    Root partition:....../dev/sda3
+    Root FS UUID:........d047bce4-63ac-4071-b369-ee7b521891b8
+    ESP Path:............/boot/efi
+    ESP Partition:......./dev/sda1
+    ESP Partition #:.....1
+    NVRAM entry #:.......-1
+    Boot Variable #:.....0000
+    Kernel Boot Options:.quiet loglevel=0 systemd.show_status=false splash
+    Kernel Image Path:.../boot/vmlinuz-6.9.3-76060903-generic
+    Initrd Image Path:.../boot/initrd.img-6.9.3-76060903-generic
+    Force-overwrite:.....False
+
+2024-08-19 14:07:38,029 - kernelstub           : DEBUG    Setting up boot...
+2024-08-19 14:07:38,029 - kernelstub           : DEBUG    kopts: root=UUID=d047bce4-63ac-4071-b369-ee7b521891b8 ro quiet loglevel=0 systemd.show_status=false splash
+2024-08-19 14:07:38,029 - kernelstub.Installer : INFO     Copying Kernel into ESP
+2024-08-19 14:07:38,030 - kernelstub.Installer : DEBUG    kernel being copied to /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-19 14:07:38,030 - kernelstub.Installer : DEBUG    Copying: /boot/vmlinuz-6.9.3-76060903-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-19 14:07:38,074 - kernelstub.Installer : INFO     Copying initrd.img into ESP
+2024-08-19 14:07:38,075 - kernelstub.Installer : DEBUG    Copying: /boot/initrd.img-6.9.3-76060903-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/initrd.img
+2024-08-19 14:07:38,194 - kernelstub.Installer : DEBUG    Copy complete
+2024-08-19 14:07:38,195 - kernelstub.Installer : INFO     Setting up loader.conf configuration
+2024-08-19 14:07:38,195 - kernelstub.Installer : INFO     Making entry file for Pop!_OS
+2024-08-19 14:07:38,196 - kernelstub.Installer : DEBUG    Entry created!
+2024-08-19 14:07:38,196 - kernelstub.Installer : INFO     Backing up old kernel
+2024-08-19 14:07:38,197 - kernelstub.Installer : DEBUG    Copying: /boot/vmlinuz-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz-previous.efi
+2024-08-19 14:07:38,241 - kernelstub.Installer : DEBUG    Copying: /boot/initrd.img-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/initrd.img-previous
+2024-08-19 14:07:38,448 - kernelstub.Installer : INFO     Making entry file for Pop!_OS
+2024-08-19 14:07:38,448 - kernelstub.Installer : DEBUG    Entry created!
+2024-08-19 14:07:38,449 - kernelstub.Installer : DEBUG    Copying: /proc/cmdline => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-19 14:07:38,449 - kernelstub           : DEBUG    Saving configuration to file
+2024-08-19 14:07:38,450 - kernelstub.Config    : DEBUG    Saving configuration to /etc/kernelstub/configuration
+2024-08-19 14:07:38,451 - kernelstub.Config    : DEBUG    Configuration saved!
+2024-08-19 14:07:38,451 - kernelstub           : DEBUG    Setup complete!
+
+
+2024-08-23 12:29:24,569 - kernelstub           : DEBUG    Got command line options: Namespace(dry_run=False, print_config=False, esp_path=None, root_path=None, kernel_path=None, initrd_path=None, k_options=None, add_options=None, remove_options=None, log_file=None, setup_loader=False, off_loader=False, install_stub=False, manage_mode=False, force_update=False, verbosity=1, preserve_live=True)
+2024-08-23 12:29:24,570 - kernelstub.Config    : DEBUG    loaded kernelstub.Config
+2024-08-23 12:29:24,570 - kernelstub.Config    : INFO     Looking for configuration...
+2024-08-23 12:29:24,571 - kernelstub.Config    : DEBUG    Checking /etc/kernelstub/configuration
+2024-08-23 12:29:24,572 - kernelstub.Config    : DEBUG    Configuration found!
+2024-08-23 12:29:24,573 - kernelstub.Config    : DEBUG    {'kernel_options': ['quiet', 'loglevel=0', 'systemd.show_status=false', 'splash'], 'esp_path': '/boot/efi', 'setup_loader': True, 'manage_mode': True, 'force_update': False, 'live_mode': False, 'config_rev': 3}
+2024-08-23 12:29:24,573 - kernelstub.Config    : DEBUG    Configuration version: 3
+2024-08-23 12:29:24,573 - kernelstub.Config    : DEBUG    Configuration up to date
+2024-08-23 12:29:24,574 - kernelstub           : DEBUG    {
+  "default": {
+    "kernel_options": [
+      "quiet",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": false,
+    "manage_mode": false,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  },
+  "user": {
+    "kernel_options": [
+      "quiet",
+      "loglevel=0",
+      "systemd.show_status=false",
+      "splash"
+    ],
+    "esp_path": "/boot/efi",
+    "setup_loader": true,
+    "manage_mode": true,
+    "force_update": false,
+    "live_mode": false,
+    "config_rev": 3
+  }
+}
+2024-08-23 12:29:24,574 - kernelstub           : DEBUG    Checking configuration integrity...
+2024-08-23 12:29:24,574 - kernelstub           : DEBUG    Structing objects
+2024-08-23 12:29:24,575 - kernelstub.Drive     : DEBUG    loaded kernelstub.Drive
+2024-08-23 12:29:24,575 - kernelstub.Drive     : DEBUG    root path = /
+2024-08-23 12:29:24,575 - kernelstub.Drive     : DEBUG    esp_path = /boot/efi
+2024-08-23 12:29:24,575 - kernelstub.Drive     : DEBUG    Getting a list of drives
+2024-08-23 12:29:24,575 - kernelstub.Drive     : DEBUG    ['sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0\n', 'udev /dev devtmpfs rw,nosuid,relatime,size=3942372k,nr_inodes=985593,mode=755,inode64 0 0\n', 'devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0\n', 'tmpfs /run tmpfs rw,nosuid,nodev,noexec,relatime,size=797264k,mode=755,inode64 0 0\n', 'efivarfs /sys/firmware/efi/efivars efivarfs rw,nosuid,nodev,noexec,relatime 0 0\n', '/dev/sda3 / ext4 rw,noatime,errors=remount-ro 0 0\n', 'securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /dev/shm tmpfs rw,nosuid,nodev,inode64 0 0\n', 'tmpfs /run/lock tmpfs rw,nosuid,nodev,noexec,relatime,size=5120k,inode64 0 0\n', 'cgroup2 /sys/fs/cgroup cgroup2 rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot 0 0\n', 'pstore /sys/fs/pstore pstore rw,nosuid,nodev,noexec,relatime 0 0\n', 'bpf /sys/fs/bpf bpf rw,nosuid,nodev,noexec,relatime,mode=700 0 0\n', 'systemd-1 /proc/sys/fs/binfmt_misc autofs rw,relatime,fd=29,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=11388 0 0\n', 'hugetlbfs /dev/hugepages hugetlbfs rw,relatime,pagesize=2M 0 0\n', 'mqueue /dev/mqueue mqueue rw,nosuid,nodev,noexec,relatime 0 0\n', 'debugfs /sys/kernel/debug debugfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'tracefs /sys/kernel/tracing tracefs rw,nosuid,nodev,noexec,relatime 0 0\n', 'fusectl /sys/fs/fuse/connections fusectl rw,nosuid,nodev,noexec,relatime 0 0\n', 'configfs /sys/kernel/config configfs rw,nosuid,nodev,noexec,relatime 0 0\n', 'ramfs /run/credentials/systemd-sysusers.service ramfs ro,nosuid,nodev,noexec,relatime,mode=700 0 0\n', '/dev/sda1 /boot/efi vfat rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', '/dev/sda2 /recovery vfat rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro 0 0\n', 'binfmt_misc /proc/sys/fs/binfmt_misc binfmt_misc rw,nosuid,nodev,noexec,relatime 0 0\n', 'tmpfs /run/user/1000 tmpfs rw,nosuid,nodev,relatime,size=797260k,nr_inodes=199315,mode=700,uid=1000,gid=1000,inode64 0 0\n', 'gvfsd-fuse /run/user/1000/gvfs fuse.gvfsd-fuse rw,nosuid,nodev,relatime,user_id=1000,group_id=1000 0 0\n', 'portal /run/user/1000/doc fuse.portal rw,nosuid,nodev,relatime,user_id=1000,group_id=1000 0 0\n']
+2024-08-23 12:29:24,576 - kernelstub.Drive     : DEBUG    Getting the block device file for /
+2024-08-23 12:29:24,576 - kernelstub.Drive     : DEBUG    / is on /dev/sda3
+2024-08-23 12:29:24,576 - kernelstub.Drive     : DEBUG    Getting the block device file for /boot/efi
+2024-08-23 12:29:24,576 - kernelstub.Drive     : DEBUG    /boot/efi is on /dev/sda1
+2024-08-23 12:29:24,577 - kernelstub.Drive     : DEBUG    ESP is a partition on /dev/sda
+2024-08-23 12:29:24,577 - kernelstub.Drive     : DEBUG    Looking for UUID for path /
+2024-08-23 12:29:24,588 - kernelstub.Drive     : DEBUG    Root is on /dev/sda
+2024-08-23 12:29:24,588 - kernelstub.Drive     : DEBUG    root_fs = /dev/sda3 
+2024-08-23 12:29:24,589 - kernelstub.Drive     : DEBUG    root_uuid is d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-23 12:29:24,589 - kernelstub.NVRAM     : DEBUG    loaded kernelstub.NVRAM
+2024-08-23 12:29:24,589 - kernelstub.NVRAM     : DEBUG    Updating NVRAM info
+2024-08-23 12:29:24,590 - kernelstub.NVRAM     : DEBUG    Getting NVRAM data
+2024-08-23 12:29:24,647 - kernelstub.NVRAM     : DEBUG    Finding NVRAM entry for Pop_OS 22.04
+2024-08-23 12:29:24,648 - kernelstub.Installer : DEBUG    loaded kernelstub.Installer
+2024-08-23 12:29:24,648 - kernelstub           : INFO     System information: 
+
+    OS:..................Pop!_OS 22.04
+    Root partition:....../dev/sda3
+    Root FS UUID:........d047bce4-63ac-4071-b369-ee7b521891b8
+    ESP Path:............/boot/efi
+    ESP Partition:......./dev/sda1
+    ESP Partition #:.....1
+    NVRAM entry #:.......-1
+    Boot Variable #:.....0000
+    Kernel Boot Options:.quiet loglevel=0 systemd.show_status=false splash
+    Kernel Image Path:.../boot/vmlinuz-6.9.3-76060903-generic
+    Initrd Image Path:.../boot/initrd.img-6.9.3-76060903-generic
+    Force-overwrite:.....False
+
+2024-08-23 12:29:24,649 - kernelstub           : DEBUG    Setting up boot...
+2024-08-23 12:29:24,649 - kernelstub           : DEBUG    kopts: root=UUID=d047bce4-63ac-4071-b369-ee7b521891b8 ro quiet loglevel=0 systemd.show_status=false splash
+2024-08-23 12:29:24,649 - kernelstub.Installer : INFO     Copying Kernel into ESP
+2024-08-23 12:29:24,650 - kernelstub.Installer : DEBUG    kernel being copied to /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-23 12:29:24,650 - kernelstub.Installer : DEBUG    Copying: /boot/vmlinuz-6.9.3-76060903-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz.efi
+2024-08-23 12:29:24,703 - kernelstub.Installer : INFO     Copying initrd.img into ESP
+2024-08-23 12:29:24,705 - kernelstub.Installer : DEBUG    Copying: /boot/initrd.img-6.9.3-76060903-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/initrd.img
+2024-08-23 12:29:24,889 - kernelstub.Installer : DEBUG    Copy complete
+2024-08-23 12:29:24,889 - kernelstub.Installer : INFO     Setting up loader.conf configuration
+2024-08-23 12:29:24,890 - kernelstub.Installer : INFO     Making entry file for Pop!_OS
+2024-08-23 12:29:24,890 - kernelstub.Installer : DEBUG    Entry created!
+2024-08-23 12:29:24,890 - kernelstub.Installer : INFO     Backing up old kernel
+2024-08-23 12:29:24,891 - kernelstub.Installer : DEBUG    Copying: /boot/vmlinuz-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/vmlinuz-previous.efi
+2024-08-23 12:29:24,952 - kernelstub.Installer : DEBUG    Copying: /boot/initrd.img-6.8.0-76060800daily20240311-generic => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8/initrd.img-previous
+2024-08-23 12:29:25,223 - kernelstub.Installer : INFO     Making entry file for Pop!_OS
+2024-08-23 12:29:25,224 - kernelstub.Installer : DEBUG    Entry created!
+2024-08-23 12:29:25,224 - kernelstub.Installer : DEBUG    Copying: /proc/cmdline => /boot/efi/EFI/Pop_OS-d047bce4-63ac-4071-b369-ee7b521891b8
+2024-08-23 12:29:25,225 - kernelstub           : DEBUG    Saving configuration to file
+2024-08-23 12:29:25,225 - kernelstub.Config    : DEBUG    Saving configuration to /etc/kernelstub/configuration
+2024-08-23 12:29:25,226 - kernelstub.Config    : DEBUG    Configuration saved!
+2024-08-23 12:29:25,226 - kernelstub           : DEBUG    Setup complete!
+
+

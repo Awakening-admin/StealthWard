@@ -1,0 +1,1002 @@
+Aug 18 13:24:26 pop-os systemd-logind[645]: New seat seat0.
+Aug 18 13:24:26 pop-os systemd-logind[645]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 18 13:24:26 pop-os systemd-logind[645]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 18 13:24:26 pop-os systemd-logind[645]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 18 13:24:26 pop-os systemd-logind[645]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 18 13:24:26 pop-os systemd-logind[645]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 18 13:24:26 pop-os systemd-logind[645]: Watching system buttons on /dev/input/event5 (HP WMI hotkeys)
+Aug 18 13:24:27 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 18 13:24:27 pop-os systemd-logind[645]: New session c1 of user gdm.
+Aug 18 13:24:27 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 18 13:24:29 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 18 13:24:33 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 18 13:24:33 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 18 13:24:39 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 18 13:24:39 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 18 13:24:39 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 18 13:24:39 pop-os systemd-logind[645]: New session 2 of user robot.
+Aug 18 13:24:39 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 18 13:24:39 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 18 13:24:41 pop-os gnome-keyring-daemon[1236]: The PKCS#11 component was already initialized
+Aug 18 13:24:41 pop-os gnome-keyring-daemon[1236]: The SSH agent was already initialized
+Aug 18 13:24:41 pop-os gnome-keyring-daemon[1236]: The Secret Service was already initialized
+Aug 18 13:24:42 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.75 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 18 13:24:48 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 18 13:24:48 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 18 13:24:48 pop-os systemd-logind[645]: Session c1 logged out. Waiting for processes to exit.
+Aug 18 13:24:48 pop-os systemd-logind[645]: Removed session c1.
+Aug 18 13:26:31 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 13:26:33 pop-os polkitd(authority=local): Operator of unix-session:2 successfully authenticated as unix-user:robot to gain TEMPORARY authorization for action org.freedesktop.packagekit.package-install for system-bus-name::1.113 [io.elementary.appcenter -s] (owned by unix-user:robot)
+Aug 18 13:26:33 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 13:28:15 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 18 13:28:15 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 18 13:34:16 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-update auth (only_trusted:1)
+Aug 18 13:34:16 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-update
+Aug 18 13:44:21 pop-os systemd-logind[645]: System is powering down.
+Aug 18 20:20:04 pop-os systemd-logind[644]: New seat seat0.
+Aug 18 20:20:04 pop-os systemd-logind[644]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 18 20:20:04 pop-os systemd-logind[644]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 18 20:20:04 pop-os systemd-logind[644]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 18 20:20:04 pop-os systemd-logind[644]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 18 20:20:04 pop-os systemd-logind[644]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 18 20:20:04 pop-os systemd-logind[644]: Watching system buttons on /dev/input/event15 (HP WMI hotkeys)
+Aug 18 20:20:05 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 18 20:20:05 pop-os systemd-logind[644]: New session c1 of user gdm.
+Aug 18 20:20:05 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 18 20:20:07 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 18 20:20:10 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 18 20:20:10 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 18 20:20:14 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 18 20:20:14 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 18 20:20:14 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 18 20:20:14 pop-os systemd-logind[644]: New session 2 of user robot.
+Aug 18 20:20:14 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 18 20:20:14 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 18 20:20:16 pop-os gnome-keyring-daemon[1602]: The PKCS#11 component was already initialized
+Aug 18 20:20:16 pop-os gnome-keyring-daemon[1602]: The SSH agent was already initialized
+Aug 18 20:20:16 pop-os gnome-keyring-daemon[1602]: The Secret Service was already initialized
+Aug 18 20:20:17 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.77 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 18 20:20:22 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 18 20:20:22 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 18 20:20:22 pop-os systemd-logind[644]: Session c1 logged out. Waiting for processes to exit.
+Aug 18 20:20:22 pop-os systemd-logind[644]: Removed session c1.
+Aug 18 20:23:57 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-update auth (only_trusted:1)
+Aug 18 20:23:57 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-update
+Aug 18 21:00:07 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:00:14 pop-os polkitd(authority=local): Operator of unix-session:2 successfully authenticated as unix-user:robot to gain TEMPORARY authorization for action org.freedesktop.packagekit.package-install for system-bus-name::1.107 [io.elementary.appcenter] (owned by unix-user:robot)
+Aug 18 21:00:14 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:10:40 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/apt update
+Aug 18 21:10:40 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 21:10:47 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 18 21:10:47 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 18 21:10:52 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 21:11:17 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:20 pop-os polkitd(authority=local): Operator of unix-session:2 successfully authenticated as unix-user:robot to gain TEMPORARY authorization for action org.freedesktop.packagekit.package-install for system-bus-name::1.107 [io.elementary.appcenter] (owned by unix-user:robot)
+Aug 18 21:11:20 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:22 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:22 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:23 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:23 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:25 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:25 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:26 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:26 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:27 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:27 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:29 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:29 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:30 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:30 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:32 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:32 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:33 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:33 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:35 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:35 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:37 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:37 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:38 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:38 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:41 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:41 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:43 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:43 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:45 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:45 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:47 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:47 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:50 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:50 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:51 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:51 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:11:56 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:11:56 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:12:07 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/apt upgrade
+Aug 18 21:12:07 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 21:12:08 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 21:16:28 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 21:16:31 pop-os polkitd(authority=local): Operator of unix-session:2 successfully authenticated as unix-user:robot to gain TEMPORARY authorization for action org.freedesktop.packagekit.package-install for system-bus-name::1.107 [io.elementary.appcenter] (owned by unix-user:robot)
+Aug 18 21:16:31 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 21:17:01 pop-os CRON[49179]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 18 21:17:01 pop-os CRON[49179]: pam_unix(cron:session): session closed for user root
+Aug 18 21:23:28 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install php
+Aug 18 21:23:28 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 21:24:27 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 21:24:29 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 18 21:24:29 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 18 21:25:03 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt-get install dconf-cli uuid-runtime
+Aug 18 21:25:03 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 21:25:11 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 21:25:13 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 18 21:25:13 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 18 21:39:01 pop-os CRON[250831]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 18 21:39:01 pop-os CRON[250831]: pam_unix(cron:session): session closed for user root
+Aug 18 21:44:42 pop-os gdm-password]: gkr-pam: unlocked login keyring
+Aug 18 21:45:57 pop-os sudo: pam_unix(sudo:auth): conversation failed
+Aug 18 21:45:57 pop-os sudo: pam_unix(sudo:auth): auth could not identify password for [robot]
+Aug 18 21:53:55 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/wget https://downloadsapachefriends.global.ssl.fastly.net/7.4.21/xampp-linux-x64-7.4.21-0-installer.run
+Aug 18 21:53:55 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 21:53:57 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 21:59:55 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install apache
+Aug 18 21:59:55 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 21:59:56 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 22:00:00 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install apache2
+Aug 18 22:00:00 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 22:00:00 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 22:00:11 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/systemctl status apache2
+Aug 18 22:00:11 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 22:00:33 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 22:03:29 pop-os sudo:    robot : TTY=pts/0 ; PWD=/var/www ; USER=root ; COMMAND=/usr/bin/chmod +777 html
+Aug 18 22:03:29 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 22:03:29 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 22:03:46 pop-os sudo:    robot : TTY=pts/0 ; PWD=/var/www/html ; USER=root ; COMMAND=/usr/bin/gedit oop.php
+Aug 18 22:03:46 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 22:04:29 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 22:04:44 pop-os sudo:    robot : TTY=pts/0 ; PWD=/var/www/html ; USER=root ; COMMAND=/usr/bin/gedit oop.php
+Aug 18 22:04:44 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 22:04:54 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 22:05:04 pop-os sudo:    robot : TTY=pts/0 ; PWD=/var/www/html ; USER=root ; COMMAND=/usr/bin/gedit oop.php
+Aug 18 22:05:04 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 22:06:46 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 22:07:00 pop-os systemd-logind[644]: Lid closed.
+Aug 18 22:07:00 pop-os systemd-logind[644]: Suspending...
+Aug 18 23:05:13 pop-os systemd-logind[644]: Lid opened.
+Aug 18 23:05:14 pop-os systemd-logind[644]: Operation 'sleep' finished.
+Aug 18 23:05:16 pop-os gdm-password]: gkr-pam: unlocked login keyring
+Aug 18 23:06:00 pop-os sudo:    robot : TTY=pts/0 ; PWD=/var/www/html ; USER=root ; COMMAND=/usr/bin/apt install neofetch
+Aug 18 23:06:00 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 18 23:06:32 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 18 23:06:34 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 18 23:06:34 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 18 23:07:41 pop-os polkitd(authority=local): Registered Authentication Agent for unix-process:255237:1007053 (system bus name :1.269 [flatpak list], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale C)
+Aug 18 23:07:41 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-process:255237:1007053 (system bus name :1.269, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale C)
+Aug 18 23:09:01 pop-os CRON[255435]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 18 23:09:01 pop-os CRON[255435]: pam_unix(cron:session): session closed for user root
+Aug 18 23:11:55 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 18 23:11:58 pop-os polkitd(authority=local): Operator of unix-session:2 successfully authenticated as unix-user:robot to gain TEMPORARY authorization for action org.freedesktop.packagekit.package-install for system-bus-name::1.265 [io.elementary.appcenter] (owned by unix-user:robot)
+Aug 18 23:11:58 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 18 23:17:01 pop-os CRON[255669]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 18 23:17:01 pop-os CRON[255669]: pam_unix(cron:session): session closed for user root
+Aug 18 23:31:35 pop-os systemd-logind[644]: System is powering down.
+Aug 18 23:49:36 pop-os systemd-logind[677]: New seat seat0.
+Aug 18 23:49:36 pop-os systemd-logind[677]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 18 23:49:36 pop-os systemd-logind[677]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 18 23:49:36 pop-os systemd-logind[677]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 18 23:49:36 pop-os systemd-logind[677]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 18 23:49:36 pop-os systemd-logind[677]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 18 23:49:36 pop-os systemd-logind[677]: Watching system buttons on /dev/input/event8 (HP WMI hotkeys)
+Aug 18 23:49:37 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 18 23:49:37 pop-os systemd-logind[677]: New session c1 of user gdm.
+Aug 18 23:49:37 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 18 23:49:40 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 18 23:49:43 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 18 23:49:43 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 18 23:49:49 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 18 23:49:49 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 18 23:49:49 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 18 23:49:49 pop-os systemd-logind[677]: New session 2 of user robot.
+Aug 18 23:49:49 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 18 23:49:49 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 18 23:49:50 pop-os gnome-keyring-daemon[1766]: The PKCS#11 component was already initialized
+Aug 18 23:49:50 pop-os gnome-keyring-daemon[1766]: The SSH agent was already initialized
+Aug 18 23:49:50 pop-os gnome-keyring-daemon[1766]: The Secret Service was already initialized
+Aug 18 23:49:52 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.77 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 18 23:49:57 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 18 23:49:57 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 18 23:49:57 pop-os systemd-logind[677]: Session c1 logged out. Waiting for processes to exit.
+Aug 18 23:49:57 pop-os systemd-logind[677]: Removed session c1.
+Aug 18 23:50:59 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 18 23:50:59 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 19 00:09:01 pop-os CRON[4933]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 00:09:01 pop-os CRON[4933]: pam_unix(cron:session): session closed for user root
+Aug 19 00:17:01 pop-os CRON[5216]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 00:17:01 pop-os CRON[5216]: pam_unix(cron:session): session closed for user root
+Aug 19 00:33:11 pop-os sudo:    robot : TTY=pts/0 ; PWD=/var/www/html ; USER=root ; COMMAND=/usr/bin/chmod +777 oop.php
+Aug 19 00:33:11 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 19 00:33:11 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 19 00:33:22 pop-os sudo:    robot : TTY=pts/0 ; PWD=/var/www/html ; USER=root ; COMMAND=/usr/bin/gedit oop.php
+Aug 19 00:33:22 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 19 00:39:01 pop-os CRON[6014]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 00:39:01 pop-os CRON[6014]: pam_unix(cron:session): session closed for user root
+Aug 19 00:52:39 pop-os systemd-logind[677]: Lid closed.
+Aug 19 00:52:39 pop-os systemd-logind[677]: Suspending...
+Aug 19 01:47:31 pop-os systemd-logind[677]: Lid opened.
+Aug 19 01:47:31 pop-os systemd-logind[677]: Operation 'sleep' finished.
+Aug 19 01:48:04 pop-os gdm-password]: gkr-pam: unlocked login keyring
+Aug 19 02:09:01 pop-os CRON[10952]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 02:09:01 pop-os CRON[10952]: pam_unix(cron:session): session closed for user root
+Aug 19 02:17:01 pop-os CRON[11281]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 02:17:01 pop-os CRON[11281]: pam_unix(cron:session): session closed for user root
+Aug 19 02:17:33 pop-os systemd-logind[677]: System is powering down.
+Aug 19 02:17:33 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 19 13:04:30 pop-os systemd-logind[659]: New seat seat0.
+Aug 19 13:04:30 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 19 13:04:30 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 19 13:04:30 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 19 13:04:30 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 19 13:04:30 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 19 13:04:30 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event8 (HP WMI hotkeys)
+Aug 19 13:04:30 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 19 13:04:30 pop-os systemd-logind[659]: New session c1 of user gdm.
+Aug 19 13:04:30 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 19 13:04:33 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 19 13:04:36 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 13:04:36 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 19 13:04:42 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 19 13:04:42 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 19 13:04:42 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 13:04:42 pop-os systemd-logind[659]: New session 2 of user robot.
+Aug 19 13:04:42 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 13:04:42 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 19 13:04:44 pop-os gnome-keyring-daemon[1692]: The PKCS#11 component was already initialized
+Aug 19 13:04:44 pop-os gnome-keyring-daemon[1692]: The SSH agent was already initialized
+Aug 19 13:04:44 pop-os gnome-keyring-daemon[1692]: The Secret Service was already initialized
+Aug 19 13:04:45 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.77 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 19 13:04:50 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 19 13:04:50 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 19 13:04:50 pop-os systemd-logind[659]: Session c1 logged out. Waiting for processes to exit.
+Aug 19 13:04:50 pop-os systemd-logind[659]: Removed session c1.
+Aug 19 13:05:15 pop-os systemd-logind[659]: System is rebooting.
+Aug 19 13:06:04 pop-os systemd-logind[670]: New seat seat0.
+Aug 19 13:06:04 pop-os systemd-logind[670]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 19 13:06:04 pop-os systemd-logind[670]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 19 13:06:04 pop-os systemd-logind[670]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 19 13:06:04 pop-os systemd-logind[670]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 19 13:06:04 pop-os systemd-logind[670]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 19 13:06:04 pop-os systemd-logind[670]: Watching system buttons on /dev/input/event8 (HP WMI hotkeys)
+Aug 19 13:06:04 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 19 13:06:05 pop-os systemd-logind[670]: New session c1 of user gdm.
+Aug 19 13:06:05 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 19 13:06:07 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 19 13:06:10 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 13:06:10 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 19 13:06:19 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 19 13:06:19 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 19 13:06:19 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 13:06:19 pop-os systemd-logind[670]: New session 2 of user robot.
+Aug 19 13:06:19 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 13:06:20 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 19 13:06:21 pop-os gnome-keyring-daemon[1724]: The PKCS#11 component was already initialized
+Aug 19 13:06:21 pop-os gnome-keyring-daemon[1724]: The SSH agent was already initialized
+Aug 19 13:06:21 pop-os gnome-keyring-daemon[1724]: The Secret Service was already initialized
+Aug 19 13:06:22 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.77 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 19 13:06:27 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 19 13:06:27 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 19 13:06:27 pop-os systemd-logind[670]: Session c1 logged out. Waiting for processes to exit.
+Aug 19 13:06:27 pop-os systemd-logind[670]: Removed session c1.
+Aug 19 13:09:01 pop-os CRON[3420]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 13:09:01 pop-os CRON[3420]: pam_unix(cron:session): session closed for user root
+Aug 19 13:17:01 pop-os CRON[4134]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 13:17:01 pop-os CRON[4134]: pam_unix(cron:session): session closed for user root
+Aug 19 13:39:01 pop-os CRON[5211]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 13:39:01 pop-os CRON[5211]: pam_unix(cron:session): session closed for user root
+Aug 19 14:03:17 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 19 14:03:20 pop-os polkitd(authority=local): Operator of unix-session:2 successfully authenticated as unix-user:robot to gain TEMPORARY authorization for action org.freedesktop.packagekit.package-install for system-bus-name::1.120 [io.elementary.appcenter -s] (owned by unix-user:robot)
+Aug 19 14:03:20 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 19 14:05:10 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 19 14:05:10 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 19 14:05:22 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 19 14:05:22 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 19 14:05:27 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 19 14:05:27 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 19 14:05:39 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/apt update
+Aug 19 14:05:39 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 19 14:05:48 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 19 14:05:48 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 19 14:05:48 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 19 14:05:55 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/apt upgrade
+Aug 19 14:05:55 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 19 14:07:39 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 19 14:07:40 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 19 14:07:40 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 19 14:09:01 pop-os CRON[20504]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 14:09:01 pop-os CRON[20504]: pam_unix(cron:session): session closed for user root
+Aug 19 14:17:01 pop-os CRON[20870]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 14:17:01 pop-os CRON[20870]: pam_unix(cron:session): session closed for user root
+Aug 19 14:21:29 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 19 14:21:32 pop-os polkitd(authority=local): Operator of unix-session:2 successfully authenticated as unix-user:robot to gain TEMPORARY authorization for action org.freedesktop.packagekit.package-install for system-bus-name::1.120 [io.elementary.appcenter -s] (owned by unix-user:robot)
+Aug 19 14:21:32 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 19 14:39:01 pop-os CRON[21745]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 14:39:01 pop-os CRON[21745]: pam_unix(cron:session): session closed for user root
+Aug 19 14:58:02 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.package-install auth (only_trusted:1)
+Aug 19 14:58:05 pop-os polkitd(authority=local): Operator of unix-session:2 successfully authenticated as unix-user:robot to gain TEMPORARY authorization for action org.freedesktop.packagekit.package-install for system-bus-name::1.120 [io.elementary.appcenter -s] (owned by unix-user:robot)
+Aug 19 14:58:05 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.package-install
+Aug 19 15:09:01 pop-os CRON[25438]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 15:09:01 pop-os CRON[25438]: pam_unix(cron:session): session closed for user root
+Aug 19 15:17:01 pop-os CRON[25972]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 15:17:01 pop-os CRON[25972]: pam_unix(cron:session): session closed for user root
+Aug 19 15:25:49 pop-os systemd-logind[670]: System is rebooting.
+Aug 19 15:26:31 pop-os systemd-logind[654]: New seat seat0.
+Aug 19 15:26:31 pop-os systemd-logind[654]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 19 15:26:31 pop-os systemd-logind[654]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 19 15:26:31 pop-os systemd-logind[654]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 19 15:26:31 pop-os systemd-logind[654]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 19 15:26:31 pop-os systemd-logind[654]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 19 15:26:31 pop-os systemd-logind[654]: Watching system buttons on /dev/input/event5 (HP WMI hotkeys)
+Aug 19 15:26:32 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 19 15:26:32 pop-os systemd-logind[654]: New session c1 of user gdm.
+Aug 19 15:26:32 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 19 15:26:34 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 19 15:26:37 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 15:26:37 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 19 15:26:53 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 19 15:26:53 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 19 15:26:53 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 15:26:53 pop-os systemd-logind[654]: New session 2 of user robot.
+Aug 19 15:26:53 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 15:26:54 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 19 15:26:55 pop-os gnome-keyring-daemon[1731]: The PKCS#11 component was already initialized
+Aug 19 15:26:55 pop-os gnome-keyring-daemon[1731]: The SSH agent was already initialized
+Aug 19 15:26:55 pop-os gnome-keyring-daemon[1731]: The Secret Service was already initialized
+Aug 19 15:26:56 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.77 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 19 15:27:01 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 19 15:27:01 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 19 15:27:01 pop-os systemd-logind[654]: Session c1 logged out. Waiting for processes to exit.
+Aug 19 15:27:01 pop-os systemd-logind[654]: Removed session c1.
+Aug 19 15:35:43 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/nano /usr/share/gnome-shell/theme/gdm.css
+Aug 19 15:35:43 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 19 15:35:46 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 19 15:37:47 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Downloads/gnome-shell-extension-unlockDialogBackground-master ; USER=root ; COMMAND=/usr/bin/make install
+Aug 19 15:37:47 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 19 15:37:47 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 19 15:39:01 pop-os CRON[4759]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 15:39:01 pop-os CRON[4759]: pam_unix(cron:session): session closed for user root
+Aug 19 15:42:27 pop-os systemd-logind[654]: System is powering down.
+Aug 19 23:19:47 pop-os systemd-logind[655]: New seat seat0.
+Aug 19 23:19:47 pop-os systemd-logind[655]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 19 23:19:47 pop-os systemd-logind[655]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 19 23:19:47 pop-os systemd-logind[655]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 19 23:19:47 pop-os systemd-logind[655]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 19 23:19:47 pop-os systemd-logind[655]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 19 23:19:48 pop-os systemd-logind[655]: Watching system buttons on /dev/input/event8 (HP WMI hotkeys)
+Aug 19 23:19:48 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 19 23:19:48 pop-os systemd-logind[655]: New session c1 of user gdm.
+Aug 19 23:19:48 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 19 23:19:51 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 19 23:19:54 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 23:19:54 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 19 23:19:58 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 19 23:19:58 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 19 23:19:58 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 23:19:58 pop-os systemd-logind[655]: New session 2 of user robot.
+Aug 19 23:19:58 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 19 23:19:59 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 19 23:20:00 pop-os gnome-keyring-daemon[1737]: The PKCS#11 component was already initialized
+Aug 19 23:20:00 pop-os gnome-keyring-daemon[1737]: The SSH agent was already initialized
+Aug 19 23:20:00 pop-os gnome-keyring-daemon[1737]: The Secret Service was already initialized
+Aug 19 23:20:01 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.76 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 19 23:20:07 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 19 23:20:07 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 19 23:20:07 pop-os systemd-logind[655]: Session c1 logged out. Waiting for processes to exit.
+Aug 19 23:20:07 pop-os systemd-logind[655]: Removed session c1.
+Aug 19 23:21:05 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 19 23:21:05 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 19 23:26:12 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install qbittorrent
+Aug 19 23:26:12 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 19 23:27:01 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 19 23:27:02 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 19 23:27:02 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 19 23:39:01 pop-os CRON[6563]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 19 23:39:01 pop-os CRON[6563]: pam_unix(cron:session): session closed for user root
+Aug 20 00:09:01 pop-os CRON[8490]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 20 00:09:01 pop-os CRON[8490]: pam_unix(cron:session): session closed for user root
+Aug 20 00:17:01 pop-os CRON[8571]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 20 00:17:01 pop-os CRON[8571]: pam_unix(cron:session): session closed for user root
+Aug 20 00:39:01 pop-os CRON[8933]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 20 00:39:01 pop-os CRON[8933]: pam_unix(cron:session): session closed for user root
+Aug 20 01:09:01 pop-os CRON[12411]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 20 01:09:01 pop-os CRON[12411]: pam_unix(cron:session): session closed for user root
+Aug 20 01:17:01 pop-os CRON[12810]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 20 01:17:01 pop-os CRON[12810]: pam_unix(cron:session): session closed for user root
+Aug 20 01:18:42 pop-os systemd-logind[655]: Lid closed.
+Aug 20 01:18:42 pop-os systemd-logind[655]: Suspending...
+Aug 20 01:29:55 pop-os systemd-logind[655]: Lid opened.
+Aug 20 01:29:55 pop-os systemd-logind[655]: Operation 'sleep' finished.
+Aug 20 01:30:01 pop-os gdm-password]: gkr-pam: unlocked login keyring
+Aug 20 01:38:19 pop-os systemd-logind[655]: System is powering down.
+Aug 20 03:39:47 pop-os systemd-logind[662]: New seat seat0.
+Aug 20 03:39:47 pop-os systemd-logind[662]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 20 03:39:47 pop-os systemd-logind[662]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 20 03:39:47 pop-os systemd-logind[662]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 20 03:39:47 pop-os systemd-logind[662]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 20 03:39:47 pop-os systemd-logind[662]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 20 03:39:47 pop-os systemd-logind[662]: Watching system buttons on /dev/input/event5 (HP WMI hotkeys)
+Aug 20 03:39:48 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 20 03:39:48 pop-os systemd-logind[662]: New session c1 of user gdm.
+Aug 20 03:39:48 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 20 03:39:50 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 20 03:39:53 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 20 03:39:53 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 20 03:40:03 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 20 03:40:03 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 20 03:40:03 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 20 03:40:03 pop-os systemd-logind[662]: New session 2 of user robot.
+Aug 20 03:40:03 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 20 03:40:03 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 20 03:40:05 pop-os gnome-keyring-daemon[1757]: The PKCS#11 component was already initialized
+Aug 20 03:40:05 pop-os gnome-keyring-daemon[1757]: The SSH agent was already initialized
+Aug 20 03:40:05 pop-os gnome-keyring-daemon[1757]: The Secret Service was already initialized
+Aug 20 03:40:06 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.76 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 20 03:40:11 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 20 03:40:11 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 20 03:40:11 pop-os systemd-logind[662]: Session c1 logged out. Waiting for processes to exit.
+Aug 20 03:40:11 pop-os systemd-logind[662]: Removed session c1.
+Aug 20 03:41:26 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 20 03:41:26 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 20 03:43:56 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/tar -xvf /home/robot/Downloads/node-v20.16.0-linux-x64.tar.xz /opt
+Aug 20 03:43:56 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 20 03:43:58 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 20 03:44:08 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/tar -xvf /home/robot/Downloads/node-v20.16.0-linux-x64.tar.xz
+Aug 20 03:44:08 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 20 03:44:11 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 20 03:45:44 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/mv node-v20.16.0-linux-x64 /opt/
+Aug 20 03:45:44 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 20 03:45:44 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 20 03:46:08 pop-os sudo:    robot : TTY=pts/1 ; PWD=/opt ; USER=root ; COMMAND=/usr/bin/apt install nodejs
+Aug 20 03:46:08 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 20 03:52:33 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 20 03:52:35 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 20 03:52:35 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 20 04:09:01 pop-os CRON[8313]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 20 04:09:01 pop-os CRON[8313]: pam_unix(cron:session): session closed for user root
+Aug 20 04:12:17 pop-os sudo:    robot : TTY=pts/1 ; PWD=/opt ; USER=root ; COMMAND=/usr/bin/apt install react
+Aug 20 04:12:17 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 20 04:12:18 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 20 04:12:21 pop-os sudo:    robot : TTY=pts/1 ; PWD=/opt ; USER=root ; COMMAND=/usr/bin/apt install reactjs
+Aug 20 04:12:21 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 20 04:12:21 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 20 04:12:25 pop-os sudo:    robot : TTY=pts/1 ; PWD=/opt ; USER=root ; COMMAND=/usr/bin/apt install reactnative
+Aug 20 04:12:25 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 20 04:12:26 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 20 04:12:38 pop-os sudo:    robot : TTY=pts/1 ; PWD=/opt ; USER=root ; COMMAND=/usr/bin/apt install vue
+Aug 20 04:12:38 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 20 04:12:38 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 20 04:12:44 pop-os sudo:    robot : TTY=pts/1 ; PWD=/opt ; USER=root ; COMMAND=/usr/bin/apt install nextjs
+Aug 20 04:12:44 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 20 04:12:45 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 20 04:17:01 pop-os CRON[9068]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 20 04:17:01 pop-os CRON[9068]: pam_unix(cron:session): session closed for user root
+Aug 20 04:17:08 pop-os sudo:    robot : TTY=pts/1 ; PWD=/opt ; USER=root ; COMMAND=/usr/sbin/shutdown -h now
+Aug 20 04:17:08 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 20 21:38:46 pop-os systemd-logind[658]: New seat seat0.
+Aug 20 21:38:46 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 20 21:38:46 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 20 21:38:46 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 20 21:38:46 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 20 21:38:46 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 20 21:38:46 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event6 (HP WMI hotkeys)
+Aug 20 21:38:46 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 20 21:38:46 pop-os systemd-logind[658]: New session c1 of user gdm.
+Aug 20 21:38:46 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 20 21:38:49 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 20 21:38:52 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 20 21:38:52 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 20 21:39:01 pop-os CRON[1662]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 20 21:39:01 pop-os CRON[1662]: pam_unix(cron:session): session closed for user root
+Aug 20 21:39:21 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 20 21:39:21 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 20 21:39:21 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 20 21:39:21 pop-os systemd-logind[658]: New session 3 of user robot.
+Aug 20 21:39:21 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 20 21:39:21 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 20 21:39:22 pop-os gnome-keyring-daemon[1818]: The PKCS#11 component was already initialized
+Aug 20 21:39:22 pop-os gnome-keyring-daemon[1818]: The SSH agent was already initialized
+Aug 20 21:39:22 pop-os gnome-keyring-daemon[1818]: The Secret Service was already initialized
+Aug 20 21:39:23 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:3 (system bus name :1.76 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 20 21:39:28 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 20 21:39:28 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 20 21:39:28 pop-os systemd-logind[658]: Session c1 logged out. Waiting for processes to exit.
+Aug 20 21:39:28 pop-os systemd-logind[658]: Removed session c1.
+Aug 20 22:06:15 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/sbin/shutdown -h now
+Aug 20 22:06:15 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 20 22:06:15 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 21 19:28:34 pop-os systemd-logind[658]: New seat seat0.
+Aug 21 19:28:34 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 21 19:28:34 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 21 19:28:34 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 21 19:28:34 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 21 19:28:34 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 21 19:28:34 pop-os systemd-logind[658]: Watching system buttons on /dev/input/event8 (HP WMI hotkeys)
+Aug 21 19:28:34 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 21 19:28:34 pop-os systemd-logind[658]: New session c1 of user gdm.
+Aug 21 19:28:35 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 21 19:28:37 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 21 19:28:41 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 21 19:28:41 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 21 19:28:43 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 21 19:28:43 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 21 19:28:43 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 21 19:28:43 pop-os systemd-logind[658]: New session 2 of user robot.
+Aug 21 19:28:43 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 21 19:28:43 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 21 19:28:45 pop-os gnome-keyring-daemon[1564]: The PKCS#11 component was already initialized
+Aug 21 19:28:45 pop-os gnome-keyring-daemon[1564]: The SSH agent was already initialized
+Aug 21 19:28:45 pop-os gnome-keyring-daemon[1564]: The Secret Service was already initialized
+Aug 21 19:28:46 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.76 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 21 19:28:51 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 21 19:28:51 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 21 19:28:51 pop-os systemd-logind[658]: Session c1 logged out. Waiting for processes to exit.
+Aug 21 19:28:51 pop-os systemd-logind[658]: Removed session c1.
+Aug 21 19:30:03 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 21 19:30:03 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 21 19:38:34 pop-os systemd-logind[658]: Lid closed.
+Aug 21 19:38:34 pop-os systemd-logind[658]: Suspending...
+Aug 21 21:00:19 pop-os systemd-logind[658]: Lid opened.
+Aug 21 21:00:19 pop-os systemd-logind[658]: Operation 'sleep' finished.
+Aug 21 21:00:32 pop-os gdm-password]: gkr-pam: unlocked login keyring
+Aug 21 21:09:01 pop-os CRON[5883]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 21 21:09:01 pop-os CRON[5883]: pam_unix(cron:session): session closed for user root
+Aug 21 21:17:01 pop-os CRON[6693]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 21 21:17:01 pop-os CRON[6693]: pam_unix(cron:session): session closed for user root
+Aug 21 21:23:22 pop-os systemd-logind[658]: Lid closed.
+Aug 21 21:23:22 pop-os systemd-logind[658]: Suspending...
+Aug 21 23:51:53 pop-os systemd-logind[658]: Lid opened.
+Aug 21 23:51:53 pop-os systemd-logind[658]: Operation 'sleep' finished.
+Aug 21 23:51:57 pop-os gdm-password]: gkr-pam: unlocked login keyring
+Aug 21 23:54:53 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install phpstorm
+Aug 21 23:54:53 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 21 23:54:54 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 00:09:01 pop-os CRON[8780]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 00:09:01 pop-os CRON[8780]: pam_unix(cron:session): session closed for user root
+Aug 22 00:17:01 pop-os CRON[9255]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 00:17:01 pop-os CRON[9255]: pam_unix(cron:session): session closed for user root
+Aug 22 00:25:00 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Desktop/FYP/Research ; USER=root ; COMMAND=/usr/bin/apt install notepadqq
+Aug 22 00:25:00 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 00:27:46 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 00:27:48 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 22 00:27:48 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 22 00:34:18 pop-os sudo:    robot : TTY=pts/1 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/chmod +766 opt
+Aug 22 00:34:18 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 00:34:18 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 00:35:15 pop-os sudo:    robot : TTY=pts/1 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/chmod +rwx opt
+Aug 22 00:35:15 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 00:35:15 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 00:37:15 pop-os sudo:    robot : TTY=pts/2 ; PWD=/opt/PhpStorm-242.20224.361/bin ; USER=root ; COMMAND=/usr/bin/chmod +x phpstorm.sh
+Aug 22 00:37:15 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 00:37:15 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 00:39:01 pop-os CRON[11704]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 00:39:01 pop-os CRON[11704]: pam_unix(cron:session): session closed for user root
+Aug 22 00:42:32 pop-os systemd-logind[658]: System is powering down.
+Aug 22 12:02:41 pop-os systemd-logind[661]: New seat seat0.
+Aug 22 12:02:41 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 22 12:02:41 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 22 12:02:41 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 22 12:02:41 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 22 12:02:41 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 22 12:02:41 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event8 (HP WMI hotkeys)
+Aug 22 12:02:42 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 22 12:02:42 pop-os systemd-logind[661]: New session c1 of user gdm.
+Aug 22 12:02:42 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 22 12:02:44 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 22 12:02:47 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 22 12:02:47 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 22 12:02:50 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 22 12:02:50 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 22 12:02:50 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 22 12:02:50 pop-os systemd-logind[661]: New session 2 of user robot.
+Aug 22 12:02:50 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 22 12:02:50 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 22 12:02:52 pop-os gnome-keyring-daemon[1297]: The PKCS#11 component was already initialized
+Aug 22 12:02:52 pop-os gnome-keyring-daemon[1297]: The SSH agent was already initialized
+Aug 22 12:02:52 pop-os gnome-keyring-daemon[1297]: The Secret Service was already initialized
+Aug 22 12:02:53 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.76 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 22 12:02:58 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 22 12:02:58 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 22 12:02:58 pop-os systemd-logind[661]: Session c1 logged out. Waiting for processes to exit.
+Aug 22 12:02:58 pop-os systemd-logind[661]: Removed session c1.
+Aug 22 12:07:21 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 22 12:07:21 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 22 12:09:01 pop-os CRON[4074]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 12:09:01 pop-os CRON[4074]: pam_unix(cron:session): session closed for user root
+Aug 22 12:15:05 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/chmod +x PhpStorm.desktop
+Aug 22 12:15:05 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 12:15:05 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 12:17:00 pop-os sudo: pam_unix(sudo:auth): authentication failure; logname= uid=1000 euid=0 tty=/dev/pts/1 ruser=robot rhost=  user=robot
+Aug 22 12:17:01 pop-os CRON[4783]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 12:17:01 pop-os CRON[4783]: pam_unix(cron:session): session closed for user root
+Aug 22 12:17:04 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/apt install nautilus
+Aug 22 12:17:04 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 12:17:05 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 12:21:38 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-update auth (only_trusted:1)
+Aug 22 12:21:38 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-update
+Aug 22 12:39:01 pop-os CRON[8072]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 12:39:01 pop-os CRON[8072]: pam_unix(cron:session): session closed for user root
+Aug 22 13:06:40 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/apt install notepad++
+Aug 22 13:06:40 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 13:06:41 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 13:06:46 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/apt install notepadpp
+Aug 22 13:06:46 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 13:06:46 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 13:06:50 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/apt install notepp
+Aug 22 13:06:50 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 13:06:50 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 13:06:55 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/apt install notepad ++
+Aug 22 13:06:55 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 13:06:55 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 13:07:00 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/apt install notepad++
+Aug 22 13:07:00 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 13:07:01 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 13:07:20 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Desktop ; USER=root ; COMMAND=/usr/bin/apt install micro
+Aug 22 13:07:20 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 13:07:26 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 13:07:28 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 22 13:07:28 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 22 13:09:01 pop-os CRON[10890]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 13:09:01 pop-os CRON[10890]: pam_unix(cron:session): session closed for user root
+Aug 22 13:17:01 pop-os CRON[11331]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 13:17:01 pop-os CRON[11331]: pam_unix(cron:session): session closed for user root
+Aug 22 13:39:01 pop-os CRON[12809]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 13:39:01 pop-os CRON[12809]: pam_unix(cron:session): session closed for user root
+Aug 22 14:09:01 pop-os CRON[16566]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 14:09:01 pop-os CRON[16566]: pam_unix(cron:session): session closed for user root
+Aug 22 14:17:01 pop-os CRON[17189]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 14:17:01 pop-os CRON[17189]: pam_unix(cron:session): session closed for user root
+Aug 22 14:39:01 pop-os CRON[18915]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 14:39:01 pop-os CRON[18915]: pam_unix(cron:session): session closed for user root
+Aug 22 14:53:56 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Desktop/PHP ; USER=root ; COMMAND=/usr/bin/apt install php php-cli php-mbstring php-xml php-curl php-zip
+Aug 22 14:53:56 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 14:54:12 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 14:54:14 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 22 14:54:14 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 22 14:55:05 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Desktop/PHP ; USER=root ; COMMAND=/usr/bin/mv composer.phar /usr/local/bin/composer
+Aug 22 14:55:05 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 14:55:05 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 15:09:01 pop-os CRON[25367]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 15:09:01 pop-os CRON[25367]: pam_unix(cron:session): session closed for user root
+Aug 22 15:15:59 pop-os sudo:    robot : TTY=pts/3 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install nodejs
+Aug 22 15:15:59 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 15:16:00 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 15:16:10 pop-os sudo:    robot : TTY=pts/3 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install inertiajs
+Aug 22 15:16:10 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 15:16:11 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 15:16:16 pop-os sudo:    robot : TTY=pts/3 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install alpinejs
+Aug 22 15:16:16 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 15:16:16 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 15:17:01 pop-os CRON[26425]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 15:17:01 pop-os CRON[26425]: pam_unix(cron:session): session closed for user root
+Aug 22 15:39:01 pop-os CRON[29564]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 15:39:01 pop-os CRON[29564]: pam_unix(cron:session): session closed for user root
+Aug 22 16:09:01 pop-os CRON[31910]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 16:09:01 pop-os CRON[31910]: pam_unix(cron:session): session closed for user root
+Aug 22 16:17:01 pop-os CRON[32572]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 16:17:01 pop-os CRON[32572]: pam_unix(cron:session): session closed for user root
+Aug 22 16:39:01 pop-os CRON[34276]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 16:39:01 pop-os CRON[34276]: pam_unix(cron:session): session closed for user root
+Aug 22 17:09:01 pop-os CRON[37214]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 17:09:01 pop-os CRON[37214]: pam_unix(cron:session): session closed for user root
+Aug 22 17:17:01 pop-os CRON[37846]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 17:17:01 pop-os CRON[37846]: pam_unix(cron:session): session closed for user root
+Aug 22 17:39:01 pop-os CRON[39945]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 17:39:01 pop-os CRON[39945]: pam_unix(cron:session): session closed for user root
+Aug 22 18:09:01 pop-os CRON[42587]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 18:09:01 pop-os CRON[42587]: pam_unix(cron:session): session closed for user root
+Aug 22 18:17:01 pop-os CRON[43370]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 18:17:01 pop-os CRON[43370]: pam_unix(cron:session): session closed for user root
+Aug 22 18:39:01 pop-os CRON[45353]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 18:39:01 pop-os CRON[45353]: pam_unix(cron:session): session closed for user root
+Aug 22 18:53:32 pop-os polkitd(authority=local): Registered Authentication Agent for unix-process:46922:2466589 (system bus name :1.373 [flatpak list], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale C)
+Aug 22 18:53:32 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-process:46922:2466589 (system bus name :1.373, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale C)
+Aug 22 19:09:01 pop-os CRON[48270]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 19:09:01 pop-os CRON[48270]: pam_unix(cron:session): session closed for user root
+Aug 22 19:17:01 pop-os CRON[48956]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 19:17:01 pop-os CRON[48956]: pam_unix(cron:session): session closed for user root
+Aug 22 19:39:01 pop-os CRON[50505]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 19:39:01 pop-os CRON[50505]: pam_unix(cron:session): session closed for user root
+Aug 22 19:54:52 pop-os sudo:    robot : TTY=pts/4 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/bash moh_revival_linux2.sh
+Aug 22 19:54:52 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 22 19:54:58 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 22 19:54:58 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 22 19:55:32 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 22 19:55:32 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 22 19:56:05 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 22 19:56:05 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 22 19:56:38 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 22 19:56:38 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 22 20:09:01 pop-os CRON[56422]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 20:09:01 pop-os CRON[56422]: pam_unix(cron:session): session closed for user root
+Aug 22 20:17:01 pop-os CRON[56903]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 20:17:01 pop-os CRON[56903]: pam_unix(cron:session): session closed for user root
+Aug 22 20:26:01 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event25 (YICHIP Wireless Device System Control)
+Aug 22 20:26:01 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event23 (YICHIP Wireless Device)
+Aug 22 20:26:01 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event26 (YICHIP Wireless Device Consumer Control)
+Aug 22 20:39:01 pop-os CRON[58162]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 22 20:39:01 pop-os CRON[58162]: pam_unix(cron:session): session closed for user root
+Aug 22 20:42:29 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event23 (YICHIP Wireless Device)
+Aug 22 20:42:29 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event26 (YICHIP Wireless Device Consumer Control)
+Aug 22 20:42:29 pop-os systemd-logind[661]: Watching system buttons on /dev/input/event25 (YICHIP Wireless Device System Control)
+Aug 22 21:00:42 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 22 21:02:10 pop-os systemd-logind[661]: System is powering down.
+Aug 23 10:15:40 pop-os systemd-logind[660]: New seat seat0.
+Aug 23 10:15:40 pop-os systemd-logind[660]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 23 10:15:40 pop-os systemd-logind[660]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 23 10:15:40 pop-os systemd-logind[660]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 23 10:15:40 pop-os systemd-logind[660]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 23 10:15:40 pop-os systemd-logind[660]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 23 10:15:40 pop-os systemd-logind[660]: Watching system buttons on /dev/input/event8 (HP WMI hotkeys)
+Aug 23 10:15:41 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 23 10:15:41 pop-os systemd-logind[660]: New session c1 of user gdm.
+Aug 23 10:15:41 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 23 10:15:43 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 23 10:15:46 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 23 10:15:46 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 23 10:16:21 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 23 10:16:21 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 23 10:16:21 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 23 10:16:21 pop-os systemd-logind[660]: New session 2 of user robot.
+Aug 23 10:16:21 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 23 10:16:21 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 23 10:16:23 pop-os gnome-keyring-daemon[1942]: The PKCS#11 component was already initialized
+Aug 23 10:16:23 pop-os gnome-keyring-daemon[1942]: The SSH agent was already initialized
+Aug 23 10:16:23 pop-os gnome-keyring-daemon[1942]: The Secret Service was already initialized
+Aug 23 10:16:24 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.82 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 23 10:16:29 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 23 10:16:29 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 23 10:16:29 pop-os systemd-logind[660]: Session c1 logged out. Waiting for processes to exit.
+Aug 23 10:16:29 pop-os systemd-logind[660]: Removed session c1.
+Aug 23 10:17:01 pop-os CRON[3453]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 23 10:17:01 pop-os CRON[3453]: pam_unix(cron:session): session closed for user root
+Aug 23 10:17:53 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 23 10:17:53 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 23 10:18:20 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 23 10:18:20 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 23 10:39:01 pop-os CRON[6507]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 23 10:39:01 pop-os CRON[6507]: pam_unix(cron:session): session closed for user root
+Aug 23 11:09:01 pop-os CRON[7707]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 23 11:09:01 pop-os CRON[7707]: pam_unix(cron:session): session closed for user root
+Aug 23 11:17:01 pop-os CRON[8048]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 23 11:17:01 pop-os CRON[8048]: pam_unix(cron:session): session closed for user root
+Aug 23 11:39:01 pop-os CRON[9487]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 23 11:39:01 pop-os CRON[9487]: pam_unix(cron:session): session closed for user root
+Aug 23 12:09:01 pop-os CRON[11183]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 23 12:09:01 pop-os CRON[11183]: pam_unix(cron:session): session closed for user root
+Aug 23 12:11:28 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install mysql
+Aug 23 12:11:28 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:11:28 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:15:52 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install mysqlsudo apt-get install libaio1
+Aug 23 12:15:52 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:15:53 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:16:02 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt-get install libaio1
+Aug 23 12:16:02 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:16:03 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:16:53 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/dpkg -i mysql-common_*.deb mysql-community-client-plugins_*.deb mysql-community-client-core_*.deb mysql-community-client_*.deb mysql-client_*.deb mysql-community-server-core_*.deb mysql-community-server_*.deb mysql-server_*.deb
+Aug 23 12:16:53 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:16:53 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:17:01 pop-os CRON[11765]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 23 12:17:01 pop-os CRON[11765]: pam_unix(cron:session): session closed for user root
+Aug 23 12:17:28 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/tar -xvf mysql-9.0.1-linux-glibc2.28-x86_64.tar.xz
+Aug 23 12:17:28 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:17:51 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:18:17 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/mv mysql-9.0.1-linux-glibc2.28-x86_64 mysql-9.0.1
+Aug 23 12:18:17 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:18:17 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:19:12 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/mv mysql-9.0.1 /opt
+Aug 23 12:19:12 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:19:12 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:20:22 pop-os sudo:    robot : TTY=pts/2 ; PWD=/opt/mysql-9.0.1/bin ; USER=root ; COMMAND=/usr/bin/apt install mysql-client-core-8.0
+Aug 23 12:20:22 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:20:27 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:20:30 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 23 12:20:30 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 23 12:20:48 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/systemctl status mysql
+Aug 23 12:20:48 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:20:48 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:20:55 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/mysql -u root
+Aug 23 12:20:55 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:20:55 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:21:28 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/apt update
+Aug 23 12:21:28 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:21:33 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:21:33 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/apt install mysql-server
+Aug 23 12:21:33 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:21:33 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 23 12:21:33 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 23 12:21:47 pop-os groupadd[13341]: group added to /etc/group: name=mysql, GID=134
+Aug 23 12:21:47 pop-os groupadd[13341]: group added to /etc/gshadow: name=mysql
+Aug 23 12:21:47 pop-os groupadd[13341]: new group: name=mysql, GID=134
+Aug 23 12:21:47 pop-os useradd[13349]: new user: name=mysql, UID=126, GID=134, home=/nonexistent, shell=/bin/false, from=none
+Aug 23 12:21:47 pop-os chage[13356]: changed password expiry for mysql
+Aug 23 12:21:47 pop-os chfn[13360]: changed user 'mysql' information
+Aug 23 12:22:24 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:22:26 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 23 12:22:26 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 23 12:22:47 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/systemctl status mysql.service
+Aug 23 12:22:47 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:22:50 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:23:12 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/mysql -u root
+Aug 23 12:23:12 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:24:47 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:24:49 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/tee /etc/apt/trusted.gpg.d/tableplus-archive.gpg
+Aug 23 12:24:49 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:24:50 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:25:06 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/add-apt-repository 'deb [arch=amd64] https://deb.tableplus.com/debian/24 tableplus main'
+Aug 23 12:25:06 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:25:14 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:25:14 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 23 12:25:14 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 23 12:25:23 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/apt update
+Aug 23 12:25:23 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:25:45 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 23 12:25:45 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 23 12:25:45 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:25:45 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/apt install tableplus
+Aug 23 12:25:45 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:26:19 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:26:21 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 23 12:26:21 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 23 12:27:12 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/apt update
+Aug 23 12:27:12 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:27:16 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 23 12:27:16 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 23 12:27:16 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:27:16 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/apt upgrade
+Aug 23 12:27:16 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:29:26 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:29:28 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 23 12:29:28 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 23 12:31:43 pop-os sudo:    robot : TTY=pts/2 ; PWD=/ ; USER=root ; COMMAND=/usr/bin/apt install policykit-1
+Aug 23 12:31:43 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:31:44 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:33:31 pop-os sudo:    robot : TTY=pts/2 ; PWD=/run/sudo ; USER=root ; COMMAND=/usr/bin/ls
+Aug 23 12:33:31 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:33:31 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:33:37 pop-os sudo:    robot : TTY=pts/2 ; PWD=/run/sudo ; USER=root ; COMMAND=/usr/bin/ls
+Aug 23 12:33:37 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:33:37 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:33:45 pop-os sudo:    robot : TTY=pts/2 ; PWD=/run/sudo/ts ; USER=root ; COMMAND=/usr/bin/ls
+Aug 23 12:33:45 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:33:45 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:33:54 pop-os sudo:    robot : TTY=pts/2 ; PWD=/run/sudo/ts ; USER=root ; COMMAND=/usr/bin/ls
+Aug 23 12:33:54 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:33:54 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:39:01 pop-os CRON[35078]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 23 12:39:01 pop-os CRON[35078]: pam_unix(cron:session): session closed for user root
+Aug 23 12:41:25 pop-os polkitd(authority=local): Registered Authentication Agent for unix-process:35193:875978 (system bus name :1.205 [flatpak list], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 23 12:41:25 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-process:35193:875978 (system bus name :1.205, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 23 12:49:47 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/mysql
+Aug 23 12:49:47 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:53:55 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:54:17 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/mysql -u root -p
+Aug 23 12:54:17 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:54:25 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:55:21 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/mysql -u root -p
+Aug 23 12:55:21 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:56:15 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:56:22 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/mysql
+Aug 23 12:56:22 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 12:57:43 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 12:58:39 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/mysql
+Aug 23 12:58:39 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 13:09:01 pop-os CRON[36436]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 23 13:09:01 pop-os CRON[36436]: pam_unix(cron:session): session closed for user root
+Aug 23 13:17:01 pop-os CRON[36701]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 23 13:17:01 pop-os CRON[36701]: pam_unix(cron:session): session closed for user root
+Aug 23 13:29:23 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 13:30:47 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt update
+Aug 23 13:30:47 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 13:30:54 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 23 13:30:54 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 23 13:30:54 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 13:30:54 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt upgrade
+Aug 23 13:30:54 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 13:30:55 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 13:30:55 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt dist-upgrade
+Aug 23 13:30:55 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 23 13:30:57 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 23 13:31:22 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/sbin/shutdown -h now
+Aug 23 13:31:22 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:18:58 pop-os systemd-logind[659]: New seat seat0.
+Aug 24 02:18:58 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event3 (Power Button)
+Aug 24 02:18:58 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event2 (Power Button)
+Aug 24 02:18:58 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event1 (Lid Switch)
+Aug 24 02:18:58 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event0 (Sleep Button)
+Aug 24 02:18:58 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event4 (AT Translated Set 2 keyboard)
+Aug 24 02:18:58 pop-os systemd-logind[659]: Watching system buttons on /dev/input/event8 (HP WMI hotkeys)
+Aug 24 02:18:59 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 24 02:18:59 pop-os systemd-logind[659]: New session c1 of user gdm.
+Aug 24 02:18:59 pop-os systemd: pam_unix(systemd-user:session): session opened for user gdm(uid=111) by (uid=0)
+Aug 24 02:19:03 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:c1 (system bus name :1.38 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 24 02:19:07 pop-os runuser: pam_unix(runuser:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 24 02:19:07 pop-os runuser: pam_unix(runuser:session): session closed for user robot
+Aug 24 02:19:08 pop-os gdm-password]: gkr-pam: unable to locate daemon control file
+Aug 24 02:19:08 pop-os gdm-password]: gkr-pam: stashed password to try later in open session
+Aug 24 02:19:08 pop-os gdm-password]: pam_unix(gdm-password:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 24 02:19:08 pop-os systemd-logind[659]: New session 2 of user robot.
+Aug 24 02:19:08 pop-os systemd: pam_unix(systemd-user:session): session opened for user robot(uid=1000) by (uid=0)
+Aug 24 02:19:08 pop-os gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Aug 24 02:19:10 pop-os gnome-keyring-daemon[1517]: The PKCS#11 component was already initialized
+Aug 24 02:19:10 pop-os gnome-keyring-daemon[1517]: The SSH agent was already initialized
+Aug 24 02:19:10 pop-os gnome-keyring-daemon[1517]: The Secret Service was already initialized
+Aug 24 02:19:11 pop-os polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.76 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Aug 24 02:19:16 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-session:c1 (system bus name :1.38, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Aug 24 02:19:16 pop-os gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user gdm
+Aug 24 02:19:16 pop-os systemd-logind[659]: Session c1 logged out. Waiting for processes to exit.
+Aug 24 02:19:16 pop-os systemd-logind[659]: Removed session c1.
+Aug 24 02:27:27 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install rust
+Aug 24 02:27:27 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:27:28 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:28:07 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt update
+Aug 24 02:28:07 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:28:11 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:28:11 pop-os sudo:    robot : TTY=pts/0 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install build-essential
+Aug 24 02:28:11 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:28:11 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 24 02:28:11 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 24 02:28:12 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:36:04 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install rsyslog
+Aug 24 02:36:04 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:36:05 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:36:28 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install fluentd
+Aug 24 02:36:28 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:36:28 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:37:15 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/tee /etc/apt/trusted.gpg.d/fluentd.asc
+Aug 24 02:37:15 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:37:15 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:37:15 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/tee /etc/apt/sources.list.d/fluentd.list
+Aug 24 02:37:15 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:37:15 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:37:21 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt update
+Aug 24 02:37:21 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:37:34 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:37:34 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/apt install td-agent
+Aug 24 02:37:34 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:37:34 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:37:34 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 24 02:37:34 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 24 02:37:46 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/systemctl start td-agent
+Aug 24 02:37:46 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:37:46 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:37:46 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot ; USER=root ; COMMAND=/usr/bin/systemctl enable td-agent
+Aug 24 02:37:46 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:37:46 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:39:01 pop-os CRON[6978]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Aug 24 02:39:01 pop-os CRON[6978]: pam_unix(cron:session): session closed for user root
+Aug 24 02:39:30 pop-os polkitd(authority=local): Registered Authentication Agent for unix-process:7092:124573 (system bus name :1.142 [flatpak list], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale C)
+Aug 24 02:39:30 pop-os polkitd(authority=local): Unregistered Authentication Agent for unix-process:7092:124573 (system bus name :1.142, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale C)
+Aug 24 02:43:00 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/chmod +x fluent-package_5.0.0-1_amd64.deb
+Aug 24 02:43:00 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:43:00 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:43:27 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/dpkg -i fluent-package_5.0.0-1_amd64.deb
+Aug 24 02:43:27 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:43:33 pop-os groupadd[7506]: group added to /etc/group: name=_fluentd, GID=135
+Aug 24 02:43:33 pop-os groupadd[7506]: group added to /etc/gshadow: name=_fluentd
+Aug 24 02:43:33 pop-os groupadd[7506]: new group: name=_fluentd, GID=135
+Aug 24 02:43:33 pop-os useradd[7512]: new user: name=_fluentd, UID=127, GID=135, home=/var/lib/fluent, shell=/usr/sbin/nologin, from=none
+Aug 24 02:43:33 pop-os usermod[7519]: change user '_fluentd' password
+Aug 24 02:43:33 pop-os chage[7526]: changed password expiry for _fluentd
+Aug 24 02:43:35 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:43:44 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/systemctl fluentd
+Aug 24 02:43:44 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:43:44 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:43:49 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/systemctl status fluentd
+Aug 24 02:43:49 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:43:51 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:45:13 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/apt update
+Aug 24 02:45:13 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:45:23 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:45:23 pop-os PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Aug 24 02:45:23 pop-os PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Aug 24 02:45:30 pop-os sudo:    robot : TTY=pts/2 ; PWD=/home/robot/Downloads ; USER=root ; COMMAND=/usr/bin/apt upgrade
+Aug 24 02:45:30 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Aug 24 02:45:31 pop-os sudo: pam_unix(sudo:session): session closed for user root
+Aug 24 02:55:04 pop-os sudo:    robot : TTY=pts/1 ; PWD=/home/robot/Desktop/Rust ; USER=root ; COMMAND=./main
+Aug 24 02:55:04 pop-os sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
