@@ -1,0 +1,1 @@
+This is the Folder where all the code of both agents including the C one and Rust one will be present also the setup script is available along with clean script which i made personally for myself to eliminate ssh keys which were conflicting with each other due to issues in previous setup script
