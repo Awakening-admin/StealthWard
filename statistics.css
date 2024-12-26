@@ -1,0 +1,51 @@
+/* Statistics Section */
+.statistics-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.statistics-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.statistics-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #212121;
+    margin-bottom: 15px;
+}
+
+.statistics-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #f57c00;
+}
+
+/* Responsive Stats */
+@media (max-width: 768px) {
+    .statistics-card {
+        padding: 15px;
+    }
+}
+
+/* Styling for the statistics lists */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.stats-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
