@@ -1,0 +1,164 @@
+/* Body Styling */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin-left: 220px; /* Space for sidebar */
+    padding-top: 70px; /* Space for navbar */
+    color: #333;
+    transition: background-color 0.3s ease;
+    min-height: 100vh;
+    display: block; /* Changed from flex layout to block layout */
+}
+
+/* Ensure content takes up space pushing footer down */
+.content {
+    min-height: calc(100vh - 70px); /* Push footer to the bottom */
+    margin-left: 220px; /* Ensure alignment with the sidebar */
+    padding: 20px;
+}
+
+/* Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+    background-color: #1c1c1c; /* Dark navbar background */
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease;
+    padding: 10px 20px;
+}
+
+.navbar-brand {
+    font-size: 2rem; /* Balanced size for StealthWard */
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #ff6f00; /* Orange highlight */
+}
+
+/* Sidebar Styling */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 220px; /* Reduced sidebar width */
+    background-color: #1c1c1c;
+    color: white;
+    padding: 20px 10px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.sidebar .sidebar-link {
+    color: white;
+    display: block;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-decoration: none;
+    background-color: transparent;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+.sidebar .sidebar-link:hover {
+    background-color: #333;
+    color: #ff6f00; /* Vibrant orange for hover state */
+    transform: translateX(10px); /* Enhanced slide effect */
+}
+
+/* Footer Styling */
+.footer {
+    background-color: #1c1c1c;
+    color: white;
+    padding: 10px 0; /* Reduced padding for a slimmer footer */
+    text-align: center;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.15);
+    font-size: 0.8rem; /* Smaller text size for compactness */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    margin-left: 0;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.8rem; /* Adjusted text size for visual balance */
+    color: #ccc; /* Subtle text color for footer */
+}
+
+/* General Adjustments for Modern Look */
+a {
+    text-decoration: none;
+}
+
+button, .btn {
+    border-radius: 5px;
+}
+
+/* Content Wrapper */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px; /* Added padding for better spacing */
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    body {
+        margin-left: 0; /* Remove sidebar margin */
+        padding-top: 60px;
+    }
+
+    .sidebar {
+        width: 200px; /* Adjust sidebar width on smaller screens */
+        padding: 10px;
+    }
+
+    .sidebar .sidebar-link {
+        font-size: 0.9rem; /* Smaller links on mobile */
+    }
+
+    .navbar {
+        padding: 8px 15px;
+    }
+
+    .navbar-brand {
+        font-size: 1.6rem; /* Smaller navbar brand on mobile */
+    }
+
+    .content {
+        margin-left: 0; /* Adjust for mobile layout */
+        gap: 15px;
+    }
+    .card {
+    width: 100%;
+    }
+}
+
+/* Hover and Focus Effects */
+.navbar-brand:hover, .sidebar-link:focus {
+    color: #ff6f00; /* Ensure vibrant highlights */
+}
+
+.sidebar:hover {
+    background-color: #222;
+}
+
+.footer:hover {
+    color: #ff6f00; /* Subtle interactive footer color */
+}
