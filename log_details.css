@@ -1,0 +1,109 @@
+/* Log Details Styling */
+.log-detail-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e0e0e0;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.log-detail-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.log-detail-title {
+    font-size: 1.4rem; /* Reduced text size */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.log-detail-content {
+    font-size: 0.9rem; /* Reduced font size */
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.table {
+    width: 90%; /* Reduced width to fit within the layout */
+    margin-left: auto;
+    margin-right: auto; /* Center the table */
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: auto; /* Allow table to adjust to content */
+    overflow-x: hidden;
+}
+
+.table th, .table td {
+    padding: 10px; /* Reduced padding */
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 0.85rem; /* Smaller font size */
+    color: #333;
+    word-wrap: break-word; /* Prevent text overflow */
+}
+
+.table th {
+    background-color: #f5f5f5;
+    color: #212121;
+    font-weight: bold;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 8px 15px; /* Adjusted padding */
+    background-color: #ff6f00;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-back:hover {
+    background-color: #ff8c1a;
+    transform: translateY(-3px);
+}
+
+
+@media (max-width: 768px) {
+    .log-detail-card {
+        padding: 15px; /* Reduced padding */
+    }
+
+    .log-detail-title {
+        font-size: 1.4rem; /* Slightly smaller title on mobile */
+        text-align: left;
+    }
+
+    .table th, .table td {
+        padding: 10px;
+        font-size: 0.9rem; /* Smaller font on mobile */
+    }
+
+    .btn-back {
+        padding: 8px 15px;
+        font-size: 0.9rem; /* Smaller button */
+    }
+}
