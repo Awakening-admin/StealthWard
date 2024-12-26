@@ -1,0 +1,101 @@
+/* Log Card Styling */
+.log-card {
+    border-radius: 10px; /* Slightly larger radius for a softer, more polished look */
+    background-color: #fff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+    border: 2px solid #e0e0e0; /* Light border for more definition */
+    margin-bottom: 20px; /* Space between cards */
+    padding: 20px;
+    height: 100%;
+}
+
+.log-card:hover {
+    transform: scale(1.03); /* Subtle scaling on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    border-color: #ff6f00; /* Highlight border on hover with a subtle orange color */
+}
+
+/* Card Title for Logs */
+.system-heading {
+    font-size: 1.4rem; /* Slightly bigger title */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px; /* Increased margin for better spacing */
+    text-transform: uppercase; /* Uppercase for a more distinct look */
+    letter-spacing: 1px;
+}
+
+/* Log Tile */
+.log-tile {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 15px; /* Larger padding for better readability */
+    margin-bottom: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.log-tile:hover {
+    transform: translateY(-4px);
+    background-color: #f7f7f7;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Log Name */
+.log-name {
+    font-size: 1rem; /* Slightly larger font for better readability */
+    font-weight: bold;
+    color: #212121;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.log-tile:hover .log-name {
+    color: #ff6f00; /* Highlight log name on hover */
+}
+
+/* Log Container for Tiles - Use Grid Layout */
+.log-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Adjust grid to fit more cards on larger screens */
+    gap: 20px; /* Increase the gap between the cards */
+    justify-items: center;
+    margin-top: 20px;
+}
+
+/* Main Heading */
+.main-heading {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #212121;
+    margin-bottom: 40px;
+    text-align: center;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: color 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .log-container {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* More compact grid for mobile */
+    }
+
+    .log-tile {
+        width: 90%; /* Ensures the cards look good on mobile */
+        padding: 12px;
+    }
+
+    .log-name {
+        font-size: 0.9rem; /* Slightly smaller font for mobile */
+    }
+
+    .system-heading {
+        font-size: 1.2rem; /* Smaller title size for mobile */
+    }
+}
