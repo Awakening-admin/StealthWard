@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="blocked-ips-page" class="container mt-5">
+    <h1 class="main-heading">Blocked IPs</h1>
+
+    <!-- Blocked IP Addresses Section -->
+    <h4>Blocked IP Addresses:</h4>
+    <ul class="list-group mb-4">
+        {% for ip in blocked_ips %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="ip-address">{{ ip }}</span>
+            <!-- Unblock Button -->
+            <form method="POST" action="{{ url_for('unblock_ip', ip=ip) }}" class="unblock-form">
+                <button type="submit" class="btn btn-danger btn-sm">Unblock</button>
+            </form>
+        </li>
+        {% else %}
+        <li class="list-group-item no-ips">No blocked IPs yet.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Block New IP Section -->
+    <div class="block-ip-section">
+        <h4>Block New IP:</h4>
+        <form method="POST" action="{{ url_for('block_ip') }}" class="block-form">
+            <div class="input-group">
+                <input type="text" class="form-control" id="ip" name="ip" placeholder="Enter IP to block" required>
+                <button type="submit" class="btn btn-primary">Block IP</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Back Button -->
+    <a href="/" class="btn-back">Back to Home</a>
+</div>
+{% endblock %}
