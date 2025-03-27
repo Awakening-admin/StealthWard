@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDR Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        .upload-section {
+            margin-bottom: 20px;
+        }
+        .upload-section input[type="file"] {
+            padding: 10px;
+            font-size: 16px;
+        }
+        .chart-container {
+            width: 100%;
+            height: 500px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>EDR Dashboard</h1>
+
+        <!-- File Upload Section -->
+        <div class="upload-section">
+            <h3>Upload PCAP File</h3>
+            <input type="file" id="pcap-file" />
+            <button onclick="uploadFile()">Upload</button>
+            <p id="upload-status"></p>
+        </div>
+
+        <!-- Traffic Volume Chart -->
+        <div class="chart-container" id="traffic-chart"></div>
+    </div>
+
+    <script>
+        // Function to upload file
+        function uploadFile() {
+            let fileInput = document.getElementById("pcap-file");
+            let file = fileInput.files[0];
+            let formData = new FormData();
+            formData.append("file", file);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    document.getElementById("upload-status").innerText = data.message;
+                } else {
+                    document.getElementById("upload-status").innerText = "Error: " + data.error;
+                }
+            });
+        }
+
+        // Fetch and render traffic volume chart
+        function fetchPcapData() {
+            fetch('/pcap_data')
+                .then(response => response.json())
+                .then(data => {
+                    let graphData = JSON.parse(data.graph_json);
+                    Plotly.newPlot('traffic-chart', graphData.data, graphData.layout);
+                });
+        }
+
+        // Initialize the chart on page load
+        window.onload = fetchPcapData;
+    </script>
+</body>
+</html>
