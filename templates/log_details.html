@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}StealthWard - Log Details{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="/static/css/log_details.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="log-header">Log: {{ log_name }} (IP: {{ ip }})</h1>
+    <a href="/logs" class="btn-back">Back to Logs</a>
+
+    <!-- Log Table -->
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Log Level</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in preprocessed_data %}
+                <tr class="log-level-{{ entry.log_level|lower }}">
+                    <td>{{ entry.date }}</td>
+                    <td>
+                        <span class="badge
+                            {% if entry.log_level == 'ERROR' %}badge-danger
+                            {% elif entry.log_level == 'WARNING' %}badge-warning
+                            {% elif entry.log_level == 'INFO' %}badge-info
+                            {% else %}badge-secondary{% endif %}">
+                            {{ entry.log_level }}
+                        </span>
+                    </td>
+                    <td class="log-message">{{ entry.message }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">No log entries found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!-- templates/clamav_results.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ClamAV Scan Results</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .infected { background-color: #ffdddd; }
+    </style>
+</head>
+<body>
+    <h1>ClamAV Scan Results</h1>
+    {% if results %}
+        <table>
+            <tr>
+                <th>Endpoint IP</th>
+                <th>Log File</th>
+                <th>Threat Found</th>
+                <th>Timestamp</th>
+            </tr>
+            {% for result in results %}
+            <tr class="{% if result.scan_output %}infected{% endif %}">
+                <td>{{ result.ip }}</td>
+                <td>{{ result.log_file }}</td>
+                <td>{{ result.scan_output if result.scan_output else 'Clean' }}</td>
+                <td>{{ result.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No threats detected in recent scans</p>
+    {% endif %}
+</body>
+</html>

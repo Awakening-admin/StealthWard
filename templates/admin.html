@@ -1,0 +1,387 @@
+{% extends "base.html" %}
+{% block extra_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Admin System Monitoring</h1>
+        <p class="text-muted">Real-time monitoring of admin system activity and threats</p>
+        <button class="btn btn-primary refresh-btn" onclick="refreshData()">
+            <i class="fas fa-sync-alt"></i> Refresh Data
+        </button>
+        <div id="last-updated" class="text-muted small mt-2">Last updated: <span id="update-time">Never</span></div>
+    </div>
+
+    <!-- Network Activity Section -->
+    <div class="network-activity-container">
+        <h2 class="section-title">Network Activity</h2>
+        <div class="chart-container">
+            <canvas id="trafficChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Activity Overview Section -->
+    <div class="admin-section">
+        <h2 class="section-title">Activity Overview</h2>
+        <div class="grid-container">
+            <div class="chart-container">
+                <canvas id="threatsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="alertsChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Threats Section -->
+    <div class="admin-section">
+        <h2 class="section-title">Admin System Threats <span class="badge bg-danger threat-count">0</span></h2>
+        <div id="admin-threats" class="threats-container">
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin fa-3x mb-3"></i>
+                <p>Loading threat data...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Alerts Section -->
+    <div class="admin-section">
+        <h2 class="section-title">Admin Traffic Alerts <span class="badge bg-warning alert-count">0</span></h2>
+        <div id="admin-alerts" class="alerts-container">
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin fa-3x mb-3"></i>
+                <p>Loading alert data...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Global variables for traffic monitoring
+let trafficData = {
+    labels: [],
+    incoming: [],
+    outgoing: []
+};
+let maxDataPoints = 30;
+let trafficChart, threatsChart, alertsChart;
+
+// Initialize all charts
+function initCharts(threatData, alertData) {
+    if (trafficChart) trafficChart.destroy();
+    if (threatsChart) threatsChart.destroy();
+    if (alertsChart) alertsChart.destroy();
+
+    // Traffic Chart
+    const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+    trafficChart = new Chart(trafficCtx, {
+        type: 'line',
+        data: {
+            labels: trafficData.labels,
+            datasets: [
+                {
+                    label: 'Incoming Traffic (B/s)',
+                    data: trafficData.incoming,
+                    borderColor: '#28a745',
+                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                },
+                {
+                    label: 'Outgoing Traffic (B/s)',
+                    data: trafficData.outgoing,
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: { display: true, text: 'Network Traffic' },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: context => `${context.dataset.label}: ${context.parsed.y.toFixed(2)} B/s`
+                    }
+                }
+            },
+            scales: {
+                y: { beginAtZero: true, title: { display: true, text: 'Bytes per second' } },
+                x: { title: { display: true, text: 'Time' } }
+            }
+        }
+    });
+
+    // Threats by Severity Chart
+    const threatsCtx = document.getElementById('threatsChart').getContext('2d');
+    threatsChart = new Chart(threatsCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Critical', 'High', 'Medium', 'Low'],
+            datasets: [{
+                data: [
+                    threatData.critical || 0,
+                    threatData.high || 0,
+                    threatData.medium || 0,
+                    threatData.low || 0
+                ],
+                backgroundColor: ['#dc3545', '#fd7e14', '#ffc107', '#6c757d'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: { display: true, text: 'Threats by Severity' },
+                tooltip: {
+                    callbacks: {
+                        label: context => {
+                            const value = context.raw || 0;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = Math.round((value / total) * 100);
+                            return `${context.label}: ${value} (${percentage}%)`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Alerts by Category Chart
+    const alertsCtx = document.getElementById('alertsChart').getContext('2d');
+    alertsChart = new Chart(alertsCtx, {
+        type: 'bar',
+        data: {
+            labels: alertData.labels || [],
+            datasets: [{
+                label: 'Alerts',
+                data: alertData.values || [],
+                backgroundColor: '#17a2b8',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { title: { display: true, text: 'Alerts by Category' } },
+            scales: {
+                y: { beginAtZero: true, title: { display: true, text: 'Count' } },
+                x: { title: { display: true, text: 'Category' } }
+            }
+        }
+    });
+}
+
+// Format timestamp
+function formatTimestamp(timestamp) {
+    if (!timestamp) return 'Unknown';
+    try {
+        return new Date(timestamp).toLocaleString();
+    } catch (e) {
+        return timestamp;
+    }
+}
+
+// Fetch data and update page
+function refreshData() {
+    const threatsContainer = document.getElementById('admin-threats');
+    const alertsContainer = document.getElementById('admin-alerts');
+
+    // Show loading states
+    threatsContainer.innerHTML = `
+        <div class="empty-state">
+            <i class="fas fa-spinner fa-spin fa-3x mb-3"></i>
+            <p>Loading threat data...</p>
+        </div>
+    `;
+
+    alertsContainer.innerHTML = `
+        <div class="empty-state">
+            <i class="fas fa-spinner fa-spin fa-3x mb-3"></i>
+            <p>Loading alert data...</p>
+        </div>
+    `;
+
+    document.getElementById('update-time').textContent = new Date().toLocaleString();
+    updateTrafficData();
+
+    fetch('/api/admin_monitoring')
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            console.log("API Response Data:", data);
+
+            // Update counts
+            document.querySelector('.threat-count').textContent = data.threats?.length || 0;
+            document.querySelector('.alert-count').textContent = data.alerts?.length || 0;
+
+            // Update threats section with admin log alerts
+            if (data.threats?.length > 0) {
+                threatsContainer.innerHTML = data.threats.map(threat => `
+                    <div class="threat-card">
+                        <h5>${threat.rule_name || 'Unknown Rule'}</h5>
+                        <p>${threat.description || threat.log_line || 'No description available'}</p>
+                        <div class="d-flex justify-content-between">
+                            <span class="badge bg-${threat.severity === 'high' ? 'danger' :
+                                threat.severity === 'critical' ? 'danger' :
+                                threat.severity === 'medium' ? 'warning' : 'info'}">
+                                ${(threat.severity || 'medium').toUpperCase()}
+                            </span>
+                            <span class="timestamp">${formatTimestamp(threat.timestamp)}</span>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                <i class="fas fa-file-alt"></i> ${threat.log_file || 'unknown'}
+                            </small>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                threatsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-check-circle fa-3x mb-3"></i>
+                        <p>No threats detected on admin system</p>
+                    </div>
+                `;
+            }
+
+            // Update alerts section with network threats
+            if (data.alerts?.length > 0) {
+                alertsContainer.innerHTML = data.alerts.map(alert => `
+                    <div class="alert-card">
+                        <h5>${alert.signature || alert.rule_name || 'Network Alert'}</h5>
+                        <p>
+                            <strong>Type:</strong> ${alert.type || 'network'}<br>
+                            <strong>Source IP:</strong> ${alert.source_ip || 'unknown'}<br>
+                            ${alert.query_count ? `<strong>Query Count:</strong> ${alert.query_count}` : ''}
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <span class="badge bg-${alert.severity === 'high' ? 'danger' :
+                                                  alert.severity === 'critical' ? 'danger' :
+                                                  'warning'}">
+                                ${(alert.severity || 'medium').toUpperCase()}
+                            </span>
+                            <span class="timestamp">${formatTimestamp(alert.timestamp)}</span>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                <i class="fas fa-tag"></i> ${alert.category || 'network'}
+                            </small>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                alertsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-check-circle fa-3x mb-3"></i>
+                        <p>No suspicious traffic detected</p>
+                    </div>
+                `;
+            }
+
+            // Prepare chart data
+            const threatCounts = {critical: 0, high: 0, medium: 0, low: 0};
+            if (data.threats) {
+                data.threats.forEach(threat => {
+                    const severity = threat.severity || 'medium';
+                    if (severity === 'critical') threatCounts.critical++;
+                    else if (severity === 'high') threatCounts.high++;
+                    else if (severity === 'medium') threatCounts.medium++;
+                    else threatCounts.low++;
+                });
+            }
+
+            const alertCategories = {};
+            if (data.alerts) {
+                data.alerts.forEach(alert => {
+                    const type = alert.type || 'network';
+                    alertCategories[type] = (alertCategories[type] || 0) + 1;
+                });
+            }
+
+            const sortedAlertCategories = Object.entries(alertCategories)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+
+            initCharts(
+                { critical: threatCounts.critical, high: threatCounts.high, medium: threatCounts.medium, low: threatCounts.low },
+                { labels: sortedAlertCategories.map(item => item[0]), values: sortedAlertCategories.map(item => item[1]) }
+            );
+        })
+        .catch(error => {
+            console.error('Error fetching monitoring data:', error);
+            threatsContainer.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i> Failed to load threat data: ${error.message}
+                </div>
+            `;
+            alertsContainer.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i> Failed to load alert data: ${error.message}
+                </div>
+            `;
+        });
+}
+
+// Update traffic data
+function updateTrafficData() {
+    fetch('/api/admin_monitoring')
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            const now = new Date().toLocaleTimeString();
+            trafficData.labels.push(now);
+            trafficData.incoming.push(data.network_stats?.incoming_bps || 0);
+            trafficData.outgoing.push(data.network_stats?.outgoing_bps || 0);
+
+            if (trafficData.labels.length > maxDataPoints) {
+                trafficData.labels.shift();
+                trafficData.incoming.shift();
+                trafficData.outgoing.shift();
+            }
+
+            if (trafficChart) {
+                trafficChart.data.labels = trafficData.labels;
+                trafficChart.data.datasets[0].data = trafficData.incoming;
+                trafficChart.data.datasets[1].data = trafficData.outgoing;
+                trafficChart.update();
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching traffic data:', error);
+            const now = new Date().toLocaleTimeString();
+            trafficData.labels.push(now);
+            trafficData.incoming.push(0);
+            trafficData.outgoing.push(0);
+
+            if (trafficData.labels.length > maxDataPoints) {
+                trafficData.labels.shift();
+                trafficData.incoming.shift();
+                trafficData.outgoing.shift();
+            }
+
+            if (trafficChart) trafficChart.update();
+        });
+}
+
+// Initial load
+document.addEventListener('DOMContentLoaded', function() {
+    initCharts({critical: 0, high: 0, medium: 0, low: 0}, {labels: [], values: []});
+    refreshData();
+    setInterval(refreshData, 5000);
+    setInterval(updateTrafficData, 1000);
+});
+</script>
+{% endblock %}

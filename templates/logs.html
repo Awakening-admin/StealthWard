@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block extra_styles %}
+<link rel="stylesheet" href="/static/css/logs.css">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 class="main-heading">Log Files</h1>
+
+    <div class="row">
+        {% for ip, logs in logs.items() %}
+            <div class="col-lg-4 col-md-6 d-flex">
+                <div class="card log-card w-100">
+                    <div class="card-body">
+                        <h5 class="card-title system-heading">Logs for IP: {{ ip }}</h5>
+                        <div class="log-container">
+                            {% for log in logs %}  <!-- Removed the [:3] limit -->
+                                <div class="log-tile">
+                                    <a href="{{ url_for('log_details', ip=ip, log_name=log) }}">
+                                        <div class="log-name">{{ log }}</div>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!--
+<script>
+    // Set interval to refresh the page every 10 seconds (10000 milliseconds)
+    setInterval(function(){
+        location.reload();
+    }, 10000);
+</script>
+-->
+{% endblock %}

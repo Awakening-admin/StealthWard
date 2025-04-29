@@ -1,0 +1,101 @@
+<!-- base.html (updated) -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}StealthWard{% endblock %}</title>
+
+    <!-- General Styles (Navbar, Sidebar, Footer, Global Styles) -->
+    <link rel="stylesheet" href="/static/css/base.css">
+
+
+
+    {% block extra_styles %}
+    {% endblock %}
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a class="sidebar-link" href="/">Home</a>
+        <a class="sidebar-link" href="/alerts" id="alerts-link">
+            <i class="fas fa-bell"></i>
+            <span>Alerts</span>
+            <span class="alert-badge d-none" id="alert-count-badge">0</span>
+        </a>
+        <a class="sidebar-link" href="/statistics">Statistics</a>
+        <a class="sidebar-link" href="/blocked_ips">Blocked IPs</a>
+        <a class="sidebar-link" href="/logs">Logs</a>
+        <a class="sidebar-link" href="/admin">Admin Monitoring</a>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <!-- Navbar Brand (StealthWard) -->
+            <a class="navbar-brand" href="/">
+                STEALTHWARD
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p>stealthwardedr@gmail.com</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to update alert badge
+            function updateAlertBadge() {
+                fetch('/get_alert_ids')
+                    .then(response => response.json())
+                    .then(data => {
+                        const allAlertIds = data.alert_ids;
+                        const seenAlertIds = JSON.parse(localStorage.getItem('seenAlerts') || '[]');
+                        const unseenCount = allAlertIds.filter(id => !seenAlertIds.includes(id)).length;
+
+                        const badge = document.getElementById('alert-count-badge');
+                        if (unseenCount > 0) {
+                            badge.textContent = unseenCount;
+                            badge.classList.remove('d-none');
+                            badge.classList.add('alert-badge-pulse');
+                        } else {
+                            badge.classList.add('d-none');
+                        }
+                    });
+            }
+
+            // Mark all alerts as seen when on alerts page
+            if (window.location.pathname === '/alerts') {
+                fetch('/get_alert_ids')
+                    .then(response => response.json())
+                    .then(data => {
+                        localStorage.setItem('seenAlerts', JSON.stringify(data.alert_ids));
+                        updateAlertBadge();
+                    });
+            }
+
+            // Initial update
+            updateAlertBadge();
+
+            // Update every 30 seconds
+            setInterval(updateAlertBadge, 30000);
+        });
+    </script>
+
+</body>
+
+</html>

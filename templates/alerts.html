@@ -1,0 +1,223 @@
+[file name]: alerts.html
+[file content begin]
+{% extends 'base.html' %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="/static/css/alerts.css">
+{% endblock %}
+
+{% block content %}
+<div id="alerts-page" class="container mt-5">
+    <h1 class="main-heading">Threat Alerts</h1>
+
+    <div class="threat-sections-container">
+        <!-- Main Threats Column -->
+        <div class="main-threats-column">
+            <!-- Log-based Threats Section -->
+            <div class="log-threats-container">
+                <div class="threat-section">
+                    <div class="threat-section-header">
+                        <h4 class="section-heading">
+                            <i class="fas fa-file-alt"></i> Log-Based Threats
+                            <span class="badge bg-danger">{{ threats|length }}</span>
+                        </h4>
+                    </div>
+                    <div class="threat-section-content">
+                        <ul class="list-group">
+                            {% for threat in threats %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center alert-item"
+                                data-alert-id="log-{{ threat.endpoint_ip }}-{{ threat.rule_name | replace(' ', '-') }}">
+                                <div class="threat-details">
+                                    <div class="threat-header">
+                                        <span class="threat-ip"><i class="fas fa-desktop"></i> {{ threat.endpoint_ip }}</span>
+                                        <span class="threat-time"><i class="far fa-clock"></i> {{ threat.timestamp }}</span>
+                                    </div>
+                                    <div class="threat-content">
+                                        <p><strong><i class="fas fa-file"></i> Log:</strong> {{ threat.log_file }}</p>
+                                        <p class="threat-message"><strong><i class="fas fa-exclamation-triangle"></i> Rule:</strong> {{ threat.rule_name }}</p>
+                                        <p><strong>Description:</strong> {{ threat.description }}</p>
+                                        {% if threat.log_line %}
+                                        <div class="log-line-container">
+                                            <p><strong>Log Entry:</strong></p>
+                                            <code class="log-line">{{ threat.log_line|truncate(150) }}</code>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <span class="badge threat-severity-{{ threat.severity }}">
+                                    <i class="fas fa-bolt"></i> {{ threat.severity|capitalize }}
+                                </span>
+                            </li>
+                            {% else %}
+                            <li class="list-group-item no-threats">
+                                <i class="far fa-check-circle"></i> No log-based threats detected.
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network Traffic Threats Section -->
+            <div class="network-threats-container">
+                <div class="threat-section">
+                    <div class="threat-section-header">
+                        <h4 class="section-heading">
+                            <i class="fas fa-network-wired"></i> Network Traffic Threats
+                            <span class="badge bg-danger">{{ pcap_threats|length }}</span>
+                        </h4>
+                        <!-- Threat Severity Filter -->
+                        <div class="threat-filter">
+                            <span class="filter-label">Filter by severity:</span>
+                            <div class="filter-buttons">
+                                <button class="btn-filter active" data-severity="all">All</button>
+                                <button class="btn-filter" data-severity="high">High</button>
+                                <button class="btn-filter" data-severity="medium">Medium</button>
+                                <button class="btn-filter" data-severity="low">Low</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="threat-section-content">
+                        <ul class="list-group" id="network-threats-list">
+                            {% for threat in pcap_threats %}
+                            {% if not threat.is_duplicate %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center alert-item threat-{{ threat.severity }}"
+                                data-alert-id="pcap-{{ threat.source_ip }}-{{ threat.rule_sid }}"
+                                data-severity="{{ threat.severity }}">
+                                <div class="threat-details">
+                                    <div class="threat-header">
+                                        <span class="threat-ip"><i class="fas fa-desktop"></i> {{ threat.source_ip }} → {{ threat.dest_ip }}</span>
+                                        <span class="threat-time"><i class="far fa-clock"></i> {{ threat.timestamp }}</span>
+                                    </div>
+                                    <div class="threat-content">
+                                        <p class="threat-message"><strong><i class="fas fa-exclamation-triangle"></i> Threat:</strong> {{ threat.rule_msg }}</p>
+                                        <p><strong>Protocol:</strong> {{ threat.protocol }}</p>
+                                        <p><strong>Ports:</strong> {{ threat.src_port }} → {{ threat.dst_port }}</p>
+                                        {% if threat.pcap_info and threat.pcap_info.file_path %}
+                                        <p><strong>PCAP:</strong> {{ threat.pcap_info.file_path|basename }}</p>
+                                        {% endif %}
+                                        {% if threat.count > 1 %}
+                                        <p class="text-muted"><small>Similar events: {{ threat.count }}</small></p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <span class="badge threat-severity-{{ threat.severity }}">
+                                    <i class="fas fa-bolt"></i> {{ threat.severity|capitalize }}
+                                </span>
+                            </li>
+                            {% endif %}
+                            {% else %}
+                            <li class="list-group-item no-threats">
+                                <i class="far fa-check-circle"></i> No network traffic threats detected.
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Minor Alerts Sidebar -->
+        <div class="minor-alerts-container">
+            <div class="minor-alerts-sidebar">
+                <div class="minor-alerts-header">
+                    <i class="fas fa-info-circle"></i> Minor Alerts
+                    <span class="badge bg-warning">{{ minor_network_alerts|length }}</span>
+                </div>
+                <div class="minor-alerts-content">
+                    {% for alert in minor_network_alerts %}
+                    <div class="minor-alert-item">
+                        <p><strong><i class="fas fa-desktop"></i> {{ alert.source_ip }}:{{ alert.src_port }} → {{ alert.dest_ip }}:{{ alert.dst_port }}</strong></p>
+                        <p>{{ alert.rule_msg }}</p>
+                        <p><small class="text-muted">
+                            <i class="far fa-clock"></i> {{ alert.timestamp }}
+                        </small></p>
+                        <span class="minor-alert-severity badge bg-{% if alert.severity == 'high' %}warning{% elif alert.severity == 'medium' %}info{% else %}secondary{% endif %}">
+                            {{ alert.severity|capitalize }}
+                        </span>
+                    </div>
+                    {% else %}
+                    <div class="minor-alert-item">
+                        <p><i class="far fa-check-circle"></i> No minor alerts detected</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-primary btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Severity filtering
+    const filterButtons = document.querySelectorAll('.btn-filter');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+
+            const severity = this.dataset.severity;
+            const threatItems = document.querySelectorAll('#network-threats-list .alert-item');
+
+            threatItems.forEach(item => {
+                if (severity === 'all' || item.dataset.severity === severity) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Mark alerts as seen
+    document.querySelectorAll('.alert-item, .minor-alert-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const alertId = this.getAttribute('data-alert-id');
+            if (!alertId) return;
+
+            let seenAlerts = JSON.parse(localStorage.getItem('seenAlerts') || '[]');
+
+            if (!seenAlerts.includes(alertId)) {
+                seenAlerts.push(alertId);
+                localStorage.setItem('seenAlerts', JSON.stringify(seenAlerts));
+                this.style.opacity = '0.7';
+                setTimeout(() => { this.style.opacity = '1' }, 200);
+                updateAlertBadge();
+            }
+        });
+    });
+
+    function updateAlertBadge() {
+        fetch('/get_alert_ids')
+            .then(response => response.json())
+            .then(data => {
+                const allAlertIds = data.alert_ids;
+                const seenAlertIds = JSON.parse(localStorage.getItem('seenAlerts') || '[]');
+                const unseen = allAlertIds.filter(id => !seenAlertIds.includes(id));
+
+                const badge = document.getElementById('alert-count-badge');
+                if (badge) {
+                    if (unseen.length > 0) {
+                        badge.textContent = unseen.length;
+                        badge.classList.remove('d-none');
+                        badge.classList.add('alert-badge-pop');
+                    } else {
+                        badge.classList.add('d-none');
+                    }
+                }
+            });
+    }
+
+    // Initialize tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+{% endblock %}
+[file content end]
