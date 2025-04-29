@@ -1,0 +1,547 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #4fc3f7;
+  --accent-color: #4fc3f7;
+  --danger-color: #ff4d6d;
+  --warning-color: #ffc300;
+  --success-color: #38b000;
+  --text-primary: #f8f9fa;
+  --text-secondary: #adb5bd;
+  --card-bg: #2b2d42;
+  --card-hover: #343a4a;
+  --body-bg: #12141d;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --glow: 0 0 15px rgba(79, 195, 247, 0.3);
+}
+
+body {
+  background-color: var(--body-bg);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.statistics-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.main-heading {
+  text-align: center;
+  color: var(--accent-color);
+  margin-bottom: 2.5rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  position: relative;
+  text-shadow: var(--glow);
+}
+
+.main-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-color), transparent);
+  border-radius: 4px;
+}
+
+/* Summary Cards - Premium Glassmorphism Effect */
+.summary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, rgba(43, 45, 66, 0.8), rgba(33, 37, 41, 0.9));
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(79, 195, 247, 0.1) 0%, transparent 70%);
+  transition: transform 0.6s ease;
+  transform: translate(25%, 25%);
+}
+
+.summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(79, 195, 247, 0.3);
+}
+
+.summary-card:hover::before {
+  transform: translate(0, 0);
+}
+
+.card-network { border-left: 4px solid var(--accent-color); }
+.card-threats { border-left: 4px solid var(--danger-color); }
+.card-endpoints { border-left: 4px solid var(--success-color); }
+.card-compromised { border-left: 4px solid var(--danger-color); }
+
+.card-icon {
+  font-size: 2.8rem;
+  margin-right: 1.5rem;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+
+.summary-card:hover .card-icon {
+  transform: scale(1.1);
+}
+
+.card-network .card-icon { color: var(--accent-color); text-shadow: 0 0 12px rgba(79, 195, 247, 0.4); }
+.card-threats .card-icon { color: var(--danger-color); text-shadow: 0 0 12px rgba(255, 77, 109, 0.4); }
+.card-endpoints .card-icon { color: var(--success-color); text-shadow: 0 0 12px rgba(56, 176, 0, 0.4); }
+.card-compromised .card-icon { color: var(--danger-color); text-shadow: 0 0 12px rgba(255, 77, 109, 0.4); }
+
+.card-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0.25rem 0;
+  background: linear-gradient(90deg, var(--text-primary), #b0bec5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+/* Chart Containers - Premium Design */
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.chart-container {
+  background: linear-gradient(135deg, rgba(43, 45, 66, 0.8), rgba(33, 37, 41, 0.9));
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+  border-color: rgba(79, 195, 247, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.chart-header {
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.chart-header h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.chart-header i {
+  color: var(--accent-color);
+  font-size: 1.4rem;
+}
+
+.chart-content {
+  min-height: 320px;
+  width: 100%;
+  position: relative;
+}
+
+.js-plotly-plot {
+  width: 100% !important;
+  background: transparent !important;
+}
+
+.js-plotly-plot .plot-container {
+  background: transparent !important;
+}
+
+.js-plotly-plot .main-svg {
+  background-color: transparent !important;
+}
+
+.js-plotly-plot .bg {
+  fill: transparent !important;
+}
+
+.js-plotly-plot .gridlayer .ygrid,
+.js-plotly-plot .gridlayer .xgrid {
+  stroke: rgba(255, 255, 255, 0.1) !important;
+  stroke-dasharray: 3,3 !important;
+}
+
+.js-plotly-plot .axis line,
+.js-plotly-plot .axis path {
+  stroke: rgba(255, 255, 255, 0.3) !important;
+}
+
+.js-plotly-plot text {
+  fill: white !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.js-plotly-plot .g-xtitle text,
+.js-plotly-plot .g-ytitle text {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.js-plotly-plot .legend text {
+  font-size: 12px !important;
+}
+
+.js-plotly-plot .colorbar text {
+  font-size: 12px !important;
+}
+
+.js-plotly-plot .legend rect {
+  fill: rgba(43, 45, 66, 0.7) !important;
+  stroke: rgba(255, 255, 255, 0.2) !important;
+}
+
+.js-plotly-plot .colorbar .fillrect {
+  fill: rgba(43, 45, 66, 0.7) !important;
+}
+
+.js-plotly-plot .colorbar .line {
+  stroke: rgba(255, 255, 255, 0.3) !important;
+}
+
+.js-plotly-plot .hovertext {
+  background-color: #2b2d42 !important;
+  border: 1px solid #4fc3f7 !important;
+  border-radius: 4px !important;
+  color: #f8f9fa !important;
+  font-family: 'Inter', sans-serif !important;
+  padding: 8px 12px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+}
+
+.js-plotly-plot .crisp rect.bg {
+  fill: transparent !important;
+}
+
+/* Modebar Styling */
+.js-plotly-plot .modebar {
+  background: rgba(43, 45, 66, 0.7) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 4px !important;
+}
+
+.js-plotly-plot .modebar-btn path {
+  fill: var(--text-secondary) !important;
+}
+
+.js-plotly-plot .modebar-btn:hover path {
+  fill: var(--text-primary) !important;
+}
+
+.js-plotly-plot .modebar-btn.active path {
+  fill: var(--accent-color) !important;
+}
+
+/* Specific chart type enhancements */
+.js-plotly-plot .pie path {
+  stroke: #2b2d42 !important;
+  stroke-width: 1px !important;
+}
+
+.js-plotly-plot .bars path {
+  stroke: rgba(255,255,255,0.1) !important;
+  stroke-width: 1px !important;
+}
+
+
+/* Legend & Footer Styling */
+.chart-footer {
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  padding: 0.25rem 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+}
+
+.severity-key {
+  display: flex;
+  gap: 1.75rem;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.severity-key div {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.severity-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.severity-dot.severity-critical { background-color: var(--danger-color); }
+.severity-dot.severity-high { background-color: #ff7043; }
+.severity-dot.severity-medium { background-color: var(--warning-color); }
+.severity-dot.severity-low { background-color: var(--success-color); }
+.severity-dot.severity-info { background-color: var(--accent-color); }
+
+/* Events Table - Premium Styling */
+.table-container {
+  background: linear-gradient(135deg, rgba(43, 45, 66, 0.8), rgba(33, 37, 41, 0.9));
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  margin-top: 1rem;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+.table-header h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.table-header i {
+  color: var(--accent-color);
+}
+
+.table-controls {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.events-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.events-table th {
+  text-align: left;
+  padding: 1.25rem 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--text-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+}
+
+.events-table td {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.2s ease;
+}
+
+.events-table tr:last-child td {
+  border-bottom: none;
+}
+
+.events-table tr:hover td {
+  background: rgba(79, 195, 247, 0.08);
+}
+
+/* Severity Badges - Enhanced */
+.severity-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.severity-badge.severity-critical {
+  background: linear-gradient(135deg, var(--danger-color), #c9184a);
+  text-shadow: 0 0 8px rgba(255, 77, 109, 0.5);
+}
+.severity-badge.severity-high {
+  background: linear-gradient(135deg, #ff7043, #e85d04);
+  text-shadow: 0 0 8px rgba(255, 112, 67, 0.5);
+}
+.severity-badge.severity-medium {
+  background: linear-gradient(135deg, var(--warning-color), #ffaa00);
+  color: #212529;
+  text-shadow: 0 0 8px rgba(255, 195, 0, 0.5);
+}
+.severity-badge.severity-low {
+  background: linear-gradient(135deg, var(--success-color), #2b9348);
+  text-shadow: 0 0 8px rgba(56, 176, 0, 0.5);
+}
+.severity-badge.severity-info {
+  background: linear-gradient(135deg, var(--accent-color), #00b4d8);
+  text-shadow: 0 0 8px rgba(79, 195, 247, 0.5);
+}
+
+/* Animation for compromised card - Enhanced */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(255, 77, 109, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+}
+
+.card-compromised {
+  animation: pulse 2s infinite;
+}
+
+/* Empty Chart State */
+.empty-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  color: var(--text-secondary);
+}
+
+.empty-chart i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.empty-chart p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .chart-row {
+    grid-template-columns: 1fr;
+  }
+
+  .main-heading {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .statistics-container {
+    padding: 1.5rem;
+  }
+
+  .summary-card, .chart-container, .table-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .summary-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .main-heading {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .summary-row {
+    grid-template-columns: 1fr;
+  }
+
+  .statistics-container {
+    padding: 1rem;
+  }
+
+  .main-heading {
+    font-size: 2rem;
+  }
+
+  .card-value {
+    font-size: 1.8rem;
+  }
+
+  .events-table th,
+  .events-table td {
+    padding: 1rem;
+  }
+}

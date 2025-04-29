@@ -1,0 +1,303 @@
+/* Modern Dashboard Base Styles */
+:root {
+  --primary-color: #4361ee; /* Modern blue */
+  --secondary-color: #3f37c9; /* Darker blue */
+  --accent-color: #4cc9f0; /* Light blue accent */
+  --danger-color: #f72585; /* Vibrant pink for alerts */
+  --success-color: #4ad66d; /* Fresh green */
+  --warning-color: #f8961e; /* Orange */
+  --dark-bg: #1a1a2e; /* Dark navy for sidebar/nav */
+  --darker-bg: #16213e; /* Even darker for contrast */
+  --light-bg: #f8f9fa; /* Light background */
+  --text-light: #ffffff;
+  --text-dark: #2b2d42;
+  --text-muted: #8d99ae;
+  --sidebar-width: 240px;
+  --navbar-height: 70px;
+  --footer-height: 50px;
+  --transition-speed: 0.3s;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Styles */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--light-bg);
+  margin-left: var(--sidebar-width);
+  padding-top: var(--navbar-height);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+}
+
+/* Smooth transitions for interactive elements */
+a, button, .sidebar-link, .navbar-brand {
+  transition: all var(--transition-speed) ease;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  margin-left: var(--sidebar-width);
+  margin-bottom: var(--footer-height);
+  width: calc(100% - var(--sidebar-width)); /* Add this to ensure full width */
+}
+/* Navbar Styling */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  z-index: 1030;
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  box-shadow: var(--box-shadow);
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar-brand:hover {
+  color: var(--accent-color);
+  transform: translateY(-1px);
+}
+
+/* Sidebar Styling */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: var(--sidebar-width);
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  padding: 1.5rem 1rem;
+  box-shadow: var(--box-shadow);
+  overflow-y: auto;
+  z-index: 1020;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-link {
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+  gap: 0.75rem;
+  opacity: 0.9;
+  /* Add these lines to ensure consistent alignment */
+  margin-left: 0;
+  transition: all var(--transition-speed) ease;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--accent-color);
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.sidebar-link i {
+  width: 1.25rem;
+  text-align: center;
+}
+
+.sidebar-link.active {
+  background-color: var(--primary-color);
+  color: white;
+  opacity: 1;
+}
+
+#alerts-link {
+  padding-right: 2.5rem; /* Make space for the badge */
+}
+
+.alert-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  background-color: var(--danger-color);
+  position: absolute;
+  right: 1rem; /* Adjust this if needed */
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 1;
+}
+
+
+
+.alert-badge-pulse {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 0 rgba(247, 37, 133, 0.7); }
+  70% { transform: translateY(-50%) scale(1.1); box-shadow: 0 0 0 8px rgba(247, 37, 133, 0); }
+  100% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 0 rgba(247, 37, 133, 0); }
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  margin-left: var(--sidebar-width);
+  margin-bottom: var(--footer-height);
+  width: calc(100% - var(--sidebar-width)); /* Add this to ensure full width */
+}
+
+
+/* Update the container */
+.container {
+  max-width: 1600px; /* Increased from 1400px */
+  margin: 0 auto;
+  padding: 0 2rem; /* Increased from 1.5rem */
+  width: 100%;
+}
+
+/* Footer Styling */
+.footer {
+  position: relative; /* Change from fixed to relative */
+  margin-top: auto; /* Push footer to bottom */
+}
+
+.footer p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  body {
+    margin-left: 0;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform var(--transition-speed) ease;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
+}
+
+/* Utility Classes */
+.d-none {
+  display: none !important;
+}
+
+/* Card Styling (will be used in other components) */
+.card {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: none;
+}
+
+.card-header {
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Buttons (will be used in other components) */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #d91a6b;
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
+}
+
+/* Table Styling (will be used in other components) */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background-color: var(--light-bg);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.table tr:hover td {
+  background-color: rgba(0, 0, 0, 0.02);
+}

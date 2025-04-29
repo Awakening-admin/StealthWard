@@ -1,0 +1,207 @@
+/* Blocked IPs Page - Modern Dark Theme */
+#blocked-ips-page {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.main-heading {
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-size: 2.2rem;
+  position: relative;
+}
+
+.main-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  border-radius: 2px;
+}
+
+/* Blocked IP List */
+.list-group {
+  margin-bottom: 2.5rem;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+  background: rgba(79, 195, 247, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ip-address {
+  font-weight: 600;
+  color: var(--accent-color);
+  font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+.unblock-form {
+  margin: 0;
+}
+
+.unblock-form .btn-danger {
+  background: var(--danger-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.unblock-form .btn-danger:hover {
+  background: #e63946;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(255, 82, 82, 0.3);
+}
+
+/* No IPs Message */
+.no-ips {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 1.5rem;
+  font-style: italic;
+}
+
+.no-ips i {
+  color: var(--success-color);
+  margin-right: 0.5rem;
+}
+
+/* Block IP Section */
+.block-ip-section {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.block-ip-section h4 {
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.block-ip-section h4 i {
+  color: var(--accent-color);
+}
+
+.block-form .input-group {
+  display: flex;
+  align-items: stretch;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.block-form .form-control {
+  flex-grow: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+.block-form .form-control:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+.block-form .btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  padding: 0 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.block-form .btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Back Button */
+.btn-back {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.75rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  #blocked-ips-page {
+    padding: 1.5rem;
+  }
+
+  .main-heading {
+    font-size: 1.8rem;
+  }
+
+  .list-group-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .unblock-form {
+    width: 100%;
+  }
+
+  .unblock-form .btn-danger {
+    width: 100%;
+  }
+
+  .block-form {
+    flex-direction: column;
+  }
+
+  .block-form .input-group {
+    flex-direction: column;
+  }
+
+  .block-form .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+  }
+}
