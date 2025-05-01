@@ -134,21 +134,30 @@
 /* Threat Cards */
 .threats-container, .alerts-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.25rem;
   max-height: 600px;
   overflow-y: auto;
-  padding-right: 10px;
+  padding: 10px;
+  margin-top: 1rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
 }
 
 .threat-card, .alert-card {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--card-bg);
   border-radius: 10px;
   padding: 1.5rem;
   transition: all 0.3s ease;
   border-left: 4px solid;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.threat-card:hover, .alert-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .threat-card::before, .alert-card::before {
@@ -168,11 +177,11 @@
 }
 
 .threat-card {
-  border-left-color: var(--danger-color);
+  border-left-color: #dc3545;
 }
 
 .alert-card {
-  border-left-color: var(--warning-color);
+  border-left-color: #ffc107;
 }
 
 .threat-card h5, .alert-card h5 {
@@ -180,6 +189,18 @@
   margin-bottom: 0.75rem;
   color: var(--text-primary);
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.threat-card h5::before, .alert-card h5::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
 .threat-card p, .alert-card p {
@@ -197,6 +218,11 @@
   gap: 0.5rem;
 }
 
+.threat-card .badge, .alert-card .badge {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.7rem;
+}
+
 /* Empty States */
 .empty-state {
   text-align: center;
@@ -205,6 +231,10 @@
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .empty-state i {
@@ -218,16 +248,32 @@
   font-size: 1.1rem;
 }
 
+/* Network Activity Section */
+.network-activity-container {
+  margin-bottom: 2.5rem;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.network-activity-container .chart-container {
+  height: 400px;
+  margin-top: 1.5rem;
+}
+
 /* Custom Scrollbar */
 .threats-container::-webkit-scrollbar,
 .alerts-container::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 .threats-container::-webkit-scrollbar-track,
 .alerts-container::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  margin: 5px;
 }
 
 .threats-container::-webkit-scrollbar-thumb,
@@ -241,13 +287,14 @@
   background: var(--primary-color);
 }
 
-/* Network Activity Section */
-.network-activity-container {
-  margin-bottom: 2.5rem;
+/* Card animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.network-activity-container .chart-container {
-  height: 400px;
+.threat-card, .alert-card {
+  animation: fadeIn 0.3s ease forwards;
 }
 
 /* Responsive Adjustments */
@@ -282,6 +329,10 @@
   .network-activity-container .chart-container {
     height: 350px;
   }
+
+  .threat-card, .alert-card {
+    padding: 1rem;
+  }
 }
 
 /* Loading Animation */
@@ -298,4 +349,72 @@
   border-radius: 50%;
   border-top-color: var(--accent-color);
   animation: spin 1s ease-in-out infinite;
+}
+
+
+
+/* Add these new styles to your existing admin.css */
+
+/* Report Section Styles */
+.report-controls {
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+#generate-report-btn {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #dc3545, #fd7e14);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#generate-report-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+#generate-report-btn:disabled {
+  opacity: 0.7;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.reports-container {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.list-group-item {
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 0.5rem;
+  border-radius: 8px !important;
+  transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: translateX(5px);
+}
+
+/* Add this to your existing media queries */
+@media (max-width: 768px) {
+  .report-controls {
+      padding: 1rem;
+  }
+  
+  #generate-report-btn {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+  }
 }
