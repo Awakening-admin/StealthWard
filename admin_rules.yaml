@@ -1,0 +1,179 @@
+rules:
+  # Enhanced Authentication Threats
+  - log_file: auth.log
+    description: "SSH brute force with multiple usernames"
+    severity: "critical"
+    detection:
+      pattern: 'sshd.*Failed password for (.*) from ([0-9.]+)'
+      threshold: 15
+      time_window: "5m"
+      condition: "unique_usernames > 3"
+
+  - log_file: auth.log
+    description: "Successful SSH login after multiple failures (password guessing)"
+    severity: "high"
+    detection:
+      pattern_success: 'sshd.*Accepted password for (.*) from ([0-9.]+)'
+      pattern_failure: 'sshd.*Failed password for \1 from \2'
+      threshold_failure: 5
+      time_window: "10m"
+
+  # Lateral Movement Detection
+  - log_file: auth.log
+    description: "Multiple successful logins from single source (possible lateral movement)"
+    severity: "high"
+    detection:
+      pattern: 'sshd.*Accepted password for (.*) from ([0-9.]+)'
+      threshold: 5
+      time_window: "15m"
+      condition: "unique_users > 3"
+
+  # FTP Attack Detection
+  - log_file: vsftpd.log
+    description: "FTP brute force attack"
+    severity: "critical"
+    detection:
+      pattern: 'vsftpd.*FAIL LOGIN: Client "([0-9.]+)"'
+      threshold: 10
+      time_window: "2m"
+
+  # Web Application Attacks
+  - log_file: apache/access.log
+    description: "Web application brute force attack"
+    severity: "high"
+    detection:
+      pattern: 'POST .*(wp-login|login|auth) HTTP.* 200'
+      threshold: 20
+      time_window: "2m"
+
+  - log_file: "/var/log/auth.log"
+    description: "SSH brute force attack detected"
+    severity: "high"
+    detection:
+      pattern: "Failed password for .* from <SRC_IP>"
+      threshold: 5
+      time_window: "1m"
+
+  - log_file: apache/access.log
+    description: "SQL injection attempt"
+    severity: "critical"
+    detection:
+      pattern: 'SELECT.*FROM|UNION.*SELECT|INSERT INTO|1=1|DROP TABLE'
+      whitelist_pattern: 'legitimate_query\.php.*SELECT.*FROM approved_table'
+
+  # Network Attacks
+  - log_file: kern.log
+    description: "Port scanning detected"
+    severity: "medium"
+    detection:
+      pattern: 'kernel: .*DROP.* SRC=([0-9.]+)'
+      threshold: 50
+      time_window: "1m"
+      condition: "unique_ports > 10"
+
+  - log_file: auth.log
+    description: "SSH tunnel or port forwarding attempt"
+    severity: "high"
+    detection:
+      pattern: 'sshd.*(forwarding|tunnel).*from ([0-9.]+)'
+
+  # Persistence Detection
+  - log_file: auth.log
+    description: "Unauthorized SSH key addition"
+    severity: "critical"
+    detection:
+      pattern: 'sshd.*AuthorizedKeysCommand: key for (.*)'
+
+  # System Anomalies
+  - log_file: syslog
+    description: "Unexpected cron job execution"
+    severity: "medium"
+    detection:
+      pattern: 'CRON.*(root|admin)'
+      whitelist_pattern: 'CRON.*(root|admin).*(daily|weekly|monthly)'
+
+  - log_file: kern.log
+    description: "Kernel module manipulation"
+    severity: "critical"
+    detection:
+      pattern: 'kernel: .*(loaded|unloaded) module'
+
+  # Account Compromise
+  - log_file: auth.log
+    description: "Password change for privileged account"
+    severity: "high"
+    detection:
+      pattern: 'passwd.*password changed for (root|admin)'
+
+  # File Integrity Monitoring
+  - log_file: tripwire.log
+    description: "Critical system file modification"
+    severity: "critical"
+    detection:
+      pattern: 'Severity Level:.*High.*File modified'
+
+  # Database Security
+  - log_file: mysql/error.log
+    description: "MySQL brute force attempt"
+    severity: "high"
+    detection:
+      pattern: 'Access denied for user .* using password'
+      threshold: 10
+      time_window: "2m"
+
+  # Container Security
+  - log_file: syslog
+    description: "Unauthorized container creation"
+    severity: "high"
+    detection:
+      pattern: 'docker.*create'
+      whitelist_pattern: 'docker.*create.*user=authorized_user'
+
+  # Cloud Metadata API Abuse
+  - log_file: nginx/access.log
+    description: "Cloud metadata API access attempt"
+    severity: "high"
+    detection:
+      pattern: 'GET /latest/meta-data/'
+
+  # RDP Attack Detection
+  - log_file: auth.log
+    description: "RDP brute force attempt"
+    severity: "critical"
+    detection:
+      pattern: 'xrdp.*FAIL.*login attempt for user.*from ([0-9.]+)'
+      threshold: 10
+      time_window: "5m"
+
+  # Suspicious Process Execution
+  - log_file: syslog
+    description: "Execution of suspicious binaries"
+    severity: "high"
+    detection:
+      pattern: '(sh|bash|wget|curl|perl|python|nc|ncat|netcat) .*(/dev/tcp/|/dev/udp/|\.sh|\.py)'
+      whitelist_pattern: 'legitimate_script\.sh'
+
+  - log_file: "/var/log/auth.log"
+    description: "SSH brute force attack detected"
+    severity: "high"
+    detection:
+      pattern: "Failed password for .* from <SRC_IP>"
+      threshold: 5
+      time_window: "1m"
+
+  - log_file: "/var/log/vsftpd.log"
+    description: "FTP brute force attack detected"
+    severity: "high"
+    detection:
+      pattern: "FAIL LOGIN: Client \"<SRC_IP>\""
+      threshold: 3
+      time_window: "1m"
+
+  - log_file: "/var/log/secure"
+    description: "Multiple authentication failures"
+    severity: "high"
+    detection:
+      pattern: "authentication failure; .* rhost=<SRC_IP>"
+      threshold: 5
+      time_window: "2m"
+
