@@ -1,0 +1,808 @@
+{% extends "base.html" %}
+{% block extra_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Admin System Monitoring</h1>
+        <p class="text-muted">Real-time monitoring of admin system activity and threats</p>
+        <button class="btn btn-primary refresh-btn" onclick="refreshData()">
+            <i class="fas fa-sync-alt"></i> Refresh Data
+        </button>
+        <div id="last-updated" class="text-muted small mt-2">Last updated: <span id="update-time">Never</span></div>
+    </div>
+
+    <!-- Network Activity Section -->
+    <div class="network-activity-container">
+        <h2 class="section-title">Network Activity</h2>
+        <div class="chart-container">
+            <canvas id="trafficChart"></canvas>
+        </div>
+        <div class="network-stats-container">
+            <div class="stat-card">
+                <h5>Current Interface</h5>
+                <p id="current-interface">Loading...</p>
+            </div>
+            <div class="stat-card">
+                <h5>Total Incoming</h5>
+                <p id="total-incoming">Loading...</p>
+            </div>
+            <div class="stat-card">
+                <h5>Total Outgoing</h5>
+                <p id="total-outgoing">Loading...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activity Overview Section -->
+    <div class="admin-section">
+        <h2 class="section-title">Activity Overview</h2>
+        <div class="grid-container">
+            <div class="chart-container">
+                <canvas id="threatsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="alertsChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Threats Section -->
+    <div class="admin-section">
+        <h2 class="section-title">Admin System Threats <span class="badge bg-danger threat-count">0</span></h2>
+        <div class="threat-summary">
+            <div class="summary-card critical">
+                <h5>Critical</h5>
+                <p class="count">0</p>
+            </div>
+            <div class="summary-card high">
+                <h5>High</h5>
+                <p class="count">0</p>
+            </div>
+            <div class="summary-card medium">
+                <h5>Medium</h5>
+                <p class="count">0</p>
+            </div>
+            <div class="summary-card low">
+                <h5>Low</h5>
+                <p class="count">0</p>
+            </div>
+        </div>
+        <div id="admin-threats" class="threats-container">
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin fa-3x mb-3"></i>
+                <p>Loading threat data...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Alerts Section -->
+    <div class="admin-section">
+        <h2 class="section-title">Network Traffic Alerts <span class="badge bg-warning alert-count">0</span></h2>
+        <div class="alert-summary">
+            <div class="summary-card">
+                <h5>Top Source IP</h5>
+                <p id="top-source-ip">Loading...</p>
+            </div>
+            <div class="summary-card">
+                <h5>Top Destination IP</h5>
+                <p id="top-dest-ip">Loading...</p>
+            </div>
+            <div class="summary-card">
+                <h5>Most Common Alert</h5>
+                <p id="common-alert">Loading...</p>
+            </div>
+        </div>
+        <div id="admin-alerts" class="alerts-container">
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin fa-3x mb-3"></i>
+                <p>Loading alert data...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Generation Section -->
+    <div class="admin-section">
+        <h2 class="section-title">Security Reports</h2>
+        <div class="report-controls">
+            <div class="report-options">
+                <label for="report-time-range">Time Range:</label>
+                <select id="report-time-range" class="form-select">
+                    <option value="1h">Last 1 hour</option>
+                    <option value="6h">Last 6 hours</option>
+                    <option value="24h" selected>Last 24 hours</option>
+                    <option value="7d">Last 7 days</option>
+                    <option value="custom">Custom Range</option>
+                </select>
+                <div id="custom-range" class="custom-range" style="display: none;">
+                    <input type="datetime-local" id="report-start" class="form-control">
+                    <span>to</span>
+                    <input type="datetime-local" id="report-end" class="form-control">
+                </div>
+                <label for="report-detail-level">Detail Level:</label>
+                <select id="report-detail-level" class="form-select">
+                    <option value="summary">Summary</option>
+                    <option value="detailed" selected>Detailed</option>
+                    <option value="full">Full</option>
+                </select>
+            </div>
+            <button id="generate-report-btn" class="btn btn-primary">
+                <i class="fas fa-file-pdf"></i> Generate Security Report
+            </button>
+            <div id="report-status" class="mt-3"></div>
+            <div id="report-list" class="mt-4">
+                <h5>Available Reports</h5>
+                <div class="reports-container">
+                    <div class="empty-state">
+                        <i class="fas fa-file-alt fa-3x mb-3"></i>
+                        <p>No reports generated yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Global variables for traffic monitoring
+let trafficData = {
+    labels: [],
+    incoming: [],
+    outgoing: []
+};
+let maxDataPoints = 30;
+let trafficChart, threatsChart, alertsChart;
+let lastThreatsHash = '';
+let lastAlertsHash = '';
+
+// Simple hash function to detect changes
+function getHash(obj) {
+    return JSON.stringify(obj).split('').reduce((a, b) => {
+        a = ((a << 5) - a) + b.charCodeAt(0);
+        return a & a;
+    }, 0);
+}
+
+// Initialize all charts
+function initCharts(threatData, alertData) {
+    if (trafficChart) trafficChart.destroy();
+    if (threatsChart) threatsChart.destroy();
+    if (alertsChart) alertsChart.destroy();
+
+    // Traffic Chart
+    const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+    trafficChart = new Chart(trafficCtx, {
+        type: 'line',
+        data: {
+            labels: trafficData.labels,
+            datasets: [
+                {
+                    label: 'Incoming Traffic (B/s)',
+                    data: trafficData.incoming,
+                    borderColor: '#28a745',
+                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                },
+                {
+                    label: 'Outgoing Traffic (B/s)',
+                    data: trafficData.outgoing,
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: { display: true, text: 'Network Traffic' },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: context => `${context.dataset.label}: ${context.parsed.y.toFixed(2)} B/s`
+                    }
+                }
+            },
+            scales: {
+                y: { beginAtZero: true, title: { display: true, text: 'Bytes per second' } },
+                x: { title: { display: true, text: 'Time' } }
+            }
+        }
+    });
+
+    // Threats by Severity Chart
+    const threatsCtx = document.getElementById('threatsChart').getContext('2d');
+    threatsChart = new Chart(threatsCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Critical', 'High', 'Medium', 'Low'],
+            datasets: [{
+                data: [
+                    threatData.critical || 0,
+                    threatData.high || 0,
+                    threatData.medium || 0,
+                    threatData.low || 0
+                ],
+                backgroundColor: ['#dc3545', '#fd7e14', '#ffc107', '#6c757d'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: { display: true, text: 'Threats by Severity' },
+                tooltip: {
+                    callbacks: {
+                        label: context => {
+                            const value = context.raw || 0;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = Math.round((value / total) * 100);
+                            return `${context.label}: ${value} (${percentage}%)`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Alerts by Category Chart
+    const alertsCtx = document.getElementById('alertsChart').getContext('2d');
+    alertsChart = new Chart(alertsCtx, {
+        type: 'bar',
+        data: {
+            labels: alertData.labels || [],
+            datasets: [{
+                label: 'Alerts',
+                data: alertData.values || [],
+                backgroundColor: '#17a2b8',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { title: { display: true, text: 'Alerts by Category' } },
+            scales: {
+                y: { beginAtZero: true, title: { display: true, text: 'Count' } },
+                x: { title: { display: true, text: 'Category' } }
+            }
+        }
+    });
+}
+
+// Format timestamp
+function formatTimestamp(timestamp) {
+    if (!timestamp) return 'Unknown';
+    try {
+        return new Date(timestamp).toLocaleString();
+    } catch (e) {
+        return timestamp;
+    }
+}
+
+// Format bytes to human readable format
+function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
+// Update summary statistics
+function updateSummaryStats(data) {
+    // Update network stats
+    if (data.network_stats) {
+        document.getElementById('current-interface').textContent = data.network_stats.interface || 'Unknown';
+        document.getElementById('total-incoming').textContent = formatBytes(data.network_stats.total_in || 0);
+        document.getElementById('total-outgoing').textContent = formatBytes(data.network_stats.total_out || 0);
+    }
+
+    // Update threat summary counts
+    if (data.threats) {
+        const threatCounts = {critical: 0, high: 0, medium: 0, low: 0};
+        data.threats.forEach(threat => {
+            const severity = threat.severity || 'medium';
+            if (severity === 'critical') threatCounts.critical++;
+            else if (severity === 'high') threatCounts.high++;
+            else if (severity === 'medium') threatCounts.medium++;
+            else threatCounts.low++;
+        });
+
+        document.querySelector('.summary-card.critical .count').textContent = threatCounts.critical;
+        document.querySelector('.summary-card.high .count').textContent = threatCounts.high;
+        document.querySelector('.summary-card.medium .count').textContent = threatCounts.medium;
+        document.querySelector('.summary-card.low .count').textContent = threatCounts.low;
+    }
+
+    // Update alert summary
+    if (data.alerts) {
+        const ipCounts = {};
+        const destIpCounts = {};
+        const alertTypes = {};
+
+        data.alerts.forEach(alert => {
+            // Count source IPs
+            const srcIp = alert.source_ip || 'unknown';
+            ipCounts[srcIp] = (ipCounts[srcIp] || 0) + 1;
+
+            // Count destination IPs
+            const destIp = alert.dest_ip || 'unknown';
+            destIpCounts[destIp] = (destIpCounts[destIp] || 0) + 1;
+
+            // Count alert types
+            const alertType = alert.signature || alert.rule_name || 'unknown';
+            alertTypes[alertType] = (alertTypes[alertType] || 0) + 1;
+        });
+
+        // Find top source IP
+        const topSourceIp = Object.entries(ipCounts).sort((a, b) => b[1] - a[1])[0];
+        if (topSourceIp) {
+            document.getElementById('top-source-ip').textContent = `${topSourceIp[0]} (${topSourceIp[1]} alerts)`;
+        }
+
+        // Find top destination IP
+        const topDestIp = Object.entries(destIpCounts).sort((a, b) => b[1] - a[1])[0];
+        if (topDestIp) {
+            document.getElementById('top-dest-ip').textContent = `${topDestIp[0]} (${topDestIp[1]} alerts)`;
+        }
+
+        // Find most common alert
+        const commonAlert = Object.entries(alertTypes).sort((a, b) => b[1] - a[1])[0];
+        if (commonAlert) {
+            document.getElementById('common-alert').textContent = `${commonAlert[0]} (${commonAlert[1]} times)`;
+        }
+    }
+}
+
+// Fetch data and update page
+function refreshData() {
+    const threatsContainer = document.getElementById('admin-threats');
+    const alertsContainer = document.getElementById('admin-alerts');
+
+    fetch('/api/admin_monitoring')
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            console.log("API Response Data:", data);
+            document.getElementById('update-time').textContent = new Date().toLocaleString();
+
+            // Update summary statistics
+            updateSummaryStats(data);
+
+            // Update counts
+            document.querySelector('.threat-count').textContent = data.threats?.length || 0;
+            document.querySelector('.alert-count').textContent = data.alerts?.length || 0;
+
+            // Check if threats have changed
+            const currentThreatsHash = getHash(data.threats);
+            if (currentThreatsHash !== lastThreatsHash) {
+                lastThreatsHash = currentThreatsHash;
+
+                // Update threats section with admin log alerts
+                if (data.threats?.length > 0) {
+                    threatsContainer.innerHTML = data.threats.map(threat => `
+                        <div class="threat-card">
+                            <h5>${threat.rule_name || 'Unknown Rule'}</h5>
+                            <div class="threat-details">
+                                <p><strong>Description:</strong> ${threat.description || threat.log_line || 'No description available'}</p>
+                                ${threat.source_ip ? `<p><strong>Source IP:</strong> ${threat.source_ip}</p>` : ''}
+                                ${threat.user ? `<p><strong>User:</strong> ${threat.user}</p>` : ''}
+                                ${threat.process ? `<p><strong>Process:</strong> ${threat.process}</p>` : ''}
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="badge bg-${threat.severity === 'high' ? 'danger' :
+                                    threat.severity === 'critical' ? 'danger' :
+                                    threat.severity === 'medium' ? 'warning' : 'info'}">
+                                    ${(threat.severity || 'medium').toUpperCase()}
+                                </span>
+                                <span class="timestamp">${formatTimestamp(threat.timestamp)}</span>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-file-alt"></i> ${threat.log_file || 'unknown'}
+                                </small>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    threatsContainer.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-check-circle fa-3x mb-3"></i>
+                            <p>No threats detected on admin system</p>
+                        </div>
+                    `;
+                }
+            }
+
+            // Check if alerts have changed
+            const currentAlertsHash = getHash(data.alerts);
+            if (currentAlertsHash !== lastAlertsHash) {
+                lastAlertsHash = currentAlertsHash;
+
+                // Update alerts section with network threats
+                if (data.alerts?.length > 0) {
+                    alertsContainer.innerHTML = data.alerts.map(alert => `
+                        <div class="alert-card">
+                            <h5>${alert.signature || alert.rule_name || 'Network Alert'}</h5>
+                            <div class="alert-details">
+                                <p><strong>Type:</strong> ${alert.type || 'network'}</p>
+                                <p><strong>Source IP:</strong> ${alert.source_ip || 'unknown'}:${alert.src_port || 'unknown'}</p>
+                                <p><strong>Destination IP:</strong> ${alert.dest_ip || 'unknown'}:${alert.dst_port || 'unknown'}</p>
+                                <p><strong>Protocol:</strong> ${alert.protocol || 'unknown'}</p>
+                                ${alert.query_count ? `<p><strong>Query Count:</strong> ${alert.query_count}</p>` : ''}
+                                ${alert.payload ? `<p><strong>Payload:</strong> ${alert.payload.substring(0, 100)}${alert.payload.length > 100 ? '...' : ''}</p>` : ''}
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="badge bg-${alert.severity === 'high' ? 'danger' :
+                                                      alert.severity === 'critical' ? 'danger' :
+                                                      'warning'}">
+                                    ${(alert.severity || 'medium').toUpperCase()}
+                                </span>
+                                <span class="timestamp">${formatTimestamp(alert.timestamp)}</span>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-tag"></i> ${alert.category || 'network'}
+                                </small>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    alertsContainer.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-check-circle fa-3x mb-3"></i>
+                            <p>No suspicious traffic detected</p>
+                        </div>
+                    `;
+                }
+            }
+
+            // Prepare chart data (always update charts)
+            const threatCounts = {critical: 0, high: 0, medium: 0, low: 0};
+            if (data.threats) {
+                data.threats.forEach(threat => {
+                    const severity = threat.severity || 'medium';
+                    if (severity === 'critical') threatCounts.critical++;
+                    else if (severity === 'high') threatCounts.high++;
+                    else if (severity === 'medium') threatCounts.medium++;
+                    else threatCounts.low++;
+                });
+            }
+
+            const alertCategories = {};
+            if (data.alerts) {
+                data.alerts.forEach(alert => {
+                    const type = alert.type || 'network';
+                    alertCategories[type] = (alertCategories[type] || 0) + 1;
+                });
+            }
+
+            const sortedAlertCategories = Object.entries(alertCategories)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+
+            initCharts(
+                { critical: threatCounts.critical, high: threatCounts.high, medium: threatCounts.medium, low: threatCounts.low },
+                { labels: sortedAlertCategories.map(item => item[0]), values: sortedAlertCategories.map(item => item[1]) }
+            );
+        })
+        .catch(error => {
+            console.error('Error fetching monitoring data:', error);
+            document.getElementById('update-time').textContent = `Error: ${error.message}`;
+        });
+}
+
+// Update traffic data
+function updateTrafficData() {
+    fetch('/api/admin_monitoring')
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            const now = new Date().toLocaleTimeString();
+            trafficData.labels.push(now);
+            trafficData.incoming.push(data.network_stats?.incoming_bps || 0);
+            trafficData.outgoing.push(data.network_stats?.outgoing_bps || 0);
+
+            if (trafficData.labels.length > maxDataPoints) {
+                trafficData.labels.shift();
+                trafficData.incoming.shift();
+                trafficData.outgoing.shift();
+            }
+
+            if (trafficChart) {
+                trafficChart.data.labels = trafficData.labels;
+                trafficChart.data.datasets[0].data = trafficData.incoming;
+                trafficChart.data.datasets[1].data = trafficData.outgoing;
+                trafficChart.update();
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching traffic data:', error);
+            const now = new Date().toLocaleTimeString();
+            trafficData.labels.push(now);
+            trafficData.incoming.push(0);
+            trafficData.outgoing.push(0);
+
+            if (trafficData.labels.length > maxDataPoints) {
+                trafficData.labels.shift();
+                trafficData.incoming.shift();
+                trafficData.outgoing.shift();
+            }
+
+            if (trafficChart) trafficChart.update();
+        });
+}
+
+// Report Generation Functions
+function generateReport() {
+    const reportBtn = document.getElementById('generate-report-btn');
+    const reportStatus = document.getElementById('report-status');
+    const timeRange = document.getElementById('report-time-range').value;
+    const detailLevel = document.getElementById('report-detail-level').value;
+
+    let startTime = '';
+    let endTime = '';
+
+    if (timeRange === 'custom') {
+        startTime = document.getElementById('report-start').value;
+        endTime = document.getElementById('report-end').value;
+        if (!startTime || !endTime) {
+            reportStatus.innerHTML = '<div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Please specify both start and end times for custom range</div>';
+            return;
+        }
+    }
+
+    reportBtn.disabled = true;
+    reportBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating Report...';
+    reportStatus.innerHTML = '<div class="alert alert-info"><i class="fas fa-info-circle"></i> Report generation in progress...</div>';
+
+    fetch('/api/generate_report', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            time_range: timeRange,
+            detail_level: detailLevel,
+            start_time: startTime,
+            end_time: endTime
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            reportStatus.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> Report generated successfully!
+                    <a href="/reports/${data.report_name}" target="_blank" class="btn btn-sm btn-outline-success ml-2">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            `;
+            loadReportList();
+        } else {
+            reportStatus.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i> ${data.message}
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        reportStatus.innerHTML = `
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle"></i> Error generating report: ${error.message}
+            </div>
+        `;
+    })
+    .finally(() => {
+        reportBtn.disabled = false;
+        reportBtn.innerHTML = '<i class="fas fa-file-pdf"></i> Generate Security Report';
+    });
+}
+
+function loadReportList() {
+    fetch('/api/list_reports')
+    .then(response => response.json())
+    .then(data => {
+        const reportsContainer = document.querySelector('.reports-container');
+        if (data.reports && data.reports.length > 0) {
+            reportsContainer.innerHTML = `
+                <div class="list-group">
+                    ${data.reports.map(report => `
+                        <a href="/reports/${report.name}" target="_blank" class="list-group-item list-group-item-action">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-file-pdf text-danger"></i>
+                                    <span class="ml-2">${report.name}</span>
+                                </div>
+                                <div>
+                                    <small class="text-muted">${report.date}</small>
+                                    <small class="text-muted ml-2">${report.size}</small>
+                                </div>
+                            </div>
+                        </a>
+                    `).join('')}
+                </div>
+            `;
+        } else {
+            reportsContainer.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-file-alt fa-3x mb-3"></i>
+                    <p>No reports generated yet</p>
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Error loading report list:', error);
+    });
+}
+
+// Toggle custom date range inputs
+document.getElementById('report-time-range').addEventListener('change', function() {
+    const customRangeDiv = document.getElementById('custom-range');
+    if (this.value === 'custom') {
+        customRangeDiv.style.display = 'flex';
+
+        // Set default start to 24 hours ago and end to now
+        const now = new Date();
+        const yesterday = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+
+        document.getElementById('report-end').value = now.toISOString().slice(0, 16);
+        document.getElementById('report-start').value = yesterday.toISOString().slice(0, 16);
+    } else {
+        customRangeDiv.style.display = 'none';
+    }
+});
+
+// Initial load
+document.addEventListener('DOMContentLoaded', function() {
+    initCharts({critical: 0, high: 0, medium: 0, low: 0}, {labels: [], values: []});
+    refreshData();
+
+    // Set up report generation button
+    document.getElementById('generate-report-btn').addEventListener('click', generateReport);
+
+    // Load initial report list
+    loadReportList();
+
+    // Set intervals
+    setInterval(updateTrafficData, 1000); // Update traffic every 1 second
+    setInterval(refreshData, 5000); // Check for new threats/alerts every 5 seconds
+});
+</script>
+
+<style>
+/* Additional CSS that won't conflict with admin.css */
+.network-stats-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stat-card {
+    flex: 1;
+    background: var(--card-bg);
+    border-radius: 5px;
+    padding: 10px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.stat-card h5 {
+    font-size: 14px;
+    margin: 0 0 5px 0;
+    color: var(--text-secondary);
+}
+
+.stat-card p {
+    font-size: 16px;
+    margin: 0;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.threat-summary, .alert-summary {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.summary-card {
+    flex: 1;
+    background: var(--card-bg);
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    border-left: 3px solid;
+}
+
+.summary-card.critical {
+    border-left-color: #dc3545;
+}
+
+.summary-card.high {
+    border-left-color: #fd7e14;
+}
+
+.summary-card.medium {
+    border-left-color: #ffc107;
+}
+
+.summary-card.low {
+    border-left-color: #6c757d;
+}
+
+.summary-card h5 {
+    font-size: 14px;
+    margin: 0 0 5px 0;
+    color: var(--text-secondary);
+}
+
+.summary-card .count {
+    font-size: 18px;
+    margin: 0;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.threat-details, .alert-details {
+    margin: 10px 0;
+}
+
+.threat-details p, .alert-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.report-options {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.custom-range {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.custom-range input {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .network-stats-container, .threat-summary, .alert-summary {
+        flex-direction: column;
+    }
+
+    .report-options {
+        grid-template-columns: 1fr;
+    }
+
+    .custom-range {
+        grid-column: span 1;
+    }
+}
+</style>
+{% endblock %}

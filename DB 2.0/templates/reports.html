@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="mt-4">Report Generation</h1>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-file-alt mr-1"></i>
+            Generate New Report
+        </div>
+        <div class="card-body">
+            <form id="reportForm">
+                <div class="form-group">
+                    <label for="reportType">Report Type</label>
+                    <select class="form-control" id="reportType">
+                        <option value="daily">Daily Operational</option>
+                        <option value="technical">Technical Detailed</option>
+                        <option value="executive">Executive Summary</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Generate Report</button>
+            </form>
+            <div id="reportStatus" class="mt-3"></div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-history mr-1"></i>
+            Recent Reports
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="reportsTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Report Name</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Size</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filled by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Load recent reports
+    function loadReports() {
+        $.get('/api/list_reports', function(data) {
+            let tableBody = $('#reportsTable tbody');
+            tableBody.empty();
+            
+            data.reports.forEach(function(report) {
+                tableBody.append(`
+                    <tr>
+                        <td>${report.name}</td>
+                        <td>${report.type}</td>
+                        <td>${report.date}</td>
+                        <td>${report.size}</td>
+                        <td>
+                            <a href="/reports/${report.name}" class="btn btn-sm btn-primary" target="_blank">
+                                <i class="fas fa-eye"></i> View
+                            </a>
+                            <a href="/reports/${report.name}?download=1" class="btn btn-sm btn-secondary">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </td>
+                    </tr>
+                `);
+            });
+        });
+    }
+    
+    // Generate report
+    $('#reportForm').submit(function(e) {
+        e.preventDefault();
+        let reportType = $('#reportType').val();
+        let statusDiv = $('#reportStatus');
+        
+        statusDiv.html(`
+            <div class="alert alert-info">
+                <i class="fas fa-spinner fa-spin"></i> Generating report...
+            </div>
+        `);
+        
+        $.ajax({
+            url: '/api/generate_report',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({type: reportType}),
+            success: function(response) {
+                if (response.success) {
+                    statusDiv.html(`
+                        <div class="alert alert-success">
+                            <i class="fas fa-check"></i> ${response.message}
+                            <a href="/reports/${response.report_path.split('/').pop()}" 
+                               class="alert-link" target="_blank">View Report</a>
+                        </div>
+                    `);
+                    loadReports(); // Refresh the list
+                } else {
+                    statusDiv.html(`
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle"></i> ${response.message}
+                        </div>
+                    `);
+                }
+            },
+            error: function() {
+                statusDiv.html(`
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle"></i> Error generating report
+                    </div>
+                `);
+            }
+        });
+    });
+    
+    // Initial load
+    loadReports();
+});
+</script>
+{% endblock %}

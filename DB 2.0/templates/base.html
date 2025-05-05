@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}StealthWard{% endblock %}</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- General Styles -->
+    <link rel="stylesheet" href="/static/css/base.css">
+    {% block extra_styles %}
+    {% endblock %}
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a class="sidebar-link" href="/"><i class="fas fa-home"></i><span>Home</span></a>
+        <a class="sidebar-link" href="/alerts" id="alerts-link">
+            <i class="fas fa-bell"></i>
+            <span>Alerts</span>
+            <span class="alert-badge d-none" id="alert-count-badge">0</span>
+        </a>
+        <a class="sidebar-link" href="/statistics"><i class="fas fa-chart-bar"></i><span>Statistics</span></a>
+        <a class="sidebar-link" href="/mitre_attack"><i class="fas fa-chess-board"></i><span>MITRE Matrix</span></a>
+        <a class="sidebar-link" href="/blocked_ips"><i class="fas fa-ban"></i><span>Blocked IPs</span></a>
+        <a class="sidebar-link" href="/logs"><i class="fas fa-file-alt"></i><span>Logs</span></a>
+        <a class="sidebar-link" href="/admin"><i class="fas fa-shield-alt"></i><span>Admin</span></a>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                STEALTHWARD
+            </a>
+            <div class="navbar-right">
+                <div class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                    <span class="theme-toggle-text">Dark Mode</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p>stealthwardedr@gmail.com</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Theme Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle.querySelector('i');
+            const themeText = themeToggle.querySelector('.theme-toggle-text');
+
+            // Check for saved theme preference or use dark theme as default
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                updateThemeToggle(savedTheme);
+            }
+
+            // Toggle theme when button is clicked
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeToggle(newTheme);
+            });
+
+            function updateThemeToggle(theme) {
+                if (theme === 'dark') {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                    themeText.textContent = 'Dark Mode';
+                } else {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                    themeText.textContent = 'Light Mode';
+                }
+            }
+
+            // Alert Badge Functionality
+            function updateAlertBadge() {
+                fetch('/get_alert_ids')
+                    .then(response => response.json())
+                    .then(data => {
+                        const allAlertIds = data.alert_ids;
+                        const seenAlertIds = JSON.parse(localStorage.getItem('seenAlerts') || '[]');
+                        const unseenCount = allAlertIds.filter(id => !seenAlertIds.includes(id)).length;
+
+                        const badge = document.getElementById('alert-count-badge');
+                        if (unseenCount > 0) {
+                            badge.textContent = unseenCount;
+                            badge.classList.remove('d-none');
+                            badge.classList.add('alert-badge-pulse');
+                        } else {
+                            badge.classList.add('d-none');
+                        }
+                    });
+            }
+
+            // Mark all alerts as seen when on alerts page
+            if (window.location.pathname === '/alerts') {
+                fetch('/get_alert_ids')
+                    .then(response => response.json())
+                    .then(data => {
+                        localStorage.setItem('seenAlerts', JSON.stringify(data.alert_ids));
+                        updateAlertBadge();
+                    });
+            }
+
+            // Initial update
+            updateAlertBadge();
+
+            // Update every 30 seconds
+            setInterval(updateAlertBadge, 30000);
+        });
+    </script>
+    {% block extra_scripts %}
+    {% endblock %}
+</body>
+</html>

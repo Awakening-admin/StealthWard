@@ -1,0 +1,462 @@
+{% extends 'base.html' %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="/static/css/statistics.css">
+{% endblock %}
+
+{% block content %}
+<div class="statistics-container">
+    <h1 class="main-heading">Security Dashboard</h1>
+
+    <!-- Summary Cards -->
+    <div class="summary-row">
+        <div class="summary-card card-network">
+            <div class="card-icon">
+                <i class="fas fa-network-wired"></i>
+            </div>
+            <div class="card-content">
+                <h3>Network Traffic</h3>
+                <div class="card-value">
+                    {% if network_stats.packet_count is defined %}
+                        {{ network_stats.packet_count|default(0)|intcomma }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </div>
+                <div class="card-label">Total Packets</div>
+            </div>
+        </div>
+
+        <div class="summary-card card-threats">
+            <div class="card-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="card-content">
+                <h3>Threats Detected</h3>
+                <div class="card-value">
+                    {% if threat_stats.total_threats is defined %}
+                        {{ threat_stats.total_threats|default(0)|intcomma }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </div>
+                <div class="card-label">Total Threats</div>
+            </div>
+        </div>
+
+        <div class="summary-card card-endpoints">
+            <div class="card-icon">
+                <i class="fas fa-server"></i>
+            </div>
+            <div class="card-content">
+                <h3>Active Endpoints</h3>
+                <div class="card-value">
+                    {% if endpoint_stats.total_endpoints is defined %}
+                        {{ endpoint_stats.total_endpoints|default(0)|intcomma }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </div>
+                <div class="card-label">Monitored Devices</div>
+            </div>
+        </div>
+
+        <div class="summary-card card-compromised">
+            <div class="card-icon">
+                <i class="fas fa-bug"></i>
+            </div>
+            <div class="card-content">
+                <h3>Compromised</h3>
+                <div class="card-value">
+                    {% if endpoint_stats.compromised_endpoints is defined %}
+                        {{ endpoint_stats.compromised_endpoints|length|default(0)|intcomma }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </div>
+                <div class="card-label">Affected Devices</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="chart-row">
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3><i class="fas fa-project-diagram"></i> Protocol Distribution</h3>
+            </div>
+            {% if visualizations.protocol_distribution and network_stats.top_protocols %}
+                <div class="chart-content">{{ visualizations.protocol_distribution|safe }}</div>
+                <div class="chart-footer">
+                    <div class="legend">
+                        {% for proto, count in network_stats.top_protocols %}
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: {{ ['#4fc3f7','#ff4d6d','#ffc300','#38b000','#9966FF','#FF9F40']|random }};"></span>
+                            {{ proto }}: {{ count|default(0)|intcomma }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="empty-chart">
+                    <i class="fas fa-chart-pie"></i>
+                    <p>No protocol data available</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3><i class="fas fa-chart-line"></i> Traffic Volume</h3>
+            </div>
+            {% if visualizations.traffic_volume %}
+                <div class="chart-content">{{ visualizations.traffic_volume|safe }}</div>
+            {% else %}
+                <div class="empty-chart">
+                    <i class="fas fa-chart-line"></i>
+                    <p>No traffic data available</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="chart-row">
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Threat Severity</h3>
+            </div>
+            {% if visualizations.threat_severity and threat_stats.threats_by_severity %}
+                <div class="chart-content">{{ visualizations.threat_severity|safe }}</div>
+                <div class="chart-footer">
+                    <div class="severity-key">
+                        {% for severity, count in threat_stats.threats_by_severity %}
+                        <div>
+                            <span class="severity-dot severity-{{ severity|lower }}"></span>
+                            {{ severity|title }}: {{ count|default(0)|intcomma }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="empty-chart">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>No threat data available</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3><i class="fas fa-desktop"></i> Top Talkers</h3>
+            </div>
+            {% if visualizations.top_talkers and network_stats.top_ips %}
+                <div class="chart-content">{{ visualizations.top_talkers|safe }}</div>
+                <div class="chart-footer">
+                    <div class="ip-list">
+                        {% for ip, count in network_stats.top_ips %}
+                        <div class="ip-item">
+                            <span class="ip-address">{{ ip }}</span>
+                            <span class="ip-count">{{ count|default(0)|intcomma }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="empty-chart">
+                    <i class="fas fa-desktop"></i>
+                    <p>No IP data available</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Charts Row 3 -->
+    <div class="chart-row">
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3><i class="fas fa-bolt"></i> Attack Types</h3>
+            </div>
+            {% if visualizations.attack_types and threat_stats.attack_patterns %}
+                <div class="chart-content">{{ visualizations.attack_types|safe }}</div>
+                <div class="chart-footer">
+                    <div class="legend">
+                        {% for attack, count in threat_stats.attack_patterns %}
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: {{ ['#4fc3f7','#ff4d6d','#ffc300','#38b000','#9966FF','#FF9F40']|random }};"></span>
+                            {{ attack }}: {{ count|default(0)|intcomma }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="empty-chart">
+                    <i class="fas fa-bolt"></i>
+                    <p>No attack data available</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3><i class="fas fa-plug"></i> Target Ports</h3>
+            </div>
+            {% if visualizations.target_ports_chart and threat_stats.target_ports %}
+                <div class="chart-content">{{ visualizations.target_ports_chart|safe }}</div>
+
+            {% else %}
+                <div class="empty-chart">
+                    <i class="fas fa-plug"></i>
+                    <p>No port data available</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Charts Row 4 - New Visualizations -->
+    <div class="chart-row">
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3><i class="fas fa-map-marked-alt"></i> Threat Sources</h3>
+            </div>
+            {% if visualizations.threat_sources and threat_stats.threat_sources %}
+                <div class="chart-content">{{ visualizations.threat_sources|safe }}</div>
+                <div class="chart-footer">
+                    <div class="legend">
+                        {% for source, count in threat_stats.threat_sources %}
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: {{ ['#4fc3f7','#ff4d6d','#ffc300','#38b000','#9966FF','#FF9F40']|random }};"></span>
+                            {{ source }}: {{ count|default(0)|intcomma }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="empty-chart">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p>No threat source data available</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3><i class="fas fa-skull-crossbones"></i> Compromised Endpoints</h3>
+            </div>
+            {% if visualizations.compromised_endpoints and endpoint_stats.compromised_endpoints %}
+                <div class="chart-content">{{ visualizations.compromised_endpoints|safe }}</div>
+                <div class="chart-footer">
+                    <div class="endpoint-list">
+                        {% for ip in endpoint_stats.compromised_endpoints %}
+                        <div class="endpoint-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <span class="endpoint-ip">{{ ip }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="empty-chart">
+                    <i class="fas fa-skull-crossbones"></i>
+                    <p>No compromised endpoints</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Recent Events Table -->
+    <div class="table-container">
+        <div class="table-header">
+            <h3><i class="fas fa-list-ul"></i> Recent Events</h3>
+            <div class="table-controls">
+                <span>
+                    {% if log_stats %}
+                        Showing last {{ log_stats|length }} events
+                    {% else %}
+                        No events to display
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+        {% if log_stats %}
+            <table class="events-table">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Source</th>
+                        <th>Type</th>
+                        <th>Severity</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in log_stats %}
+                    <tr class="severity-{{ event.log_level|default('info', true)|lower }}">
+                        <td>{{ event.timestamp|default('N/A', true) }}</td>
+                        <td>{{ event.ip|default('Unknown', true) }}</td>
+                        <td>{{ event.log_type|default('N/A', true)|title }}</td>
+                        <td>
+                        <span class="badge">{{ event.log_level|default('INFO', true) }}</span>
+                        </td>
+                        <td>{{ event.message|default('No message', true)|truncate(50, true) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="empty-table">
+                <i class="fas fa-inbox"></i>
+                <p>No recent events found</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle window resize for Plotly charts
+    function resizeCharts() {
+        const charts = document.querySelectorAll('.js-plotly-plot');
+        charts.forEach(chart => {
+            Plotly.Plots.resize(chart);
+        });
+    }
+
+    // Enhanced dark theme configuration
+    const darkTheme = {
+        layout: {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: {
+                color: '#f8f9fa',
+                family: 'Inter, sans-serif',
+                size: 12
+            },
+            xaxis: {
+                color: '#f8f9fa',
+                gridcolor: 'rgba(255,255,255,0.1)',
+                linecolor: 'rgba(255,255,255,0.3)',
+                zerolinecolor: 'rgba(255,255,255,0.1)',
+                tickfont: {
+                    color: '#f8f9fa'
+                },
+                titlefont: {
+                    color: '#f8f9fa'
+                }
+            },
+            yaxis: {
+                color: '#f8f9fa',
+                gridcolor: 'rgba(255,255,255,0.1)',
+                linecolor: 'rgba(255,255,255,0.3)',
+                zerolinecolor: 'rgba(255,255,255,0.1)',
+                tickfont: {
+                    color: '#f8f9fa'
+                },
+                titlefont: {
+                    color: '#f8f9fa'
+                }
+            },
+            legend: {
+                font: {
+                    color: '#f8f9fa'
+                },
+                bgcolor: 'rgba(43,45,66,0.7)',
+                bordercolor: 'rgba(255,255,255,0.2)'
+            },
+            margin: {
+                t: 40,
+                b: 60,
+                l: 60,
+                r: 40
+            },
+            hoverlabel: {
+                bgcolor: '#2b2d42',
+                bordercolor: '#4fc3f7',
+                font: {
+                    color: '#f8f9fa',
+                    family: 'Inter, sans-serif'
+                }
+            },
+            colorway: ['#4fc3f7', '#ff4d6d', '#ffc300', '#38b000', '#9966FF', '#FF9F40'],
+            colorscale: {
+                sequential: [
+                    [0, '#12141d'],
+                    [1, '#4fc3f7']
+                ],
+                diverging: [
+                    [0, '#ff4d6d'],
+                    [0.5, '#12141d'],
+                    [1, '#4fc3f7']
+                ]
+            }
+        },
+        config: {
+            responsive: true,
+            displayModeBar: true,
+            modeBarButtonsToRemove: ['toImage', 'sendDataToCloud', 'lasso2d', 'select2d'],
+            displaylogo: false
+        }
+    };
+
+    // Apply dark theme to all charts
+    function applyDarkTheme() {
+        const charts = document.querySelectorAll('.js-plotly-plot');
+        charts.forEach(chart => {
+            const data = JSON.parse(chart.dataset.plotlyData);
+            const layout = JSON.parse(chart.dataset.plotlyLayout);
+
+            // Merge existing layout with dark theme
+            const updatedLayout = {
+                ...layout,
+                ...darkTheme.layout
+            };
+
+            // Special handling for different chart types
+            if (chart.querySelector('.pie')) {
+                updatedLayout.paper_bgcolor = 'rgba(0,0,0,0)';
+                updatedLayout.plot_bgcolor = 'rgba(0,0,0,0)';
+                updatedLayout.showlegend = true;
+            }
+
+            if (chart.querySelector('.cartesianlayer')) {
+                updatedLayout.xaxis.gridcolor = 'rgba(255,255,255,0.05)';
+                updatedLayout.yaxis.gridcolor = 'rgba(255,255,255,0.05)';
+            }
+
+            Plotly.react(chart, data, updatedLayout, darkTheme.config);
+        });
+    }
+
+    // Initial setup
+    window.addEventListener('resize', resizeCharts);
+
+    // Wait for charts to render then apply theme
+    const checkCharts = setInterval(() => {
+        if (document.querySelectorAll('.js-plotly-plot').length > 0) {
+            clearInterval(checkCharts);
+            setTimeout(() => {
+                resizeCharts();
+                applyDarkTheme();
+
+                // Re-apply theme after animations complete
+                setTimeout(applyDarkTheme, 1000);
+            }, 100);
+        }
+    }, 100);
+
+    // Add hover effect for compromised endpoints
+    const compromisedChart = document.querySelector('.chart-container:nth-last-child(2) .chart-content .js-plotly-plot');
+    if (compromisedChart) {
+        compromisedChart.addEventListener('plotly_hover', function(eventData) {
+            const hoverText = eventData.points[0].hovertext;
+            if (hoverText) {
+                console.log("Compromised endpoints:", hoverText);
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
+{% endblock %}
