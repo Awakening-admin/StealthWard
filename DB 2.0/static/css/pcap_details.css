@@ -1,0 +1,279 @@
+/* pcap_details.css - Modern Dark Theme PCAP Analysis Dashboard - Stacked Layout */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.main-heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.main-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  border-radius: 2px;
+}
+
+/* Remove grid/flex from rows and make them stack */
+.row {
+  display: block;
+  margin-bottom: 0;
+}
+
+.section {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  width: 100%;
+}
+
+/* Remove hover effect since we're stacking */
+.section:hover {
+  transform: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+  width: 100%;
+  min-height: 400px;
+  position: relative;
+}
+
+.chart-container h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chart-container h4::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: var(--accent-color);
+  border-radius: 2px;
+}
+
+.packets-table-container {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 2rem;
+}
+
+.packets-table-container h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.packets-table-container h4::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: var(--accent-color);
+  border-radius: 2px;
+}
+
+/* Plotly chart adjustments for dark theme */
+.js-plotly-plot .plot-container {
+  width: 100% !important;
+}
+
+/* Fix for white background in Plotly charts */
+.main-svg {
+  background-color: transparent !important;
+}
+
+/* Style the Plotly toolbar */
+.modebar {
+  background-color: rgba(36, 42, 54, 0.8) !important;
+  border-radius: 4px !important;
+}
+
+.modebar-btn path {
+  fill: var(--text-secondary) !important;
+}
+
+.modebar-btn:hover path {
+  fill: var(--accent-color) !important;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text-primary);
+}
+
+th {
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.9rem;
+}
+
+tr:hover td {
+  background: rgba(79, 195, 247, 0.05);
+}
+
+/* Graph Text Elements - Force White with Contrast */
+.js-plotly-plot .gtitle,
+.js-plotly-plot .xtitle,
+.js-plotly-plot .ytitle,
+.js-plotly-plot .legendtext,
+.js-plotly-plot .annotation-text,
+.js-plotly-plot .hovertext {
+  fill: var(--text-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Axis Labels and Ticks */
+.js-plotly-plot .xtick text,
+.js-plotly-plot .ytick text {
+  fill: var(--text-secondary) !important;
+}
+
+/* Graph Background and Grid Lines */
+.js-plotly-plot .bg {
+  fill: var(--card-bg) !important;
+}
+
+.js-plotly-plot .gridlayer .xgrid,
+.js-plotly-plot .gridlayer .ygrid {
+  stroke: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Zero Line Styling */
+.js-plotly-plot .zerolinelayer .xzl,
+.js-plotly-plot .zerolinelayer .yzl {
+  stroke: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Hover Label Styling */
+.js-plotly-plot .hoverlayer .hovertext {
+  fill: var(--card-bg) !important;
+  stroke: var(--accent-color) !important;
+}
+
+.js-plotly-plot .hoverlayer .hovertext text {
+  fill: var(--text-primary) !important;
+}
+
+/* Legend Background */
+.js-plotly-plot .legend {
+  background-color: rgba(36, 42, 54, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Pie Chart Labels */
+.js-plotly-plot .pie .textinfo,
+.js-plotly-plot .pie .slicetext {
+  fill: var(--text-primary) !important;
+}
+
+/* Bar Chart Text */
+.js-plotly-plot .barlayer .text {
+  fill: var(--text-primary) !important;
+}
+
+/* Tooltip Styling */
+.js-plotly-plot .hoverlayer .spikeline {
+  stroke: var(--accent-color) !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .main-heading {
+    font-size: 1.5rem;
+  }
+
+  .section {
+    padding: 1.25rem;
+  }
+
+  .chart-container {
+    min-height: 350px;
+  }
+
+  .chart-container h4,
+  .packets-table-container h4 {
+    font-size: 1.1rem;
+  }
+
+  th, td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .js-plotly-plot .xtick text,
+  .js-plotly-plot .ytick text {
+    font-size: 10px !important;
+  }
+
+  .js-plotly-plot .gtitle {
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-heading {
+    font-size: 1.3rem;
+  }
+
+  .chart-container {
+    min-height: 300px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}

@@ -1,0 +1,164 @@
+/* MITRE ATT&CK - Theme-Compatible Styling */
+/* Inherits from base.css variables */
+
+/* Visualization containers */
+.visualization-container {
+    min-height: 400px;
+    margin-bottom: 2rem;
+    background-color: transparent;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+}
+
+/* Technique badges */
+.technique-badge {
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.35em 0.65em;
+    border-radius: 4px;
+    font-size: 0.85em;
+    display: inline-block;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.technique-badge:hover {
+    opacity: 0.8;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling */
+#threatsTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+#threatsTable thead th {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    padding: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+#threatsTable tbody td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    background-color: var(--card-bg);
+    position: relative;
+}
+
+#threatsTable tbody tr:hover td {
+    background-color: var(--card-hover);
+}
+
+/* Technique link wrapper */
+.technique-link-wrapper {
+    display: inline-block;
+    margin: 2px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Ensure links are properly layered */
+.technique-link {
+    position: relative;
+    z-index: 3;
+    text-decoration: none !important;
+}
+
+/* Recommendation cards */
+.recommendation-card {
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-speed) ease;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-card .card-title {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.recommendation-card .card-text {
+    color: var(--text-secondary);
+}
+
+.recommendation-card .badge {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+#threatsTable tbody td {
+  color: inherit;
+  background-color: inherit;
+}
+
+[data-theme="dark"] #threatsTable tbody td {
+  color: var(--text-secondary);
+  background-color: transparent;
+}
+/* Empty state */
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    color: var(--text-secondary);
+}
+
+/* Container styling */
+.mitre-container {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .mitre-container {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .mitre-container {
+        padding: 1rem;
+    }
+    
+    #threatsTable thead th,
+    #threatsTable tbody td {
+        padding: 0.75rem;
+    }
+    
+    .technique-badge {
+        font-size: 0.75em;
+        padding: 0.25em 0.5em;
+    }
+}
