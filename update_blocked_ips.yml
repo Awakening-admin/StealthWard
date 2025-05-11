@@ -1,0 +1,163 @@
+---
+- name: Sync firewall with blocked_ips list
+  hosts: admin:endpoints
+  gather_facts: true
+  vars:
+    blocked_ips: "{{ lookup('file', '/home/robot/edr_server/blocked_ips.json') | from_json }}"
+  
+  # Force become for all tasks
+  become: yes
+  become_method: sudo
+
+  tasks:
+    # Ubuntu UFW Tasks
+    - name: Ensure UFW is installed on Ubuntu
+      apt:
+        name: ufw
+        state: present
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Enable and start UFW on Ubuntu
+      community.general.ufw:
+        state: enabled
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Gather current UFW deny rules
+      shell: ufw status numbered
+      register: ufw_status
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Build list of currently blocked IPs (UFW)
+      set_fact:
+        ufw_current_blocked: "{{ ufw_current_blocked | default([]) + [ (item.split()[-1]) ] }}"
+      loop: "{{ ufw_status.stdout_lines }}"
+      when:
+        - ansible_distribution == 'Ubuntu'
+        - "'DENY' in item and 'IN' in item"
+      vars:
+        ufw_current_blocked: []
+
+    - name: Block missing IPs with UFW
+      community.general.ufw:
+        rule: deny
+        src: "{{ item }}"
+      loop: "{{ blocked_ips }}"
+      when:
+        - ansible_distribution == 'Ubuntu'
+        - "(ufw_current_blocked is not defined) or (item not in ufw_current_blocked)"
+
+    - name: Remove obsolete UFW block rules
+      community.general.ufw:
+        rule: deny
+        src: "{{ item }}"
+        delete: true
+      loop: "{{ ufw_current_blocked | default([]) }}"
+      when:
+        - ansible_distribution == 'Ubuntu'
+        - "(item not in blocked_ips)"
+
+    # Fedora firewalld Tasks (Updated)
+    - name: Install required Python packages on Fedora
+      dnf:
+        name: python3-libdnf5
+        state: present
+      when: ansible_distribution == 'Fedora'
+
+    - name: Ensure firewalld is installed on Fedora
+      dnf:
+        name: firewalld
+        state: present
+      when: ansible_distribution == 'Fedora'
+
+    - name: Enable and start firewalld on Fedora
+      systemd:
+        name: firewalld
+        state: started
+        enabled: true
+      when: ansible_distribution == 'Fedora'
+
+    - name: Get current firewalld rich rules (public zone)
+      command: firewall-cmd --zone=public --list-rich-rules
+      register: fw_rich_rules
+      when: ansible_distribution == 'Fedora'
+
+    - name: Parse current blocked IPs from firewalld rules
+      set_fact:
+        fw_current_blocked: "{{ fw_current_blocked | default([]) + [ (item | regex_search('address=\"([^\"]+)\"', '\\1')) ] }}"
+      loop: "{{ fw_rich_rules.stdout_lines }}"
+      when:
+        - ansible_distribution == 'Fedora'
+        - item is match("family=\"ipv4\".*drop")
+      vars:
+        fw_current_blocked: []
+
+    - name: Block missing IPs with firewalld rich rules
+      ansible.posix.firewalld:
+        zone: public
+        rich_rule: 'rule family="ipv4" source address="{{ item }}" drop'
+        state: enabled
+        permanent: yes
+        immediate: yes
+      loop: "{{ blocked_ips }}"
+      when:
+        - ansible_distribution == 'Fedora'
+        - "(fw_current_blocked is not defined) or (item not in fw_current_blocked)"
+
+    - name: Remove obsolete firewalld rich rules
+      ansible.posix.firewalld:
+        zone: public
+        rich_rule: 'rule family="ipv4" source address="{{ item }}" drop'
+        state: disabled
+        permanent: yes
+        immediate: yes
+      loop: "{{ fw_current_blocked | default([]) }}"
+      when:
+        - ansible_distribution == 'Fedora'
+        - "(item not in blocked_ips)"
+
+    # Arch Linux iptables Tasks
+    - name: Ensure iptables is installed on Arch
+      pacman:
+        name: iptables
+        state: present
+      when: ansible_distribution == 'Archlinux'
+
+    - name: Gather current iptables DROP rules (INPUT chain)
+      command: iptables -S INPUT
+      register: ipt_rules
+      when: ansible_distribution == 'Archlinux'
+
+    - name: Parse current blocked IPs from iptables rules
+      set_fact:
+        ipt_current_blocked: "{{ ipt_current_blocked | default([]) + [ (item.split()[3].split('/')[0]) ] }}"
+      loop: "{{ ipt_rules.stdout_lines }}"
+      when:
+        - ansible_distribution == 'Archlinux'
+        - item.split() | length >= 4
+        - item.split()[0] == '-A'
+        - item.split()[1] == 'INPUT'
+        - "'-s' in item and 'DROP' in item"
+      vars:
+        ipt_current_blocked: []
+
+    - name: Block missing IPs with iptables
+      ansible.builtin.iptables:
+        chain: INPUT
+        source: "{{ item }}"
+        jump: DROP
+        state: present
+      loop: "{{ blocked_ips }}"
+      when:
+        - ansible_distribution == 'Archlinux'
+        - "(ipt_current_blocked is not defined) or (item not in ipt_current_blocked)"
+
+    - name: Remove obsolete iptables DROP rules
+      ansible.builtin.iptables:
+        chain: INPUT
+        source: "{{ item }}"
+        jump: DROP
+        state: absent
+      loop: "{{ ipt_current_blocked | default([]) }}"
+      when:
+        - ansible_distribution == 'Archlinux'
+        - "(item not in blocked_ips)"
