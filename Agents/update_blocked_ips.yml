@@ -1,0 +1,195 @@
+---
+- name: Sync firewall with blocked_ips list
+  hosts: admin:endpoints
+  gather_facts: true
+  vars:
+    blocked_ips: "{{ lookup('file', '/home/termix/edr_server/blocked_ips.json') | from_json }}"
+  
+  become: yes
+  become_method: sudo
+
+  tasks:
+    # Debug blocked_ips variable to ensure it's loaded correctly
+    - name: Debug blocked_ips variable
+      debug:
+        var: blocked_ips
+      when: blocked_ips is defined
+
+    # Ubuntu UFW Tasks
+    - name: Ensure UFW is installed on Ubuntu
+      apt:
+        name: ufw
+        state: present
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Enable and start UFW on Ubuntu
+      community.general.ufw:
+        state: enabled
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Gather current UFW deny rules
+      command: ufw status numbered
+      register: ufw_status
+      changed_when: false
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Build list of currently blocked IPs (UFW)
+      set_fact:
+        ufw_current_blocked: "{{ ufw_current_blocked | default([]) + [ item.split()[-1] ] }}"
+      loop: "{{ ufw_status.stdout_lines }}"
+      when:
+        - ansible_distribution == 'Ubuntu'
+        - "'DENY' in item and 'Anywhere' in item"
+      vars:
+        ufw_current_blocked: []
+
+    - name: Block missing IPs with UFW (all protocols)
+      community.general.ufw:
+        rule: deny
+        src: "{{ item }}"
+        proto: any
+      loop: "{{ blocked_ips }}"
+      when:
+        - ansible_distribution == 'Ubuntu'
+        - "(ufw_current_blocked is not defined) or (item not in ufw_current_blocked)"
+
+    - name: Remove obsolete UFW block rules
+      community.general.ufw:
+        rule: deny
+        src: "{{ item }}"
+        proto: any
+        delete: true
+      loop: "{{ ufw_current_blocked | default([]) }}"
+      when:
+        - ansible_distribution == 'Ubuntu'
+        - "(item not in blocked_ips)"
+      notify: Reload UFW
+
+    # Fedora firewalld Tasks
+    - name: Ensure firewalld is installed and running on Fedora
+      block:
+        - name: Install firewalld
+          dnf:
+            name: firewalld
+            state: present
+          
+        - name: Enable and start firewalld
+          systemd:
+            name: firewalld
+            state: started
+            enabled: true
+      when: ansible_distribution == 'Fedora'
+
+    - name: Get current firewalld rich rules (all zones)
+      command: firewall-cmd --list-rich-rules
+      register: fw_rich_rules
+      changed_when: false
+      when: ansible_distribution == 'Fedora'
+
+    - name: Parse current blocked IPs from firewalld rules
+      set_fact:
+        fw_current_blocked: "{{ fw_current_blocked | default([]) + [ item | regex_search('address=\"([^\"]+)\"', '\\1') | first ] }}"
+      loop: "{{ fw_rich_rules.stdout_lines }}"
+      when:
+        - ansible_distribution == 'Fedora'
+        - "'drop' in item|lower and 'ipv4' in item|lower"
+      vars:
+        fw_current_blocked: []
+
+    - name: Block missing IPs with firewalld (all protocols)
+      ansible.posix.firewalld:
+        zone: public
+        rich_rule: 'rule family="ipv4" source address="{{ item }}" drop'
+        permanent: yes
+        immediate: yes
+        state: enabled
+      loop: "{{ blocked_ips }}"
+      when:
+        - ansible_distribution == 'Fedora'
+        - "(fw_current_blocked is not defined) or (item not in fw_current_blocked)"
+      notify: Reload firewalld
+
+    - name: Remove obsolete firewalld rich rules
+      ansible.posix.firewalld:
+        zone: public
+        rich_rule: 'rule family="ipv4" source address="{{ item }}" drop'
+        permanent: yes
+        immediate: yes
+        state: absent
+      loop: "{{ fw_current_blocked | default([]) }}"
+      when:
+        - ansible_distribution == 'Fedora'
+        - "(item not in blocked_ips)"
+      notify: Reload firewalld
+
+    # Arch Linux iptables Tasks
+    - name: Ensure iptables is installed on Arch
+      pacman:
+        name: iptables
+        state: present
+      when: ansible_distribution == 'Archlinux'
+
+    - name: Gather current iptables rules (all chains)
+      command: iptables-save
+      register: ipt_rules
+      changed_when: false
+      when: ansible_distribution == 'Archlinux'
+
+    - name: Parse current blocked IPs from iptables rules
+      set_fact:
+        ipt_current_blocked: "{{ ipt_current_blocked | default([]) + [ item.split()[3] ] }}"
+      loop: "{{ ipt_rules.stdout_lines }}"
+      when:
+        - ansible_distribution == 'Archlinux'
+        - "'-A INPUT' in item"
+        - "'-s' in item"
+        - "'-j DROP' in item"
+        - "'Blocked by EDR system' in item"
+      vars:
+        ipt_current_blocked: []
+
+    - name: Block missing IPs with iptables (all protocols)
+      ansible.builtin.iptables:
+        table: filter
+        chain: INPUT
+        source: "{{ item }}"
+        jump: DROP
+        comment: "Blocked by EDR system"
+        state: present
+      loop: "{{ blocked_ips }}"
+      when:
+        - ansible_distribution == 'Archlinux'
+        - "(ipt_current_blocked is not defined) or (item not in ipt_current_blocked)"
+
+    - name: Remove obsolete iptables DROP rules
+      ansible.builtin.iptables:
+        table: filter
+        chain: INPUT
+        source: "{{ item.split('/')[0] }}"
+        jump: DROP
+        comment: "Blocked by EDR system"
+        state: absent
+      loop: "{{ ipt_current_blocked | default([]) }}"
+      when:
+        - ansible_distribution == 'Archlinux'
+        - "(item not in blocked_ips)"
+
+    - name: Persist iptables rules on Arch
+      shell: |
+        iptables-save > /etc/iptables/iptables.rules
+        systemctl restart iptables
+      when:
+        - ansible_distribution == 'Archlinux'
+        - ansible_facts['pkg_mgr'] == 'pacman'
+
+  handlers:
+    - name: Reload UFW
+      community.general.ufw:
+        state: reloaded
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Reload firewalld
+      ansible.posix.firewalld:
+        state: reloaded
+      when: ansible_distribution == 'Fedora'
+
