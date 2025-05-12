@@ -32,8 +32,8 @@
 #define DNS_QUERY_THRESH 100
 #define SYN_FLOOD_THRESH 500
 #define SNAPLEN 65535
-#define ADMIN_IP "192.168.18.31"
-#define ADMIN_USERNAME "termix"
+#define ADMIN_IP "192.168.100.24"
+#define ADMIN_USERNAME "robot"
 
 typedef struct {
     int ssh_attempts;
@@ -100,7 +100,7 @@ char* get_endpoint_ip() {
     char *ip = NULL;
 
     // Try hostname -I first (if available)
-    fp = popen("command -v hostname >/dev/null && hostname -I || echo ''", "r");
+    fp = popen("command -v hostname >/dev/null && hostname -i || echo ''", "r");
     if (fp) {
         if (fgets(buffer, sizeof(buffer), fp) != NULL) {
             char *token = strtok(buffer, " ");
@@ -280,7 +280,7 @@ void finalize_alerts(AlertContext *context) {
         if (json_array_size(context->alerts) > 0) {
             char mkdir_command[512];
             snprintf(mkdir_command, sizeof(mkdir_command),
-                "ssh %s@%s \"mkdir -p /home/termix/edr_server/alerts/%s\"",
+                "ssh %s@%s \"mkdir -p /home/robot/edr_server/alerts/%s\"",
                 ADMIN_USERNAME, ADMIN_IP, endpoint_ip);
 
             if (system(mkdir_command) != 0) {
@@ -289,7 +289,7 @@ void finalize_alerts(AlertContext *context) {
 
             char scp_command[512];
             snprintf(scp_command, sizeof(scp_command),
-                "scp %s %s@%s:/home/termix/edr_server/alerts/%s/",
+                "scp %s %s@%s:/home/robot/edr_server/alerts/%s/",
                 context->alert_filename, ADMIN_USERNAME, ADMIN_IP, endpoint_ip);
 
             if (system(scp_command) != 0) {
@@ -475,7 +475,7 @@ void capture_traffic(const char *interface) {
 
     char mkdir_command[512];
     snprintf(mkdir_command, sizeof(mkdir_command),
-        "ssh %s@%s \"mkdir -p /home/termix/edr_server/pcap_files/%s\"",
+        "ssh %s@%s \"mkdir -p /home/robot/edr_server/pcap_files/%s\"",
         ADMIN_USERNAME, ADMIN_IP, endpoint_ip);
 
     if (system(mkdir_command) != 0) {
@@ -484,7 +484,7 @@ void capture_traffic(const char *interface) {
 
     char scp_command[512];
     snprintf(scp_command, sizeof(scp_command),
-        "scp %s %s@%s:/home/termix/edr_server/pcap_files/%s/",
+        "scp %s %s@%s:/home/robot/edr_server/pcap_files/%s/",
         current_pcap_filename, ADMIN_USERNAME, ADMIN_IP, endpoint_ip);
 
     if (system(scp_command) != 0) {

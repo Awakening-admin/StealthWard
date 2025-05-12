@@ -1,0 +1,393 @@
+- name: Setup EDR endpoint with complete SSH configuration
+  hosts: endpoints
+  become: true
+  gather_facts: true
+
+  vars:
+    admin_user: "robot"
+    admin_host: "192.168.100.24"  # Admin server IP
+    admin_ssh_dir: "/home/{{ admin_user }}/.ssh"
+    endpoint_user: "{{ ansible_user }}"
+    endpoint_ssh_dir: "/home/{{ endpoint_user }}/.ssh"
+    agent_remote_dir: "/var/edr_agent"
+    admin_pcap_dir: "/home/robot/edr_server/pcap_files"
+    admin_log_dir: "/home/robot/edr_server/logs"
+    admin_alert_dir: "/home/robot/edr_server/alerts"
+
+  tasks:
+    # ===================== SSH SETUP (same as before) =====================
+    - name: Add endpoint to admin's known_hosts to avoid fingerprint prompt
+      delegate_to: localhost
+      become: false
+      known_hosts:
+        path: "/home/{{ admin_user }}/.ssh/known_hosts"
+        name: "{{ inventory_hostname }}"
+        key: "{{ lookup('pipe', 'ssh-keyscan -H ' + inventory_hostname) }}"
+
+    - name: Ensure admin SSH key exists
+      delegate_to: localhost
+      become: false
+      block:
+        - name: Create admin .ssh directory
+          file:
+            path: "{{ admin_ssh_dir }}"
+            state: directory
+            mode: '0700'
+            owner: "{{ admin_user }}"
+            group: "{{ admin_user }}"
+
+        - name: Generate admin SSH key if not exists
+          command: ssh-keygen -t rsa -b 4096 -f "{{ admin_ssh_dir }}/id_rsa" -N "" -q
+          args:
+            creates: "{{ admin_ssh_dir }}/id_rsa.pub"
+          become_user: "{{ admin_user }}"
+
+    - name: Ensure .ssh directory exists on endpoint
+      file:
+        path: "{{ endpoint_ssh_dir }}"
+        state: directory
+        mode: '0700'
+        owner: "{{ endpoint_user }}"
+        group: "{{ endpoint_user }}"
+
+    - name: Generate SSH key on endpoint
+      ansible.builtin.command:
+        cmd: ssh-keygen -t rsa -b 2048 -f "{{ endpoint_ssh_dir }}/id_rsa" -N ""
+        creates: "{{ endpoint_ssh_dir }}/id_rsa"
+      become_user: "{{ endpoint_user }}"
+
+    - name: Copy admin's public key to endpoint
+      authorized_key:
+        user: "{{ endpoint_user }}"
+        state: present
+        key: "{{ lookup('file', '/home/robot/.ssh/id_rsa.pub') }}"
+        path: "{{ endpoint_ssh_dir }}/authorized_keys"
+      become: true
+
+    - name: Get endpoint's public key
+      shell: cat "{{ endpoint_ssh_dir }}/id_rsa.pub"
+      register: endpoint_pubkey
+      become: false
+      changed_when: false
+
+    - name: Manually add endpoint key to admin's authorized_keys
+      local_action:
+        module: lineinfile
+        path: "/home/robot/.ssh/authorized_keys"
+        line: "{{ endpoint_pubkey.stdout }}"
+        create: yes
+        state: present
+      become: false
+
+    - name: Configure SSH to disable strict host key checking for admin
+      copy:
+        dest: "{{ endpoint_ssh_dir }}/config"
+        content: |
+          Host {{ admin_host }}
+              StrictHostKeyChecking no
+              UserKnownHostsFile=/dev/null
+              User {{ admin_user }}
+              IdentityFile {{ endpoint_ssh_dir }}/id_rsa
+              ControlPath {{ endpoint_ssh_dir }}/control:%h:%p:%r
+              ControlMaster auto
+              ControlPersist 10m
+        owner: "{{ endpoint_user }}"
+        group: "{{ endpoint_user }}"
+        mode: '0600'
+
+    - name: Ensure SSH server allows key authentication
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: "^#?PasswordAuthentication"
+        line: "PasswordAuthentication no"
+        state: present
+      notify: Restart sshd
+      become: true
+
+    - name: Ensure home directory permissions are correct
+      file:
+        path: "/home/{{ endpoint_user }}"
+        mode: '0700'
+        owner: "{{ endpoint_user }}"
+        group: "{{ endpoint_user }}"
+      become: true
+
+    - name: Test endpoint->admin SSH connection
+      command: ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no {{ admin_user }}@{{ admin_host }} exit
+      register: ssh_test
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Show SSH test result
+      debug:
+        msg: |
+          Endpoint->Admin SSH: {{ 'SUCCESS' if ssh_test.rc == 0 else 'FAILED' }}
+          {% if ssh_test.rc != 0 %}
+          Troubleshooting:
+          1. Verify /home/{{ admin_user }}/.ssh/authorized_keys contains endpoint's key
+          2. Check permissions (700 .ssh, 600 authorized_keys)
+          3. Check /var/log/auth.log on admin server
+          4. Verify admin host IP is correct: {{ admin_host }}
+          {% endif %}
+
+    # ===================== EDR AGENT SETUP =====================
+    - name: Install EDR dependencies
+      block:
+        - name: Install Debian packages
+          apt:
+            name:
+              - tcpdump
+              - libpcap-dev
+              - libcap2-bin
+              - sshpass
+              - libjansson-dev
+              - iptables-persistent
+              - inotify-tools
+            state: present
+            update_cache: yes
+          when: ansible_facts['os_family'] == 'Debian'
+
+        - name: Install Arch packages
+          pacman:
+            name:
+              - tcpdump
+              - libpcap
+              - libcap
+              - sshpass
+              - jansson
+              - nftables
+              - inotify-tools
+            state: present
+            update_cache: yes
+          when: ansible_facts['os_family'] == 'Archlinux'
+
+        - name: Install Fedora packages
+          dnf:
+            name:
+              - tcpdump
+              - libpcap-devel
+              - libcap-ng
+              - sshpass
+              - jansson
+              - firewalld
+              - inotify-tools
+            state: present
+            update_cache: yes
+          when: ansible_facts['os_family'] == 'RedHat'
+
+    # ===================== FIREWALL SERVICES =====================
+    - name: Ensure iptables services are running (Ubuntu/Debian)
+      systemd:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      loop:
+        - netfilter-persistent
+        - iptables
+      when: ansible_facts['os_family'] == 'Debian'
+
+    - name: Ensure nftables service is running (Arch)
+      systemd:
+        name: nftables
+        state: started
+        enabled: yes
+      when: ansible_facts['os_family'] == 'Archlinux'
+
+    - name: Ensure firewalld service is running (Fedora)
+      systemd:
+        name: firewalld
+        state: started
+        enabled: yes
+      when: ansible_facts['os_family'] == 'RedHat'
+
+    # ===================== FIREWALL RULES =====================
+    - name: Create initial nftables rules (Arch)
+      copy:
+        dest: /etc/nftables.conf
+        content: |
+          #!/usr/sbin/nft -f
+          flush ruleset
+          table ip filter {
+              chain input {
+                  type filter hook input priority 0;
+              }
+              chain forward {
+                  type filter hook forward priority 0;
+              }
+          }
+        mode: '0644'
+      when: ansible_facts['os_family'] == 'Archlinux'
+      notify: Restart nftables
+
+    - name: Create initial iptables rules (Ubuntu/Debian)
+      copy:
+        dest: /etc/iptables/rules.v4
+        content: |
+          *filter
+          :INPUT ACCEPT [0:0]
+          :FORWARD ACCEPT [0:0]
+          :OUTPUT ACCEPT [0:0]
+          COMMIT
+        mode: '0644'
+      when: ansible_facts['os_family'] == 'Debian'
+      notify: Restart iptables
+
+    # ===================== COMPREHENSIVE SUDOERS CONFIG =====================
+    - name: Configure comprehensive sudoers for EDR agent
+      copy:
+        dest: "/etc/sudoers.d/edr_agent"
+        content: |
+          # Firewall commands
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/sbin/iptables *
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/sbin/iptables-save *
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/sbin/iptables-restore *
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/sbin/nft *
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/firewall-cmd *
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/sbin/netfilter-persistent *
+          
+          # Service management
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/systemctl restart nftables
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/systemctl restart firewalld
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/systemctl restart netfilter-persistent
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/systemctl status *
+          
+          # Agent operations
+          {{ endpoint_user }} ALL=(root) NOPASSWD: {{ agent_remote_dir }}/agent
+          {{ endpoint_user }} ALL=(root) NOPASSWD: {{ agent_remote_dir }}/Lagentt
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/inotifywait *
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/cat /var/edr_agent/config/blocked_ips.json
+          
+          # Required for setcap
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/sbin/setcap *
+          
+          # Additional commands needed for Fedora
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/cat /etc/nftables.conf
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/cp /etc/nftables.conf /etc/nftables.conf.bak
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/mv /etc/nftables.conf.new /etc/nftables.conf
+          
+          # Allow sudo -n check
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/sudo -n *
+          
+          # Allow true command for sudo checks
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/true
+          
+          # Allow reading firewall state
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/firewall-cmd --list-all
+          {{ endpoint_user }} ALL=(root) NOPASSWD: /usr/bin/firewall-cmd --list-rich-rules
+        mode: '0440'
+      become: true
+      
+    - name: Verify sudoers file permissions
+      stat:
+        path: /etc/sudoers.d/edr_agent
+      register: sudoers_stat
+      become: true
+
+    - name: Debug sudoers file permissions
+      debug:
+        msg: "Sudoers file permissions: {{ sudoers_stat.stat.mode }} (should be 0440)"
+      when: sudoers_stat.stat.exists
+
+    - name: Create SELinux policy for sudo access
+      command: >
+        semanage boolean --modify --on allow_unconfined_exec_content
+      when: ansible_facts['distribution'] == 'fedora'
+      become: true
+      ignore_errors: yes
+
+    # ===================== AGENT DIRECTORIES AND FILES =====================
+    - name: Create agent directories with proper permissions
+      file:
+        path: "{{ item.path }}"
+        state: directory
+        owner: "{{ item.owner | default(endpoint_user) }}"
+        group: "{{ item.group | default(endpoint_user) }}"
+        mode: "{{ item.mode | default('0775') }}"
+      loop:
+        - { path: "{{ agent_remote_dir }}" }
+        - { path: "{{ agent_remote_dir }}/pcap_files", mode: '0777' }
+        - { path: "{{ agent_remote_dir }}/alerts", mode: '0777' }
+
+
+    - name: Copy agent binaries
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ agent_remote_dir }}/{{ item.dest }}"
+        mode: '0755'
+      loop:
+        - { src: "./agent", dest: "agent" }
+        - { src: "./Lagentt", dest: "Lagentt" }
+
+    - name: Set capabilities on agent binary (C agent)
+      command: >
+        setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' {{ agent_remote_dir }}/agent
+      become: true
+
+    - name: Set capabilities on Rust agent binary (Lagentt)
+      command: >
+        setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' {{ agent_remote_dir }}/Lagentt
+      become: true
+    
+    - name: Create admin directories on server
+      delegate_to: localhost
+      file:
+        path: "{{ item.path }}/{{ inventory_hostname }}"
+        state: directory
+        owner: "{{ admin_user }}"
+        group: "{{ admin_user }}"
+        mode: "{{ item.mode | default('0775') }}"
+      loop:
+        - { path: "{{ admin_pcap_dir | expanduser }}" }
+        - { path: "{{ admin_alert_dir | expanduser }}" }
+    
+
+    - name: Ensure the agent can read log files
+      file:
+        path: "/var/log/{{ item }}"
+        owner: "{{ endpoint_user }}"
+        group: "{{ endpoint_user }}"
+        mode: '0644'
+      loop:
+        - syslog
+        - auth.log
+        - kern.log
+        - secure
+        - messages
+        - maillog
+        - firewalld
+        - cron
+      become: true
+
+    - name: Create SSH control directory for multiplexing
+      file:
+        path: "{{ endpoint_ssh_dir }}/control"
+        state: directory
+        owner: "{{ endpoint_user }}"
+        group: "{{ endpoint_user }}"
+        mode: '0700'
+
+    - name: Add agent user to sudo group
+      user:
+        name: "{{ endpoint_user }}"
+        groups: sudo
+        append: yes
+      become: true
+
+  handlers:
+    - name: Restart nftables
+      systemd:
+        name: nftables
+        state: restarted
+      when: ansible_facts['os_family'] == 'Archlinux'
+
+    - name: Restart iptables
+      systemd:
+        name: netfilter-persistent
+        state: restarted
+      when: ansible_facts['os_family'] == 'Debian'
+      
+    - name: Restart sshd
+      systemd:
+        name: sshd
+        state: restarted
+      become: true
