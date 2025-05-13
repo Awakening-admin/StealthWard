@@ -1,27 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <pcap.h>
-#include <unistd.h>
-#include <time.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <arpa/inet.h>
-#include <libgen.h>
-#include <net/if.h>
-#include <sys/ioctl.h>
-#include <fcntl.h>
-#include <netdb.h>
-#include <jansson.h>
-#include <signal.h>
-#include <netinet/ip.h>
-#include <netinet/tcp.h>
-#include <netinet/udp.h>
-#include <netinet/if_ether.h>
-#include <syslog.h>
-#include <stdarg.h>
-#include <errno.h>
-#include <sys/wait.h>
+#include <stdio.h>           // Standard I/O functions (printf, fopen, etc.)
+#include <stdlib.h>          // Memory allocation, process control, conversions (malloc, exit, atoi)
+#include <string.h>          // String handling (strcpy, strcmp, strlen, etc.)
+#include <pcap.h>            // Packet capture library (libpcap) for sniffing network traffic
+#include <unistd.h>          // POSIX OS API (fork, sleep, access, close, etc.)
+#include <time.h>            // Time and date functions (time, strftime, etc.)
+#include <sys/stat.h>        // File status and permission info (stat, mkdir, chmod, etc.)
+#include <sys/types.h>       // Primitive system data types (pid_t, uid_t, size_t, etc.)
+#include <arpa/inet.h>       // Functions for IP address conversion (inet_ntoa, inet_pton, etc.)
+#include <libgen.h>          // File path manipulation (basename, dirname)
+#include <net/if.h>          // Network interface structures (ifreq, interface flags)
+#include <sys/ioctl.h>       // I/O control operations (used to manipulate device parameters)
+#include <fcntl.h>           // File control options (open, fcntl, file locking)
+#include <netdb.h>           // Network database operations (gethostbyname, getaddrinfo, etc.)
+#include <jansson.h>         // JSON parsing and encoding (used for alerts, configs, logs)
+#include <signal.h>          // Signal handling (signal, raise, kill, SIGINT, etc.)
+#include <netinet/ip.h>      // IP protocol definitions and IP header struct
+#include <netinet/tcp.h>     // TCP protocol definitions and TCP header struct
+#include <netinet/udp.h>     // UDP protocol definitions and UDP header struct
+#include <netinet/if_ether.h>// Ethernet frame definitions (Ethernet header, ETH_P_IP, etc.)
+#include <syslog.h>          // System logging interface (syslog, openlog, closelog)
+#include <stdarg.h>          // Variable argument handling macros (va_list, va_start, va_end)
+#include <errno.h>           // Error number definitions and error handling (errno, strerror)
+#include <sys/wait.h>        // Wait for process status changes (wait, waitpid)
 
 #define MAX_PACKETS 1000
 #define PCAP_DIR "/var/edr_agent/pcap_files"

@@ -3,7 +3,7 @@
   hosts: admin:endpoints
   gather_facts: true
   vars:
-    blocked_ips: "{{ lookup('file', '/home/termix/edr_server/blocked_ips.json') | from_json }}"
+    blocked_ips: "{{ lookup('file', '/home/robot/edr_server/blocked_ips.json') | from_json }}"
   
   become: yes
   become_method: sudo
@@ -21,18 +21,18 @@
         name: ufw
         state: present
       when: ansible_distribution == 'Ubuntu'
-
+    
     - name: Enable and start UFW on Ubuntu
       community.general.ufw:
         state: enabled
       when: ansible_distribution == 'Ubuntu'
 
     - name: Gather current UFW deny rules
-      command: ufw status numbered
+      command: ufw --force status numbered  # Added --force to bypass prompts
       register: ufw_status
       changed_when: false
       when: ansible_distribution == 'Ubuntu'
-
+    
     - name: Build list of currently blocked IPs (UFW)
       set_fact:
         ufw_current_blocked: "{{ ufw_current_blocked | default([]) + [ item.split()[-1] ] }}"
@@ -46,6 +46,7 @@
     - name: Block missing IPs with UFW (all protocols)
       community.general.ufw:
         rule: deny
+        direction: in  # Explicitly set direction
         src: "{{ item }}"
         proto: any
       loop: "{{ blocked_ips }}"
@@ -56,6 +57,7 @@
     - name: Remove obsolete UFW block rules
       community.general.ufw:
         rule: deny
+        direction: in  # Explicitly set direction
         src: "{{ item }}"
         proto: any
         delete: true
