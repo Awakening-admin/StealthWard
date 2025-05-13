@@ -1,6 +1,8 @@
 import os
 import pandas as pd
 import json
+from stix2 import MemoryStore
+from taxii2client.v20 import Server
 import pyshark
 from collections import Counter
 import plotly.express as px
@@ -28,6 +30,63 @@ logging.basicConfig(
     filename=DETECTION_LOG
 )
 logger = logging.getLogger(__name__)
+
+
+
+def fetch_mitre_techniques():
+    """Fetch MITRE techniques from API with caching"""
+    global MITRE_TECHNIQUES, MITRE_LAST_UPDATED
+    
+    # Return cached data if recent
+    if MITRE_LAST_UPDATED and (datetime.now() - MITRE_LAST_UPDATED) < timedelta(hours=24):
+        return MITRE_TECHNIQUES
+    
+    try:
+        # Fetch techniques from MITRE API
+        response = requests.get('https://attack.mitre.org/api.php?action=ask&query=[[Category:Technique]]|?Has ID|?Has display name|?Has description|?Has tactic&format=json')
+        if response.status_code == 200:
+            data = response.json()
+            techniques = {}
+            
+            for tech_id, tech_data in data.get('query', {}).get('results', {}).items():
+                techniques[tech_id] = {
+                    'name': tech_data.get('display name', tech_id),
+                    'description': tech_data.get('description', 'No description available'),
+                    'tactics': [t.strip() for t in tech_data.get('tactic', '').split(',') if t.strip()],
+                    'url': f'https://attack.mitre.org/techniques/{tech_id}/'
+                }
+            
+            MITRE_TECHNIQUES = techniques
+            MITRE_LAST_UPDATED = datetime.now()
+            return techniques
+    except Exception as e:
+        logger.error(f"Error fetching MITRE techniques: {str(e)}")
+    
+    # Fallback to ensure critical techniques are always available
+    fallback_techniques = {
+        'T1595': {
+            'name': 'Active Scanning',
+            'description': 'Adversaries may execute active reconnaissance scans to gather information that can be used during targeting.',
+            'tactics': ['Reconnaissance'],
+            'url': 'https://attack.mitre.org/techniques/T1595/'
+        },
+        'T1110': {
+            'name': 'Brute Force',
+            'description': 'Adversaries may use brute force techniques to gain access to accounts when passwords are unknown or when password hashes are obtained.',
+            'tactics': ['Credential Access'],
+            'url': 'https://attack.mitre.org/techniques/T1110/'
+        },
+        'T1059': {
+            'name': 'Command-Line Interface',
+            'description': 'Adversaries may abuse command-line interfaces for execution.',
+            'tactics': ['Execution'],
+            'url': 'https://attack.mitre.org/techniques/T1059/'
+        }
+    }
+    
+    # Merge with existing techniques
+    MITRE_TECHNIQUES = {**MITRE_TECHNIQUES, **fallback_techniques}
+    return MITRE_TECHNIQUES
 
 def process_pcap(file_path):
     capture = pyshark.FileCapture(file_path, use_json=True)
@@ -80,13 +139,13 @@ def process_pcap(file_path):
                 packet_info["protocol"] = protocol
 
             packets_data.append(packet_info)
-            
+
             # Update statistics
             if packet_info["source"] and packet_info["destination"]:
                 ip_stats[(packet_info["source"], packet_info["destination"])] += 1
-            
+
             protocols[packet_info["protocol"]] += 1
-            
+
         except Exception as e:
             logger.warning(f"Error processing packet: {str(e)}")
             continue
@@ -100,7 +159,7 @@ def process_pcap(file_path):
         'packets_table': packets_table
     }
     return df, stats
-    
+
 def generate_plot(df):
     fig = px.line(df, x='time', y='length', title='Packet Length Over Time')
     return fig.to_html(full_html=False)
@@ -217,38 +276,92 @@ def load_endpoint_alerts():
         return all_alerts
 
     try:
-        alert_files = [f for f in os.listdir(alerts_dir) if f.endswith('.json')]
+        # Get all IP folders
+        ip_folders = [d for d in os.listdir(alerts_dir)
+                     if os.path.isdir(os.path.join(alerts_dir, d))]
 
-        for alert_file in alert_files:
-            try:
-                with open(os.path.join(alerts_dir, alert_file), 'r') as f:
-                    alerts = json.load(f)
-                    if isinstance(alerts, list):
-                        # Convert endpoint alert format to match existing pcap alert format
-                        for alert in alerts:
-                            normalized_alert = {
-                                'timestamp': alert.get('timestamp'),
-                                'source_ip': alert.get('source_ip'),
-                                'dest_ip': alert.get('destination_ip'),
-                                'src_port': alert.get('source_port'),
-                                'dst_port': alert.get('destination_port'),
-                                'severity': alert.get('severity', 'medium'),
-                                'rule_msg': alert.get('attack_type', 'Unknown Attack'),
-                                'rule_sid': hash(alert.get('attack_type', '')) % 1000000,
-                                'protocol': 'TCP',  # Assuming SSH is TCP
-                                'pcap_info': {
+        for ip_folder in ip_folders:
+            ip_path = os.path.join(alerts_dir, ip_folder)
+            alert_files = [f for f in os.listdir(ip_path)
+                         if f.endswith('.json') and os.path.isfile(os.path.join(ip_path, f))]
+
+            for alert_file in alert_files:
+                try:
+                    with open(os.path.join(ip_path, alert_file), 'r') as f:
+                        alerts = json.load(f)
+                        if isinstance(alerts, list):
+                            for alert in alerts:
+                                normalized_alert = {
+                                    'timestamp': alert.get('timestamp'),
+                                    'source_ip': alert.get('source_ip', ip_folder),  # Use folder IP as fallback
+                                    'dest_ip': alert.get('destination_ip'),
                                     'src_port': alert.get('source_port'),
                                     'dst_port': alert.get('destination_port'),
-                                    'file_path': alert.get('pcap_reference', '')
+                                    'severity': alert.get('severity', 'medium'),
+                                    'rule_msg': alert.get('attack_type', 'Unknown Attack'),
+                                    'rule_sid': hash(alert.get('attack_type', '')) % 1000000,
+                                    'protocol': alert.get('protocol', 'TCP'),
+                                    'pcap_info': {
+                                        'src_port': alert.get('source_port'),
+                                        'dst_port': alert.get('destination_port'),
+                                        'file_path': alert.get('pcap_reference', '')
+                                    }
                                 }
-                            }
-                            all_alerts.append(normalized_alert)
-            except json.JSONDecodeError as e:
-                logger.error(f"Error decoding JSON in {alert_file}: {str(e)}")
-            except Exception as e:
-                logger.error(f"Error processing alert file {alert_file}: {str(e)}")
+                                all_alerts.append(normalized_alert)
+                except Exception as e:
+                    logger.error(f"Error processing {ip_folder}/{alert_file}: {str(e)}")
 
     except Exception as e:
-        logger.error(f"Error listing alert files: {str(e)}")
+        logger.error(f"Error loading endpoint alerts: {str(e)}")
 
     return all_alerts
+
+
+def preprocess_log(log_path, log_name):
+    """Parse log file and extract structured data"""
+    log_entries = []
+
+    try:
+        with open(log_path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+
+                # Basic parsing (adjust according to your log format)
+                entry = {
+                    'date': 'Unknown',
+                    'log_level': 'INFO',
+                    'message': line
+                }
+
+                # Try to extract timestamp and log level if in standard format
+                parts = line.split(maxsplit=3)
+                if len(parts) >= 3:
+                    try:
+                        # Check if first part looks like a date/time
+                        if ':' in parts[0] and '-' in parts[0]:
+                            entry['date'] = ' '.join(parts[:2])
+                            entry['log_level'] = parts[2]
+                            entry['message'] = parts[3] if len(parts) > 3 else ''
+                        elif parts[0].isalpha() and len(parts[0]) <= 5:
+                            # Might be month abbreviation
+                            entry['date'] = ' '.join(parts[:3])
+                            entry['log_level'] = parts[3]
+                            entry['message'] = ' '.join(parts[4:]) if len(parts) > 4 else ''
+                    except:
+                        pass
+
+                log_entries.append(entry)
+
+    except Exception as e:
+        logger.error(f"Error parsing log file {log_name}: {str(e)}")
+        # Return at least the raw lines if parsing fails
+        with open(log_path, 'r') as f:
+            return [{
+                'date': 'Error',
+                'log_level': 'ERROR',
+                'message': line.strip()
+            } for line in f if line.strip()]
+
+    return log_entries
