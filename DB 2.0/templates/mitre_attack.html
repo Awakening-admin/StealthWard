@@ -1,0 +1,460 @@
+{% extends "base.html" %}
+
+{% block title %}Threat Intelligence | StealthWard{% endblock %}
+
+{% block extra_styles %}
+<link href="{{ url_for('static', filename='css/mitre_attack.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Stats Row -->
+    <div class="row mb-4 g-4">
+        <div class="col-md-3">
+            <div class="card stats-card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Threats</h5>
+                    <h2 class="mb-0">{{ threat_insights.stats.total }}</h2>
+                    <small class="opacity-75">{{ threat_insights.stats.by_mitre_tactic|length }} ATT&CK Tactics</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stats-card bg-danger text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Critical</h5>
+                    <h2 class="mb-0">{{ threat_insights.stats.by_severity.get('critical', 0) }}</h2>
+                    <small class="opacity-75">Require immediate action</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stats-card bg-warning text-dark">
+                <div class="card-body">
+                    <h5 class="card-title">High</h5>
+                    <h2 class="mb-0">{{ threat_insights.stats.by_severity.get('high', 0) }}</h2>
+                    <small class="opacity-75">Should be addressed</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stats-card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Techniques</h5>
+                    <h2 class="mb-0">{{ threat_insights.mitre_techniques|length }}</h2>
+                    <small class="opacity-75">Unique ATT&CK techniques</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <p class="text-muted mb-4">
+        <i class="fas fa-clock me-1"></i> Last updated: {{ last_updated }}
+    </p>
+
+    <!-- MITRE ATT&CK Matrix -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0"><i class="fas fa-chess-board me-2"></i>MITRE ATT&CK Tactics Distribution</h4>
+        </div>
+        <div class="card-body">
+            {% if threat_insights.stats.by_mitre_tactic %}
+            <div class="mitre-matrix">
+                {% for tactic in all_tactics %}
+                <div class="mitre-tactic" data-tactic="{{ tactic }}">
+                    <div class="tactic-count">{{ threat_insights.stats.by_mitre_tactic.get(tactic, 0) }}</div>
+                    <small>{{ tactic }}</small>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                No MITRE ATT&CK tactics identified in current threats
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Main Content Row -->
+    <div class="row g-4">
+        <!-- Left Column -->
+        <div class="col-lg-6">
+            <!-- Critical Threats Timeline -->
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Critical Threat Timeline</h4>
+                </div>
+                <div class="card-body">
+                    {% if threat_insights.critical_threats %}
+                        {% set sorted_threats = threat_insights.critical_threats|sort(attribute='timestamp', reverse=True) %}
+                        <div class="threat-timeline">
+                            {% for threat in sorted_threats %}
+                                {% if loop.index <= 5 %}
+                                <div class="timeline-item {{ threat.severity }}">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="mb-1">{{ threat.type }}</h6>
+                                        <small class="text-muted">{{ threat.timestamp }}</small>
+                                    </div>
+                                    <p class="mb-1 small">{{ threat.message|truncate(100) }}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge severity-{{ threat.severity }}">
+                                            {{ threat.severity|title }}
+                                        </span>
+                                        {% if threat.mitre_id %}
+                                        <a href="https://attack.mitre.org/techniques/{{ threat.mitre_id }}/" 
+                                           target="_blank" 
+                                           class="mitre-tech-badge">
+                                            {{ threat.mitre_id }}
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle me-2"></i>
+                            No critical threats detected in the analyzed period
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Column -->
+        <div class="col-lg-6">
+            <!-- Security Recommendations -->
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Security Recommendations</h4>
+                </div>
+                <div class="card-body">
+                    {% if threat_insights.recommendations %}
+                        <div class="list-group">
+                            {% for rec in threat_insights.recommendations %}
+                            <div class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">
+                                        <i class="fas fa-{{ 'exclamation-triangle' if rec.priority == 'critical' else 'shield-alt' if rec.priority == 'high' else 'info-circle' }} me-2 text-{{ 'danger' if rec.priority == 'critical' else 'warning' if rec.priority == 'high' else 'info' }}"></i>
+                                        {{ rec.title }}
+                                    </h5>
+                                    <span class="badge severity-{{ rec.priority }}">
+                                        {{ rec.priority|title }}
+                                    </span>
+                                </div>
+                                <p class="mb-1">{{ rec.description }}</p>
+                                <small class="text-muted">{{ rec.action }}</small>
+                                {% if rec.techniques %}
+                                <div class="mt-2">
+                                    {% for tech in rec.techniques %}
+                                    <a href="https://attack.mitre.org/techniques/{{ tech }}/" 
+                                       target="_blank"
+                                       class="mitre-tech-badge me-1">
+                                        {{ tech }}
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            No specific recommendations available
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="row mt-4 g-4">
+        <!-- Threat Types Card -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Threat Distribution by Type</h4>
+                </div>
+                <div class="card-body">
+                    {% if threat_insights.common_techniques %}
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="threatTypesChart"></canvas>
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <div class="alert alert-info mb-0">
+                                <i class="fas fa-info-circle me-2"></i> No threat patterns detected
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Top Sources Card -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0"><i class="fas fa-network-wired me-2"></i>Top Threat Sources</h4>
+                </div>
+                <div class="card-body">
+                    {% if threat_insights.top_sources %}
+                        <div class="table-responsive">
+                            <table class="table top-threats-table">
+                                <thead>
+                                    <tr>
+                                        <th>IP Address</th>
+                                        <th>Alerts</th>
+                                        <th>Last Technique</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for ip, count in threat_insights.top_sources.items() %}
+                                    <tr>
+                                        <td class="font-monospace">{{ ip }}</td>
+                                        <td>
+                                            <span class="badge bg-primary rounded-pill">{{ count }}</span>
+                                        </td>
+                                        <td>
+                                            {% set found_tech = namespace(value='Unknown') %}
+                                            {% for threat in threat_insights.critical_threats %}
+                                                {% if threat.source == ip %}
+                                                    {% set found_tech.value = threat.mitre_id or 'Unknown' %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if found_tech.value != 'Unknown' %}
+                                            <span class="mitre-tech-badge">
+                                                <a href="https://attack.mitre.org/techniques/{{ found_tech.value }}/" target="_blank">
+                                                    {{ found_tech.value }}
+                                                </a>
+                                            </span>
+                                            {% else %}
+                                            <span class="text-muted">Unknown</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-sm btn-outline-info action-btn">
+                                                <i class="fas fa-search me-1"></i> Investigate
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <div class="alert alert-info mb-0">
+                                <i class="fas fa-info-circle me-2"></i> No threat sources detected
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MITRE ATT&CK Techniques -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0"><i class="fas fa-chess-knight me-2"></i>Detected ATT&CK Techniques</h4>
+                </div>
+                <div class="card-body">
+                    {% if threat_insights.mitre_techniques %}
+                        <div class="row">
+                            {% for (tech_id, tech_name), count in threat_insights.mitre_techniques.items() %}
+                            <div class="col-md-4 mb-4">
+                                <div class="card h-100 technique-card">
+                                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">
+                                            <span class="mitre-tech-badge">{{ tech_id }}</span>
+                                        </h5>
+                                        <span class="badge bg-primary rounded-pill">{{ count }}</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ tech_name }}</h6>
+                                        <p class="tech-percentage">
+                                            {{ ((count / threat_insights.stats.total) * 100)|round(1) }}%
+                                            <small>of all threats</small>
+                                        </p>
+                                        {% if tech_id in mitre_techniques and mitre_techniques[tech_id].tactics %}
+                                        <div class="tech-tactics mt-2">
+                                            {% for tactic in mitre_techniques[tech_id].tactics %}
+                                            <span class="badge bg-secondary tech-tactic-badge">{{ tactic }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-footer bg-transparent d-flex justify-content-between">
+                                        <a href="{% if tech_id in mitre_techniques %}{{ mitre_techniques[tech_id].url }}{% else %}https://attack.mitre.org/techniques/{{ tech_id }}/{% endif %}" 
+                                           target="_blank" 
+                                           class="btn btn-sm btn-outline-dark action-btn">
+                                            <i class="fas fa-external-link-alt me-1"></i> MITRE Details
+                                        </a>
+                                        <button class="btn btn-sm btn-outline-primary action-btn" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#techniqueModal"
+                                                data-tech="{{ tech_id }}"
+                                                data-tech-name="{{ tech_name }}"
+                                                data-tech-desc="{{ mitre_techniques[tech_id].description if tech_id in mitre_techniques else 'No description available' }}"
+                                                data-tech-tactics="{{ mitre_techniques[tech_id].tactics|join(',') if tech_id in mitre_techniques else '' }}">
+                                            <i class="fas fa-search me-1"></i> Analyze
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            No MITRE ATT&CK techniques identified in current threats
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Technique Modal -->
+<div class="modal fade" id="techniqueModal" tabindex="-1" aria-labelledby="techniqueModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="techniqueModalLabel">Technique Analysis</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="techniqueDetails">
+                    <p class="text-center text-muted my-5">Select a technique to analyze</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">View Related Threats</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+$(document).ready(function() {
+    // Threat Types Chart
+    {% if threat_insights.common_techniques %}
+    const threatTypesCtx = document.getElementById('threatTypesChart').getContext('2d');
+    new Chart(threatTypesCtx, {
+        type: 'doughnut',
+        data: {
+            labels: {{ threat_insights.common_techniques.keys()|list|tojson }},
+            datasets: [{
+                data: {{ threat_insights.common_techniques.values()|list|tojson }},
+                backgroundColor: [
+                    '#dc3545', '#fd7e14', '#ffc107', '#28a745', '#17a2b8', '#6610f2', '#6f42c1'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const value = context.raw;
+                            const percentage = Math.round((value / total) * 100);
+                            return `${context.label}: ${value} (${percentage}%)`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+    {% endif %}
+
+    // MITRE Tactic click handler
+    $('.mitre-tactic').click(function() {
+        const tactic = $(this).data('tactic');
+        $('.mitre-tactic').removeClass('active');
+        $(this).addClass('active');
+        // Filter threats by tactic here
+    });
+
+    // Technique Modal
+    $('#techniqueModal').on('show.bs.modal', function(event) {
+        const button = $(event.relatedTarget);
+        const techId = button.data('tech');
+        const techName = button.data('tech-name');
+        const techDesc = button.data('tech-desc');
+        const techTactics = button.data('tech-tactics').split(',');
+        
+        const modal = $(this);
+        modal.find('.modal-title').text(`${techId} - ${techName}`);
+        
+        // Get count for this technique
+        let techCount = 0;
+        {% for tech in threat_insights.serialized_mitre_techniques %}
+            if ("{{ tech.tech_id }}" === techId) {
+                techCount = {{ tech.count }};
+            }
+        {% endfor %}
+        
+        // Build tactics badges HTML
+        let tacticsHtml = '';
+        if (techTactics.length > 0 && techTactics[0] !== '') {
+            tacticsHtml = `<div class="mb-3">
+                <h6>Associated Tactics:</h6>
+                ${techTactics.map(t => `<span class="badge bg-secondary me-1">${t}</span>`).join('')}
+            </div>`;
+        }
+        
+        $('#techniqueDetails').html(`
+            <div class="row">
+                <div class="col-md-8">
+                    <h4>${techName}</h4>
+                    <p class="text-muted">${techDesc}</p>
+                    ${tacticsHtml}
+                    <div class="alert alert-info">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        Detected ${techCount} times in your environment
+                        (${((techCount / {{ threat_insights.stats.total }}) * 100).toFixed(1)}% of all threats)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h6 class="mb-0">MITRE ATT&CK Details</h6>
+                        </div>
+                        <div class="card-body">
+                            <a href="https://attack.mitre.org/techniques/${techId}/" 
+                               target="_blank" 
+                               class="btn btn-sm btn-outline-dark w-100 mb-2">
+                                <i class="fas fa-external-link-alt me-1"></i> View on MITRE
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-primary w-100">
+                                <i class="fas fa-shield-alt me-1"></i> Mitigation Strategies
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `);
+    });
+});
+</script>
+{% endblock %}

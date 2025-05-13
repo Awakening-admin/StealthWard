@@ -78,30 +78,30 @@
         </div>
     </div>
 
-    <!-- Admin Alerts Section -->
-    <div class="admin-section">
-        <h2 class="section-title">Network Traffic Alerts <span class="badge bg-warning alert-count">0</span></h2>
-        <div class="alert-summary">
-            <div class="summary-card">
-                <h5>Top Source IP</h5>
-                <p id="top-source-ip">Loading...</p>
+    <!-- Admin Alerts Section - Updated -->
+        <div class="admin-section">
+            <h2 class="section-title">Network Traffic Alerts <span class="badge bg-warning alert-count">0</span></h2>
+            <div class="alert-summary">
+                <div class="summary-card">
+                    <h5>Top Source IP</h5>
+                    <p id="top-source-ip">Loading...</p>
+                </div>
+                <div class="summary-card">
+                    <h5>Most Common Alert</h5>
+                    <p id="common-alert">Loading...</p>
+                </div>
+                <div class="summary-card">
+                    <h5>Total Attempts</h5>
+                    <p id="total-attempts">Loading...</p>
+                </div>
             </div>
-            <div class="summary-card">
-                <h5>Top Destination IP</h5>
-                <p id="top-dest-ip">Loading...</p>
-            </div>
-            <div class="summary-card">
-                <h5>Most Common Alert</h5>
-                <p id="common-alert">Loading...</p>
+            <div id="admin-alerts" class="alerts-container">
+                <div class="empty-state">
+                    <i class="fas fa-spinner fa-spin fa-3x mb-3"></i>
+                    <p>Loading alert data...</p>
+                </div>
             </div>
         </div>
-        <div id="admin-alerts" class="alerts-container">
-            <div class="empty-state">
-                <i class="fas fa-spinner fa-spin fa-3x mb-3"></i>
-                <p>Loading alert data...</p>
-            </div>
-        </div>
-    </div>
 
     <!-- Report Generation Section -->
     <div class="admin-section">
@@ -326,21 +326,20 @@ function updateSummaryStats(data) {
     // Update alert summary
     if (data.alerts) {
         const ipCounts = {};
-        const destIpCounts = {};
         const alertTypes = {};
+        let totalAttempts = 0;
 
         data.alerts.forEach(alert => {
             // Count source IPs
             const srcIp = alert.source_ip || 'unknown';
             ipCounts[srcIp] = (ipCounts[srcIp] || 0) + 1;
 
-            // Count destination IPs
-            const destIp = alert.dest_ip || 'unknown';
-            destIpCounts[destIp] = (destIpCounts[destIp] || 0) + 1;
-
             // Count alert types
             const alertType = alert.signature || alert.rule_name || 'unknown';
             alertTypes[alertType] = (alertTypes[alertType] || 0) + 1;
+
+            // Sum attempts
+            totalAttempts += alert.attempts || 1;
         });
 
         // Find top source IP
@@ -349,17 +348,14 @@ function updateSummaryStats(data) {
             document.getElementById('top-source-ip').textContent = `${topSourceIp[0]} (${topSourceIp[1]} alerts)`;
         }
 
-        // Find top destination IP
-        const topDestIp = Object.entries(destIpCounts).sort((a, b) => b[1] - a[1])[0];
-        if (topDestIp) {
-            document.getElementById('top-dest-ip').textContent = `${topDestIp[0]} (${topDestIp[1]} alerts)`;
-        }
-
         // Find most common alert
         const commonAlert = Object.entries(alertTypes).sort((a, b) => b[1] - a[1])[0];
         if (commonAlert) {
             document.getElementById('common-alert').textContent = `${commonAlert[0]} (${commonAlert[1]} times)`;
         }
+
+        // Update total attempts
+        document.getElementById('total-attempts').textContent = totalAttempts;
     }
 }
 
@@ -432,16 +428,21 @@ function refreshData() {
 
                 // Update alerts section with network threats
                 if (data.alerts?.length > 0) {
+                    // Calculate total attempts for summary
+                    let totalAttempts = 0;
+                    data.alerts.forEach(alert => {
+                        totalAttempts += alert.attempts || 1;
+                    });
+                    document.getElementById('total-attempts').textContent = totalAttempts;
+
                     alertsContainer.innerHTML = data.alerts.map(alert => `
                         <div class="alert-card">
                             <h5>${alert.signature || alert.rule_name || 'Network Alert'}</h5>
                             <div class="alert-details">
-                                <p><strong>Type:</strong> ${alert.type || 'network'}</p>
-                                <p><strong>Source IP:</strong> ${alert.source_ip || 'unknown'}:${alert.src_port || 'unknown'}</p>
-                                <p><strong>Destination IP:</strong> ${alert.dest_ip || 'unknown'}:${alert.dst_port || 'unknown'}</p>
-                                <p><strong>Protocol:</strong> ${alert.protocol || 'unknown'}</p>
-                                ${alert.query_count ? `<p><strong>Query Count:</strong> ${alert.query_count}</p>` : ''}
-                                ${alert.payload ? `<p><strong>Payload:</strong> ${alert.payload.substring(0, 100)}${alert.payload.length > 100 ? '...' : ''}</p>` : ''}
+                                <p><strong>Source IP:</strong> ${alert.source_ip || 'unknown'}</p>
+                                ${alert.service ? `<p><strong>Service:</strong> ${alert.service}</p>` : ''}
+                                ${alert.attempts ? `<p><strong>Attempts:</strong> ${alert.attempts}</p>` : ''}
+                                <p><strong>Protocol:</strong> ${alert.protocol || 'TCP'}</p>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span class="badge bg-${alert.severity === 'high' ? 'danger' :
@@ -450,11 +451,6 @@ function refreshData() {
                                     ${(alert.severity || 'medium').toUpperCase()}
                                 </span>
                                 <span class="timestamp">${formatTimestamp(alert.timestamp)}</span>
-                            </div>
-                            <div class="mt-2">
-                                <small class="text-muted">
-                                    <i class="fas fa-tag"></i> ${alert.category || 'network'}
-                                </small>
                             </div>
                         </div>
                     `).join('');
@@ -469,39 +465,39 @@ function refreshData() {
             }
 
             // Prepare chart data (always update charts)
-            const threatCounts = {critical: 0, high: 0, medium: 0, low: 0};
-            if (data.threats) {
-                data.threats.forEach(threat => {
-                    const severity = threat.severity || 'medium';
-                    if (severity === 'critical') threatCounts.critical++;
-                    else if (severity === 'high') threatCounts.high++;
-                    else if (severity === 'medium') threatCounts.medium++;
-                    else threatCounts.low++;
-                });
+                        const threatCounts = {critical: 0, high: 0, medium: 0, low: 0};
+                        if (data.threats) {
+                            data.threats.forEach(threat => {
+                                const severity = threat.severity || 'medium';
+                                if (severity === 'critical') threatCounts.critical++;
+                                else if (severity === 'high') threatCounts.high++;
+                                else if (severity === 'medium') threatCounts.medium++;
+                                else threatCounts.low++;
+                            });
+                        }
+            
+                        const alertCategories = {};
+                        if (data.alerts) {
+                            data.alerts.forEach(alert => {
+                                const type = alert.type || 'network';
+                                alertCategories[type] = (alertCategories[type] || 0) + 1;
+                            });
+                        }
+            
+                        const sortedAlertCategories = Object.entries(alertCategories)
+                            .sort((a, b) => b[1] - a[1])
+                            .slice(0, 5);
+            
+                        initCharts(
+                            { critical: threatCounts.critical, high: threatCounts.high, medium: threatCounts.medium, low: threatCounts.low },
+                            { labels: sortedAlertCategories.map(item => item[0]), values: sortedAlertCategories.map(item => item[1]) }
+                        );
+                    })
+                    .catch(error => {
+                        console.error('Error fetching monitoring data:', error);
+                        document.getElementById('update-time').textContent = `Error: ${error.message}`;
+                    });
             }
-
-            const alertCategories = {};
-            if (data.alerts) {
-                data.alerts.forEach(alert => {
-                    const type = alert.type || 'network';
-                    alertCategories[type] = (alertCategories[type] || 0) + 1;
-                });
-            }
-
-            const sortedAlertCategories = Object.entries(alertCategories)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 5);
-
-            initCharts(
-                { critical: threatCounts.critical, high: threatCounts.high, medium: threatCounts.medium, low: threatCounts.low },
-                { labels: sortedAlertCategories.map(item => item[0]), values: sortedAlertCategories.map(item => item[1]) }
-            );
-        })
-        .catch(error => {
-            console.error('Error fetching monitoring data:', error);
-            document.getElementById('update-time').textContent = `Error: ${error.message}`;
-        });
-}
 
 // Update traffic data
 function updateTrafficData() {
