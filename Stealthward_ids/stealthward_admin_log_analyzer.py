@@ -7,7 +7,7 @@ from datetime import datetime
 class AdminLogAnalyzer:
     def __init__(self):
         self.log_dir = "/var/log"
-        self.rules_file = "/home/robot/edr_server/admin_rules.yaml"
+        self.rules_file = "/home/robot/edr_server/rules.yaml"
         self.output_file = "/home/robot/edr_server/ids_admin_log_alerts.json"
         self.rules = self.load_rules()
         self.seen_alerts = set()  # Track seen alerts to prevent duplicates

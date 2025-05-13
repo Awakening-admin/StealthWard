@@ -64,16 +64,21 @@ class StatsGenerator:
         }
 
     def _file_changed(self, filepath):
-        """Check if a file has changed since last check using hash"""
+        """Check if a file has changed since last check using hash and mtime"""
         if not os.path.exists(filepath):
             return False
 
-        current_hash = self._file_hash(filepath)
-        last_hash = self.file_hashes.get(filepath)
-
-        if last_hash is None or current_hash != last_hash:
-            self.file_hashes[filepath] = current_hash
-            return True
+        current_mtime = os.path.getmtime(filepath)
+        last_mtime = self.file_hashes.get(filepath, {}).get('mtime', 0)
+        
+        if current_mtime > last_mtime:
+            current_hash = self._file_hash(filepath)
+            last_hash = self.file_hashes.get(filepath, {}).get('hash', '')
+            
+            if current_hash != last_hash:
+                self.file_hashes[filepath] = {'mtime': current_mtime, 'hash': current_hash}
+                return True
+        
         return False
 
     def _file_hash(self, filepath):
@@ -97,6 +102,18 @@ class StatsGenerator:
                 filepath = os.path.join(root, file)
                 if self._file_changed(filepath):
                     return True
+        
+        # Check for new/deleted files by comparing directory listings
+        current_files = set()
+        for root, _, files in os.walk(dirpath):
+            for file in files:
+                current_files.add(os.path.join(root, file))
+        
+        last_files = set(k for k in self.file_hashes.keys() if k.startswith(dirpath))
+        
+        if current_files != last_files:
+            return True
+            
         return False
 
     def needs_regeneration(self):
@@ -281,7 +298,7 @@ class StatsGenerator:
             print(f"Error generating log stats: {e}")
 
     def _generate_network_stats(self, stats):
-        """Generate network statistics from PCAP files with proper protocol analysis"""
+        """Generate network statistics from PCAP files with accurate packet counting"""
         try:
             protocol_counter = Counter()
             ip_counter = Counter()
@@ -292,45 +309,45 @@ class StatsGenerator:
             if not os.path.exists(self.pcap_dir):
                 return
 
-            for pcap_file in os.listdir(self.pcap_dir):
-                if not pcap_file.endswith('.pcap'):
+            for endpoint_ip in os.listdir(self.pcap_dir):
+                endpoint_path = os.path.join(self.pcap_dir, endpoint_ip)
+                if not os.path.isdir(endpoint_path):
                     continue
 
-                pcap_path = os.path.join(self.pcap_dir, pcap_file)
-                try:
-                    # Extract source IP from filename (format: pcap_<IP>_<timestamp>.pcap)
-                    parts = pcap_file.split('_')
-                    source_ip = parts[1] if len(parts) > 1 else 'unknown'
-                    
-                    # Get file size and creation time
-                    size = os.path.getsize(pcap_path)
-                    timestamp = datetime.fromtimestamp(os.path.getctime(pcap_path))
-                    
-                    # Analyze PCAP file for protocols
-                    protocols = self._analyze_pcap_protocols(pcap_path)
-                    if not protocols:
-                        protocols = ['unknown']
-                    
-                    # Estimate packet count (this is just an approximation)
-                    packet_count = max(1, size // 1500)  # Assuming average packet size of 1500 bytes
-                    
-                    for protocol in protocols:
-                        protocol_counter[protocol] += packet_count
-                    ip_counter[source_ip] += packet_count
-                    total_packets += packet_count
-                    total_size += size
+                for pcap_file in os.listdir(endpoint_path):
+                    if not pcap_file.endswith('.pcap'):
+                        continue
 
-                    hour = timestamp.replace(minute=0, second=0, microsecond=0)
-                    traffic_data.append({
-                        'hour': hour,
-                        'packets': packet_count,
-                        'size': size,
-                        'protocol': protocols[0],  # Use first protocol for trend grouping
-                        'source_ip': source_ip
-                    })
+                    pcap_path = os.path.join(endpoint_path, pcap_file)
+                    try:
+                        # Get actual packet count from PCAP file
+                        packets = rdpcap(pcap_path)
+                        packet_count = len(packets)
+                        size = os.path.getsize(pcap_path)
+                        timestamp = datetime.fromtimestamp(os.path.getctime(pcap_path))
+                        
+                        # Analyze PCAP file for protocols
+                        protocols = self._analyze_pcap_protocols(pcap_path)
+                        if not protocols:
+                            protocols = ['unknown']
+                        
+                        for protocol in protocols:
+                            protocol_counter[protocol] += packet_count
+                        ip_counter[endpoint_ip] += packet_count
+                        total_packets += packet_count
+                        total_size += size
 
-                except Exception as e:
-                    print(f"Error processing PCAP {pcap_file}: {e}")
+                        hour = timestamp.replace(minute=0, second=0, microsecond=0)
+                        traffic_data.append({
+                            'hour': hour,
+                            'packets': packet_count,
+                            'size': size,
+                            'protocol': protocols[0],  # Use first protocol for trend grouping
+                            'source_ip': endpoint_ip
+                        })
+
+                    except Exception as e:
+                        print(f"Error processing PCAP {pcap_file}: {e}")
 
             # Generate traffic trend data
             if traffic_data:
@@ -529,49 +546,59 @@ class StatsGenerator:
             severity_counter = Counter()
             all_alerts = []
 
-            for alert_file in os.listdir(self.alerts_dir):
-                if not alert_file.startswith('alerts_') or not alert_file.endswith('.json'):
+            # New directory structure traversal
+            for endpoint_ip in os.listdir(self.alerts_dir):
+                endpoint_path = os.path.join(self.alerts_dir, endpoint_ip)
+                if not os.path.isdir(endpoint_path):
                     continue
 
-                alert_path = os.path.join(self.alerts_dir, alert_file)
-                try:
-                    with open(alert_path, 'r') as f:
-                        alerts = json.load(f)
-                        if not isinstance(alerts, list):
-                            alerts = [alerts]
+                for alert_file in os.listdir(endpoint_path):
+                    if not alert_file.startswith('alerts_') or not alert_file.endswith('.json'):
+                        continue
 
-                        for alert in alerts:
-                            try:
-                                attack_type = alert.get('attack_type', 'unknown')
-                                dest_port = alert.get('destination_port', 0)
-                                dest_ip = alert.get('destination_ip', 'unknown')
-                                src_ip = alert.get('source_ip', 'unknown')
-                                severity = alert.get('severity', 'medium').lower()
-                                timestamp = alert.get('timestamp', '')
+                    alert_path = os.path.join(endpoint_path, alert_file)
+                    try:
+                        with open(alert_path, 'r') as f:
+                            alerts = json.load(f)
+                            if not isinstance(alerts, list):
+                                alerts = [alerts]
 
-                                attack_counter[attack_type] += 1
-                                port_counter[dest_port] += 1
-                                source_ip_counter[src_ip] += 1
-                                severity_counter[severity] += 1
+                            for alert in alerts:
+                                try:
+                                    attack_type = alert.get('attack_type', 'unknown')
+                                    dest_port = alert.get('destination_port', 0)
+                                    dest_ip = alert.get('destination_ip', 'unknown')
+                                    src_ip = alert.get('source_ip', 'unknown')
+                                    severity = alert.get('severity', 'medium').lower()
+                                    timestamp = alert.get('timestamp', '')
 
-                                if dest_ip != 'unknown':
-                                    compromised_ips.add(dest_ip)
+                                    attack_counter[attack_type] += 1
+                                    port_counter[dest_port] += 1
+                                    source_ip_counter[src_ip] += 1
+                                    severity_counter[severity] += 1
 
-                                if timestamp:
-                                    try:
-                                        alert_time = datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S')
-                                        if datetime.now() - alert_time < timedelta(days=1):
-                                            all_alerts.append(alert)
-                                    except ValueError:
-                                        continue
+                                    if dest_ip != 'unknown':
+                                        compromised_ips.add(dest_ip)
 
-                            except Exception as e:
-                                print(f"Error processing alert in {alert_file}: {e}")
-                                continue
+                                    if timestamp:
+                                        try:
+                                            alert_time = datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S')
+                                            if datetime.now() - alert_time < timedelta(days=1):
+                                                all_alerts.append(alert)
+                                        except ValueError:
+                                            continue
 
-                except Exception as e:
-                    print(f"Error loading alert file {alert_file}: {e}")
-                    continue
+                                except Exception as e:
+                                    print(f"Error processing alert in {alert_file}: {e}")
+                                    continue
+
+                    except Exception as e:
+                        print(f"Error loading alert file {alert_file}: {e}")
+                        continue
+
+            # Only count compromised endpoints that are currently active
+            active_endpoints = {e['ip'] for e in stats['endpoint_stats']['active_endpoints']}
+            compromised_endpoints = [ip for ip in compromised_ips if ip in active_endpoints]
 
             # Merge with existing stats
             existing_severity = Counter(dict(stats['threat_stats'].get('threats_by_severity', [])))
@@ -587,7 +614,7 @@ class StatsGenerator:
                 'recent_threats': (existing_recent_threats + all_alerts)[-10:]
             })
 
-            stats['endpoint_stats']['compromised_endpoints'] = list(compromised_ips)
+            stats['endpoint_stats']['compromised_endpoints'] = compromised_endpoints
 
         except Exception as e:
             print(f"Error generating alerts stats: {e}")
@@ -606,7 +633,7 @@ class StatsGenerator:
 
             stats['endpoint_stats'].update({
                 'total_endpoints': len(endpoints),
-                'active_endpoints': list(endpoints)
+                'active_endpoints': [{'ip': ip, 'activity': 1} for ip in endpoints]  # Basic activity count
             })
 
         except Exception as e:
